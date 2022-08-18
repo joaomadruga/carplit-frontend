@@ -1,20 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect, useCallback } from 'react';
+
+
+import Routes from './src/routes/routes';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'RetniSans-Regular': require('./assets/fonts/RetniSans-Regular.ttf'),
+    'RetniSans-BoldItalic': require('./assets/fonts/RetniSans-BoldItalic.ttf'),
+    'RetniSans-Italic': require('./assets/fonts/RetniSans-Italic.ttf'),
+    'RetniSans-Light': require('./assets/fonts/RetniSans-Light.ttf'),
+    'RetniSans-LightItalic': require('./assets/fonts/RetniSans-LightItalic.ttf'),
+    'RetniSans-Medium': require('./assets/fonts/RetniSans-Medium.ttf'),
+    'RetniSans-MediumItalic': require('./assets/fonts/RetniSans-MediumItalic.ttf'),
+    'RetniSans-Bold': require('./assets/fonts/RetniSans-Bold.ttf'),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+  
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <View onLayout={onLayoutRootView}/>
+      <Routes/>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
