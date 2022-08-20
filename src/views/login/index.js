@@ -3,7 +3,7 @@ import SafeAreaViewLogin from '../../components/login/SafeAreaViewLogin.componen
 import LoginTitle from '../../components/login/TitleLogin.component.component';
 import Input from '../../components/utils/Input.component';
 import ButtonPrimaryDefault from '../../components/utils/ButtonPrimaryDefault.component'
-import * as Constants from "../../constants/utils/Constants";
+import * as Constants from "../../constants/utils/constants";
 import TextForgotPassword from '../../components/login/TextForgotPassword.component';
 import LoginContent from '../../components/login/LoginContent.component';
 import { useEffect, useState } from 'react';
@@ -21,8 +21,7 @@ export default function LoginScreen() {
           title='Entrar'
           underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
           onPress={() => console.log('Pressed!')}
-        >
-        </ButtonPrimaryDefault>
+        />
         <TextForgotPassword>Esqueci minha senha</TextForgotPassword>
       </LoginContent>
     </SafeAreaViewLogin>

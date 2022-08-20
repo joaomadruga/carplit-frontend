@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import * as Constants from "../../constants/utils/Constants";
+import * as Constants from "../../constants/utils/constants";
 
 const InputStyle = styled.TextInput`
   background-color: ${Constants.inputConfig.Default.BackgroundColor};
