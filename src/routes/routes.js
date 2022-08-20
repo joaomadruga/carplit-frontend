@@ -1,7 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, Image, Text } from "react-native";
-import ArrowLeft from "../../assets/Button/arrow-left.svg";
+import { Button, Image, Text, TouchableWithoutFeedback } from "react-native";
+import ArrowLeft from "../../assets/Button/arrow-left.png";
+import ImageWrapper from "../components/utils/ImageWrapper.component";
 import * as Constants from "../constants/utils/Constants";
 import LoginScreen from "../views/login";
 import StartScreen from "../views/start";
@@ -34,7 +35,11 @@ export default function Routes() {
             headerBackTitleVisible: false,
             headerTitle: 'Entrar',
             headerTitleAlign: 'center',
-            headerLeft: () =>  ( <ArrowLeft onPress={navigation.goBack}/> )
+            headerLeft: () =>  ( 
+            <TouchableWithoutFeedback onPress={navigation.goBack}>
+              <ImageWrapper width={48} height={48} source={ArrowLeft} />
+            </TouchableWithoutFeedback>
+             )
         })}
           />
         </Stack.Navigator>
