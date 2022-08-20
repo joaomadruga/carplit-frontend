@@ -9,14 +9,19 @@ import LoginContent from '../../components/login/LoginContent.component';
 import { useEffect, useState } from 'react';
 
 export default function LoginScreen() {
-  const [inputLogin, setInputLogin] = useState('')
-  const [inputPassword, setInputPassword] = useState('')
+  const [loginInfo, setLoginInfo] = useState({
+    login: "",
+    password: ""
+  })
 
+  const handleChange = (value, type) => {
+    setLoginInfo(prev => ({...prev, [type]: value}))
+  }
   return (
     <SafeAreaViewLogin>
       <LoginContent>
-        <Input placeholder="Login" marginBottom={12} onChangeText={setInputLogin} value={inputLogin}/>
-        <Input placeholder="Senha" secureTextEntry={true} marginBottom={38} onChangeText={setInputPassword} value={inputPassword}/>
+        <Input placeholder="Email" marginBottom={12} onChangeText={(value) => {handleChange(value, 'login')}} value={loginInfo.login}/>
+        <Input placeholder="Senha" secureTextEntry={true} marginBottom={38} onChangeText={(value) => {handleChange(value, 'password')}} value={loginInfo.password}/>
         <ButtonPrimaryDefault
           title='Entrar'
           underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
