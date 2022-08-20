@@ -18,11 +18,12 @@ export default function Routes() {
             headerTintColor: 'black',
             headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
             headerStyle: {
-                backgroundColor: Constants.headerStyleConfig.backgroundColor
+                backgroundColor: Constants.headerStyleConfig.BackgroundColor
             },
             headerShadowVisible: false,
             headerBackTitleVisible: false,
-            headerTitle: 'Entrar', 
+            headerTitle: 'Entrar',
+            headerTitleAlign: 'center',
             headerLeft: () =>  ( <ArrowLeft /> )
         }}
           />

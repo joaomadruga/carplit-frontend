@@ -25,7 +25,18 @@ export const buttonConfig = {
         }
     },
     Ontouch: 
-    {
+    {   
+        Primary: 
+        {
+            Default: 
+            {
+                Width: '335px', Height: '64px' , BackgroundColor: colors.primary[900], Radius: '8px', Padding: '16px', Color: colors.gray[0]
+            },
+            Small: 
+            {
+                Width: '97px', Height: '48px' , BackgroundColor: colors.primary[900], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.gray[0]
+            }
+        },
         Secondary: 
         {
             Default: 
@@ -49,5 +60,5 @@ export const inputConfig = {
         Color: colors.primary[600]
     }
 }
-export const fontConfig = { H3: { Bold: { FontSize: '18px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '18px', FontFamily: fontWeightConfig.Regular }}, Body: { Bold: { FontSize: '16px', FontFamily: fontWeightConfig.bold }, Regular: { FontSize: '16px' , FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '16px' , FontFamily: fontWeightConfig.Medium }}, Sm: { Bold: { FontSize: '14px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '14px', FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '14px', FontFamily: fontWeightConfig.Medium }}, Xsm: { Bold: { FontSize: '12px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '12px', FontFamily: fontWeightConfig.Regular }, Semibold: { FontSize: '12px', FontFamily: fontWeightConfig.Medium } } }
+export const fontConfig = { H3: { Bold: { FontSize: '18px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '18px', FontFamily: fontWeightConfig.Regular }}, Body: { Bold: { FontSize: '16px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '16px' , FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '16px' , FontFamily: fontWeightConfig.Medium }}, Sm: { Bold: { FontSize: '14px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '14px', FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '14px', FontFamily: fontWeightConfig.Medium }}, Xsm: { Bold: { FontSize: '12px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '12px', FontFamily: fontWeightConfig.Regular }, Semibold: { FontSize: '12px', FontFamily: fontWeightConfig.Medium } } }
 export const headingConfig = { Title: { FontFamily: fontWeightConfig.Bold, FontSize: '16px', Color: colors.gray[800], BackgroundColor: colors.gray[0] }}
