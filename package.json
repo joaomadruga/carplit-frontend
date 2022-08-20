@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "babel-plugin-inline-react-svg": "^2.0.1",
     "react-native-svg-transformer": "^1.0.0"
   },
   "private": true
