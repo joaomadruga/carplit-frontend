@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useCallback } from 'react';
 import Routes from './src/routes/routes';
-import { fontsLoadedConfig } from './src/constants/utils/constants';
+import { fontsLoadedConfig } from './src/constants/utils/Constants';
 
 export default function App() {
   const [fontsLoaded] = useFonts(fontsLoadedConfig);

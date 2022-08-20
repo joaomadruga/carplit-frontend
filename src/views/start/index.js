@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import * as Constants from "../../constants/utils/constants";
+import * as Constants from "../../constants/utils/Constants";
 import SafeAreaViewStart from '../../components/start/SafeAreaViewStart.component';
 import MainImage from "../../../assets/Start/main-image.svg";
 import PeopleImage from "../../../assets/Start/people-image.svg";

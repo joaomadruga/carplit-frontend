@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import * as Constants from "../../constants/utils/constants";
+import * as Constants from "../../constants/utils/Constants";
 
 const SafeAreaViewLogin = styled.SafeAreaView`
     background-color: ${Constants.colors.gray[0]};

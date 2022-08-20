@@ -3,7 +3,7 @@ import SafeAreaViewLogin from '../../components/login/SafeAreaViewLogin.componen
 import LoginTitle from '../../components/login/TitleLogin.component.component';
 import Input from '../../components/utils/Input.component';
 import ButtonPrimaryDefault from '../../components/utils/ButtonPrimaryDefault.component'
-import * as Constants from "../../constants/utils/constants";
+import * as Constants from "../../constants/utils/Constants";
 import TextForgotPassword from '../../components/login/TextForgotPassword.component';
 import LoginContent from '../../components/login/LoginContent.component';
 import { useEffect, useState } from 'react';
