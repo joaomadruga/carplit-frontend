@@ -24,9 +24,10 @@ export default function InitialRoutes({ HomeRoutes }) {
             component={LoginScreen}
             options={({ navigation }) => ({
               headerTitle: 'Entrar',
+              title: 'Entrar',
               headerLeft: () =>  ( 
               <TouchableWithoutFeedback onPress={navigation.goBack}>
-                <ImageWrapper width={48} height={48} source={ArrowLeft} />
+                <ImageWrapper style={{cursor: 'pointer'}} width={'48px'} height={'48px'} source={ArrowLeft} />
               </TouchableWithoutFeedback>
               )
             })}
@@ -46,7 +47,7 @@ export default function InitialRoutes({ HomeRoutes }) {
 const screenOptions = {
   headerTintColor: 'black',
   headerBackTitleVisible: false,
-  headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
+  headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold, margin:'200px' },
   headerStyle: {
       backgroundColor: Constants.headerStyleConfig.BackgroundColor
   },

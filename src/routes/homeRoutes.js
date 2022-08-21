@@ -39,7 +39,7 @@ export default function HomeRoutes() {
                     tabBarLabel: 'Início',
                     tabBarIcon: ({ focused }) => (
                     <TouchableWithoutFeedback>
-                        <ImageWrapper source={focused ? CarIconActive : CarIconInactive} width={24} height={24}/>
+                        <ImageWrapper source={focused ? CarIconActive : CarIconInactive} width={'24px'} height={'24px'}/>
                     </TouchableWithoutFeedback>
                     )
                 })}
@@ -51,7 +51,7 @@ export default function HomeRoutes() {
                     tabBarLabel: 'Ajustes',
                     tabBarIcon: ({ focused }) => (
                         <TouchableWithoutFeedback>
-                            <ImageWrapper source={focused ? SettingsIconActive: SettingsIconInactive} width={24} height={24}/>
+                            <ImageWrapper source={focused ? SettingsIconActive: SettingsIconInactive} width={'24px'} height={'24px'}/>
                         </TouchableWithoutFeedback>
                         )
                 })}

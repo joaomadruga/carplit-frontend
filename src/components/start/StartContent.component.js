@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 
-const LoginContent = styled.View`
+const StartComponent = styled.View`
   background-color: ${Constants.colors.gray[0]};
   height: 100%;
   width: 100%;
-  display: flex;
-  align-items: center;
-  margin-top: 65px;
   padding: 0 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 `;
 
-export default LoginContent;
+export default StartComponent;

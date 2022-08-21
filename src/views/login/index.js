@@ -9,6 +9,7 @@ import LoginContent from '../../components/login/LoginContent.component';
 import { useContext, useEffect, useState } from 'react'
 import { CommonActions } from '@react-navigation/native';
 import { LoginContext } from '../../routes/routes';
+import CenteredView from '../../components/utils/CenteredView.component';
 
 export default function LoginScreen( {navigation} ) {
   

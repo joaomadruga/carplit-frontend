@@ -15,6 +15,7 @@ const InputStyle = styled.TextInput`
   margin-bottom: ${props => props.marginBottom ? `${props.marginBottom}px` : 0};
   margin-left: ${props => props.marginLeft ? `${props.marginLeft}px` : 0};
   margin-right: ${props => props.marginRight ? `${props.marginRight}px` : 0};
+  max-width: 500px;
 `;
 
 export default function Input({ placeholder, ...props }) {

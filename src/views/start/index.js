@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import * as Constants from "../../constants/utils/Constants";
 import SafeAreaViewStart from '../../components/start/SafeAreaViewStart.component';
 import MainImage from "../../../assets/Start/main-image.png";
@@ -8,12 +8,15 @@ import TextSubtitleStart from '../../components/start/TextSubtitleStart.componen
 import ButtonPrimaryDefault from '../../components/utils/ButtonPrimaryDefault.component';
 import CenteredView from '../../components/utils/CenteredView.component';
 import ImageWrapper from '../../components/utils/ImageWrapper.component';
+import StartComponent from '../../components/start/StartContent.component';
+import ButtonSecundaryDefault from '../../components/utils/ButtonSecondaryDefault.component';
 export default function StartScreen({ navigation }) {
 
   return (
     <SafeAreaViewStart>
-        <ImageWrapper source={MainImage} width={260} height={260}/>
-        <ImageWrapper source={PeopleImage} width={101} height={26}/>
+      <StartComponent style={{width: '100%', height: '100%', padding: 20}}>
+        <ImageWrapper source={MainImage} width={'100%'} height={'40%'} resizeMode={'contain'}/>
+        <ImageWrapper source={PeopleImage} width={'101px'} height={'26px'}/>
         <CenteredView>
             <TextMainStart>Organizando suas caronas!</TextMainStart>
             <TextSubtitleStart>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante elit</TextSubtitleStart>
@@ -25,12 +28,13 @@ export default function StartScreen({ navigation }) {
             onPress={() => console.log('Pressed!')}
             marginBottom={10}
           />
-          <ButtonPrimaryDefault
+          <ButtonSecundaryDefault
             title='Entrar'
-            underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
+            underlayColor={Constants.buttonConfig.Ontouch.Secondary.Default.BackgroundColor}
             onPress={() => navigation.navigate('Login')}
           />
         </CenteredView>
+        </StartComponent>
     </SafeAreaViewStart>
   );
 }

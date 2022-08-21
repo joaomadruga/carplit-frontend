@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 
-const ButtonPrimaryDefaultStyle = styled.TouchableHighlight`
-  background-color: ${Constants.buttonConfig.Default.Primary.Default.BackgroundColor};
-  border-radius: ${Constants.buttonConfig.Default.Primary.Default.Radius};
-  width: ${Constants.buttonConfig.Default.Primary.Default.Width};
-  height: ${Constants.buttonConfig.Default.Primary.Default.Height};
+const ButtonSecondaryDefaultStyle = styled.TouchableHighlight`
+  background-color: ${Constants.buttonConfig.Default.Secondary.Default.BackgroundColor};
+  border-radius: ${Constants.buttonConfig.Default.Secondary.Default.Radius};
+  width: ${Constants.buttonConfig.Default.Secondary.Default.Width};
+  height: ${Constants.buttonConfig.Default.Secondary.Default.Height};
   margin: ${props => props.margin ? `${props.margin}px` : 0};
+  border-color: ${Constants.buttonConfig.Default.Secondary.Default.BorderColor};
+  border-width: ${Constants.buttonConfig.Default.Secondary.Default.BorderWidth};
   margin-top: ${props => props.marginTop ? `${props.marginTop}px` : 0};
   margin-bottom: ${props => props.marginBottom ? `${props.marginBottom}px` : 0};
   margin-left: ${props => props.marginLeft ? `${props.marginLeft}px` : 0};
@@ -21,13 +23,13 @@ const ButtonPrimaryDefaultStyle = styled.TouchableHighlight`
 const ButtonText = styled.Text`
   font-size: ${Constants.fontConfig.Body.Bold.FontSize};
   font-family: ${Constants.fontConfig.Body.Bold.FontFamily};
-  color: ${Constants.buttonConfig.Default.Primary.Default.Color};
+  color: ${Constants.buttonConfig.Default.Secondary.Default.Color};
 `;
 
-export default function ButtonPrimaryDefault({ title, ...props }) {
+export default function ButtonSecundaryDefault({ title, ...props }) {
     return (
-        <ButtonPrimaryDefaultStyle {...props}>
+        <ButtonSecondaryDefaultStyle {...props}>
             <ButtonText>{title}</ButtonText>
-        </ButtonPrimaryDefaultStyle>
+        </ButtonSecondaryDefaultStyle>
     );
 }

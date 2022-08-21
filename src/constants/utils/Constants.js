@@ -7,20 +7,20 @@ export const buttonConfig = {
     Default: 
     { Primary: 
         { Default: 
-            { Width: '335px', Height: '64px' , BackgroundColor: colors.primary[600], Radius: '8px', Padding: '16px', Color: colors.gray[0] }, 
+            { Width: '100%', Height: '64px' , BackgroundColor: colors.primary[600], Radius: '8px', Padding: '16px', Color: colors.gray[0] }, 
           Small: 
-            { Width: '97px', Height: '48px' , BackgroundColor: colors.primary[600], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.gray[0] },
+            { Width: '100%', Height: '48px' , BackgroundColor: colors.primary[600], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.gray[0] },
         
         },
         Secondary: 
         {
             Default:
             {
-                Width: '97px', Height: '64px' , BackgroundColor: colors.gray[0], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600] 
+                Width: '100%', Height: '64px' , BackgroundColor: colors.gray[0], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600], BorderColor: colors.gray[400], BorderWidth: '1px'
             },
             Small: 
             { 
-                Width: '97px', Height: '48px' , BackgroundColor: colors.gray[0], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600] 
+                Width: '100%', Height: '48px' , BackgroundColor: colors.gray[0], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600] 
             }
         }
     },
@@ -30,22 +30,22 @@ export const buttonConfig = {
         {
             Default: 
             {
-                Width: '335px', Height: '64px' , BackgroundColor: colors.primary[900], Radius: '8px', Padding: '16px', Color: colors.gray[0]
+                Width: '100%', Height: '64px' , BackgroundColor: colors.primary[900], Radius: '8px', Padding: '16px', Color: colors.gray[0]
             },
             Small: 
             {
-                Width: '97px', Height: '48px' , BackgroundColor: colors.primary[900], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.gray[0]
+                Width: '100%', Height: '48px' , BackgroundColor: colors.primary[900], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.gray[0]
             }
         },
         Secondary: 
         {
             Default: 
             {
-                Width: '97px', Height: '64px' , BackgroundColor: colors.gray[100], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600] 
+                Width: '100%', Height: '64px' , BackgroundColor: colors.gray[100], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600] 
             },
             Small: 
             {
-                Width: '97px', Height: '48px' , BackgroundColor: colors.gray[100], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600]
+                Width: '100%', Height: '48px' , BackgroundColor: colors.gray[100], Radius: '8px', Padding: '16px 24px 16px 24px', Color: colors.primary[600]
             }
         }
     }
@@ -53,7 +53,7 @@ export const buttonConfig = {
 export const inputConfig = {
     Default: 
     {
-        Width: '335px', Height: '64px', BackgroundColor: colors.gray[100], Radius: '8px', Padding: '16px', Color: colors.gray[700]
+        Width: '100%', Height: '64px', BackgroundColor: colors.gray[100], Radius: '8px', Padding: '16px', Color: colors.gray[700]
     },
     Ontouch: 
     {
