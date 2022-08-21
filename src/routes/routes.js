@@ -1,48 +1,33 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Button, Image, Text, TouchableWithoutFeedback } from "react-native";
-import ArrowLeft from "../../assets/Button/arrow-left.png";
-import ImageWrapper from "../components/utils/ImageWrapper.component";
-import * as Constants from "../constants/utils/Constants";
-import LoginScreen from "../views/login";
-import StartScreen from "../views/start";
+import { createContext, useState } from "react";
+import { LogBox } from "react-native";
+import HomeRoutes from "./homeRoutes";
+import InitialRoutes from "./initialRoutes";
 
-const Stack = createNativeStackNavigator();
+LogBox.ignoreLogs([
+  'Require cycle:'
+]);
+
+export const LoginContext = createContext();
 
 export default function Routes() {
+  const [isLogin, setIsLogin] = useState(false)
+  const [loginInfo, setLoginInfo] = useState({
+    login: "",
+    password: ""
+  })
   return (
+    <>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Start">
-          <Stack.Screen 
-            name="Start"
-            component={StartScreen}
-            options={{
-              headerShown: false 
-            }}
-          />
-         
-          <Stack.Screen
-          name="Login" 
-          component={LoginScreen}
-          options={({ navigation, route }) => ({
-            headerTintColor: 'black',
-            headerBackTitleVisible: false,
-            headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
-            headerStyle: {
-                backgroundColor: Constants.headerStyleConfig.BackgroundColor
-            },
-            headerShadowVisible: false,
-            headerBackTitleVisible: false,
-            headerTitle: 'Entrar',
-            headerTitleAlign: 'center',
-            headerLeft: () =>  ( 
-            <TouchableWithoutFeedback onPress={navigation.goBack}>
-              <ImageWrapper width={48} height={48} source={ArrowLeft} />
-            </TouchableWithoutFeedback>
-             )
-        })}
-          />
-        </Stack.Navigator>
+        <LoginContext.Provider value={{ loginInfo: loginInfo.login, setLoginInfo: setLoginInfo }}>
+          {!isLogin && (<InitialRoutes HomeRoutes={HomeRoutes}/>)}
+        </LoginContext.Provider>
+
+        <LoginContext.Provider value={{ loginInfo: loginInfo.login }}>
+          {isLogin && (<HomeRoutes/>)}
+        </LoginContext.Provider>
+        
       </NavigationContainer>
-  );
+    </>
+  )
 }

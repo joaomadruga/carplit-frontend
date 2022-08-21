@@ -12,22 +12,25 @@ export default function StartScreen({ navigation }) {
 
   return (
     <SafeAreaViewStart>
-        <ImageWrapper source={MainImage} width={165} height={150}/>
+        <ImageWrapper source={MainImage} width={260} height={260}/>
         <ImageWrapper source={PeopleImage} width={101} height={26}/>
         <CenteredView>
             <TextMainStart>Organizando suas caronas!</TextMainStart>
             <TextSubtitleStart>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante elit</TextSubtitleStart>
         </CenteredView>
-        <ButtonPrimaryDefault
-          title='Criar uma conta'
-          underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
-          onPress={() => console.log('Pressed!')}
-        />
-        <ButtonPrimaryDefault
-          title='Entrar'
-          underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
-          onPress={() => navigation.navigate('Login')}
-        />
+        <CenteredView>
+          <ButtonPrimaryDefault
+            title='Criar uma conta'
+            underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
+            onPress={() => console.log('Pressed!')}
+            marginBottom={10}
+          />
+          <ButtonPrimaryDefault
+            title='Entrar'
+            underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
+            onPress={() => navigation.navigate('Login')}
+          />
+        </CenteredView>
     </SafeAreaViewStart>
   );
 }

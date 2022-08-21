@@ -5,7 +5,7 @@ const SafeAreaViewStart = styled.SafeAreaView`
     background-color: ${Constants.colors.gray[0]};
     height: 100%;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 `;
 

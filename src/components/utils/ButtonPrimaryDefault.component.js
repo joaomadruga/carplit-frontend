@@ -7,6 +7,11 @@ const ButtonPrimaryDefaultStyle = styled.TouchableHighlight`
   border-radius: ${Constants.buttonConfig.Default.Primary.Default.Radius};
   width: ${Constants.buttonConfig.Default.Primary.Default.Width};
   height: ${Constants.buttonConfig.Default.Primary.Default.Height};
+  margin: ${props => props.margin ? `${props.margin}px` : 0};
+  margin-top: ${props => props.marginTop ? `${props.marginTop}px` : 0};
+  margin-bottom: ${props => props.marginBottom ? `${props.marginBottom}px` : 0};
+  margin-left: ${props => props.marginLeft ? `${props.marginLeft}px` : 0};
+  margin-right: ${props => props.marginRight ? `${props.marginRight}px` : 0};
   display: flex;
   align-items: center;
   justify-content: center;

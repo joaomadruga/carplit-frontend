@@ -6,14 +6,13 @@ import ButtonPrimaryDefault from '../../components/utils/ButtonPrimaryDefault.co
 import * as Constants from "../../constants/utils/Constants";
 import TextForgotPassword from '../../components/login/TextForgotPassword.component';
 import LoginContent from '../../components/login/LoginContent.component';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react'
+import { CommonActions } from '@react-navigation/native';
+import { LoginContext } from '../../routes/routes';
 
-export default function LoginScreen() {
-  const [loginInfo, setLoginInfo] = useState({
-    login: "",
-    password: ""
-  })
+export default function LoginScreen( {navigation} ) {
   
+  const { loginInfo, setLoginInfo } = useContext(LoginContext);
   const handleChange = (value, type) => {
     setLoginInfo(prev => ({...prev, [type]: value}))
   }
@@ -25,7 +24,16 @@ export default function LoginScreen() {
         <ButtonPrimaryDefault
           title='Entrar'
           underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
-          onPress={() => console.log('Pressed!')}
+          onPress={() => navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [{
+                name: 'LoginHome',
+                params: { userLogin: loginInfo.login} 
+              }],
+            })
+          )}
+          
         />
         <TextForgotPassword>Esqueci minha senha</TextForgotPassword>
       </LoginContent>
