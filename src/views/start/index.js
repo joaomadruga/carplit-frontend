@@ -1,4 +1,4 @@
-import { Image, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import * as Constants from "../../constants/utils/Constants";
 import SafeAreaViewStart from '../../components/start/SafeAreaViewStart.component';
 import MainImage from "../../../assets/Start/main-image.png";
@@ -8,13 +8,13 @@ import TextSubtitleStart from '../../components/start/TextSubtitleStart.componen
 import ButtonPrimaryDefault from '../../components/utils/ButtonPrimaryDefault.component';
 import CenteredView from '../../components/utils/CenteredView.component';
 import ImageWrapper from '../../components/utils/ImageWrapper.component';
-import StartComponent from '../../components/start/StartContent.component';
 import ButtonSecundaryDefault from '../../components/utils/ButtonSecondaryDefault.component';
+import PaddingContent from '../../components/utils/PaddingContent.component';
 export default function StartScreen({ navigation }) {
 
   return (
     <SafeAreaViewStart>
-      <StartComponent style={{width: '100%', height: '100%', padding: 20}}>
+      <PaddingContent style={{justifyContent: 'space-evenly', alignItems: 'center'}}>
         <ImageWrapper source={MainImage} width={'100%'} height={'40%'} resizeMode={'contain'}/>
         <ImageWrapper source={PeopleImage} width={'101px'} height={'26px'}/>
         <CenteredView>
@@ -25,7 +25,11 @@ export default function StartScreen({ navigation }) {
           <ButtonPrimaryDefault
             title='Criar uma conta'
             underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
-            onPress={() => console.log('Pressed!')}
+            onPress={() => {
+              let whatsAppMsg = 'da p escolher o contato do zap'
+              let url = 'whatsapp://send?text=' + whatsAppMsg;
+              Linking.openURL(url);
+            }}
             marginBottom={10}
           />
           <ButtonSecundaryDefault
@@ -34,7 +38,7 @@ export default function StartScreen({ navigation }) {
             onPress={() => navigation.navigate('Login')}
           />
         </CenteredView>
-        </StartComponent>
+        </PaddingContent>
     </SafeAreaViewStart>
   );
 }

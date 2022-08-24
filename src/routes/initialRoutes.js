@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 export default function InitialRoutes({ HomeRoutes }) {
   return (
-        <Stack.Navigator initialRouteName="Start" screenOptions={screenOptions}>
+        <Stack.Navigator initialRouteName="Start" screenOptions={screenOptions} >
           <Stack.Screen 
             name="Start"
             component={StartScreen}
@@ -52,5 +52,8 @@ const screenOptions = {
       backgroundColor: Constants.headerStyleConfig.BackgroundColor
   },
   headerShadowVisible: false,
-  headerTitleAlign: 'center'
+  headerTitleAlign: 'center',
+  gestureEnabled: true,
+  gestureDirection: "horizontal",
+  animation: "slide_from_right"
 }

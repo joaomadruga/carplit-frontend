@@ -1,14 +1,16 @@
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 
-const LoginContent = styled.View`
+const PaddingContentStyle = styled.View`
   background-color: ${Constants.colors.gray[0]};
   height: 100%;
   width: 100%;
+  padding: 20px;
   display: flex;
-  align-items: center;
-  margin-top: 65px;
-  padding: 0 20px;
 `;
 
-export default LoginContent;
+export default function PaddingContent({ ...props }) {
+    return (
+        <PaddingContentStyle {...props}/>
+    );
+}
