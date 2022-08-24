@@ -1,9 +1,15 @@
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 
-const BigHeaderTitle = styled.Text`
+const BigHeaderTitleStyle = styled.Text`
     font-size: 32px;
     font-family: ${Constants.fontWeightConfig.Bold};
 `;
 
-export default BigHeaderTitle;
+export default function BigHeaderTitle({ title, ...props }) {
+    const insets = useSafeAreaInsets();
+    return (
+      <BigHeaderTitleStyle style={{marginTop: Platform.OS === 'android' ? insets.top : 0}}>{title}</BigHeaderTitleStyle>
+    );
+  }

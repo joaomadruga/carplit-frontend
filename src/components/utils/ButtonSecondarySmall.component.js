@@ -32,7 +32,7 @@ export default function ButtonSecondarySmallDefault({ title, ...props }) {
             {/* Touchable highlight can only receive one child (has to do this trick) */}
             <>
                 <ButtonText>{title}</ButtonText>
-                <ImageWrapper source={LogoutIcon} width={24} height={24} />
+                <ImageWrapper source={LogoutIcon} width={'24px'} height={'24px'} />
             </>
         </ButtonSecondarySmallStyle>
     );

@@ -7,7 +7,7 @@ export default function Finance() {
     return (
         <SafeAreaView>
             <PaddingContent>
-                    <BigHeaderTitle>Finanças</BigHeaderTitle>
+                    <BigHeaderTitle title={'Finanças'}/>
             </PaddingContent>
         </SafeAreaView>
     );

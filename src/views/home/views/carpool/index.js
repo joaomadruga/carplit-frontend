@@ -18,7 +18,7 @@ export default function Carpool() {
         return (
             <SafeAreaView>
                 <PaddingContent>
-                    <BigHeaderTitle>Caronas</BigHeaderTitle>
+                    <BigHeaderTitle title={'Caronas'}/>
                     <RoundedPlusButton/>
                     <CarpoolContent>
                         {listOfCarpools.length > 0 ? <Text>Mostrar lista</Text> : <Empty/>}

@@ -7,7 +7,7 @@ export default function ConsumeFuel() {
     return (
         <SafeAreaView>
             <PaddingContent>
-                    <BigHeaderTitle>Finanças</BigHeaderTitle>
+                    <BigHeaderTitle title={'ConsumeFuel'}/>
             </PaddingContent>
         </SafeAreaView>
     );

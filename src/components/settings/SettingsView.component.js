@@ -7,7 +7,7 @@ const SettingsViewStyle = styled.TouchableOpacity`
     background-color: ${Constants.colors.gray[0]};
     border: 1px solid ${Constants.colors.gray[400]};
     border-radius: 8px;
-    padding: 20px;
+    padding: 16px;
     width: 100%;
     height: 92px;
     display: flex;
@@ -21,6 +21,7 @@ const Title = styled.Text`
     font-family: ${Constants.fontConfig.Body.Medium.FontFamily};
     font-size: ${Constants.fontConfig.Body.Medium.FontSize};
     color: ${Constants.colors.gray[800]};
+    align-self: flex-start;
 `;
 
 const Subtitle = styled.Text`
@@ -28,12 +29,13 @@ const Subtitle = styled.Text`
     font-size: ${Constants.fontConfig.Sm.Regular.FontSize};
     color: ${Constants.colors.gray[700]};
     margin-top: 4px;
+    align-self: flex-start;
 `;
 
 export default function SettingsView({ TextTitle, TextSubtitle, SourceImage, ...props }) { 
     return (
         <SettingsViewStyle {...props}>
-            <ImageWrapper source={SourceImage} width={'24px'} height={'24px'} style={{marginRight: 16}}/>
+            <ImageWrapper source={SourceImage} width={'32px'} height={'32px'} style={{marginRight: 16}}/>
             <View style={{width: '80%' }}>
                 <Title>{TextTitle}</Title>
                 <Subtitle>{TextSubtitle}</Subtitle>
