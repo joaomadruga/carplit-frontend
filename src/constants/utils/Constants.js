@@ -58,6 +58,10 @@ export const inputConfig = {
     Ontouch: 
     {
         Color: colors.primary[600]
+    },
+    Consume:
+    {
+        color: colors.gray[800]
     }
 }
 export const fontConfig = { H3: { Bold: { FontSize: '18px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '18px', FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '18px', FontFamily: fontWeightConfig.Medium}}, Body: { Bold: { FontSize: '16px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '16px' , FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '16px' , FontFamily: fontWeightConfig.Medium }}, Sm: { Bold: { FontSize: '14px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '14px', FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '14px', FontFamily: fontWeightConfig.Medium }}, Xsm: { Bold: { FontSize: '12px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '12px', FontFamily: fontWeightConfig.Regular }, Semibold: { FontSize: '12px', FontFamily: fontWeightConfig.Medium } } }

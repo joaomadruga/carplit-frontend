@@ -9,7 +9,7 @@ const InputStyle = styled.TextInput`
   font-size: ${Constants.fontConfig.Body.Medium.FontSize};
   font-family: ${Constants.fontConfig.Body.Medium.FontFamily};
   padding: ${Constants.inputConfig.Default.Padding};
-  color: ${Constants.inputConfig.Ontouch.Color};
+  color: ${props => props.color ? `${props.color}` : Constants.inputConfig.Ontouch.Color};
   margin: ${props => props.margin ? `${props.margin}px` : 0};
   margin-top: ${props => props.marginTop ? `${props.marginTop}px` : 0};
   margin-bottom: ${props => props.marginBottom ? `${props.marginBottom}px` : 0};
