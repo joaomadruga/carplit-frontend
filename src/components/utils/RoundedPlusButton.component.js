@@ -8,13 +8,14 @@ const RoundedPlusButtonStyle = styled.View`
     position: absolute;
     bottom: 20px;
     right: 20px;
+    z-index: 999;
 `;
 
 export default function RoundedPlusButton({ ...props }) {
     return (
         <RoundedPlusButtonStyle>
             <FAB icon="plus"
-            onPress={() => console.log('Pressed')}
+            {...props}
             style={{ backgroundColor: Constants.colors.primary[600]}}
             color={Constants.colors.gray[0]}
             size="medium"

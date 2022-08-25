@@ -10,6 +10,6 @@ const BigHeaderTitleStyle = styled.Text`
 export default function BigHeaderTitle({ title, ...props }) {
     const insets = useSafeAreaInsets();
     return (
-      <BigHeaderTitleStyle style={{marginTop: Platform.OS === 'android' ? insets.top : 0}}>{title}</BigHeaderTitleStyle>
+      <BigHeaderTitleStyle style={{marginTop: Platform.OS === 'android' ? insets.top : 12}}>{title}</BigHeaderTitleStyle>
     );
   }

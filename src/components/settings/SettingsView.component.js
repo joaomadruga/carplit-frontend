@@ -35,7 +35,7 @@ const Subtitle = styled.Text`
 export default function SettingsView({ TextTitle, TextSubtitle, SourceImage, ...props }) { 
     return (
         <SettingsViewStyle {...props}>
-            <ImageWrapper source={SourceImage} width={'32px'} height={'32px'} style={{marginRight: 16}}/>
+            <ImageWrapper source={SourceImage} width={'24px'} height={'24px'} style={{marginRight: 16}}/>
             <View style={{width: '80%' }}>
                 <Title>{TextTitle}</Title>
                 <Subtitle>{TextSubtitle}</Subtitle>

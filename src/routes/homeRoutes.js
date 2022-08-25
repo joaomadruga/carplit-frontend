@@ -74,12 +74,12 @@ export default function HomeRoutes() {
             
             <Tab.Screen name="Home" 
                 component={Carpool}
-                options={() => ({
+                options={({ navigation }) => ({
                     headerTitle: 'Início',
                     tabBarLabel: 'Início',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                    <TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
                         <ImageWrapper source={focused ? CarIconActive : CarIconInactive} width={'24px'} height={'24px'}/>
                     </TouchableWithoutFeedback>
                     )
@@ -88,12 +88,12 @@ export default function HomeRoutes() {
 
             <Tab.Screen name="Finance" 
                 component={Finance}
-                options={() => ({
+                options={({ navigation }) => ({
                     headerTitle: 'Finanças',
                     tabBarLabel: 'Finanças',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                    <TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Finance')}>
                         <ImageWrapper source={focused ? WalletIconActive : WalletIconInactive} width={'24px'} height={'24px'}/>
                     </TouchableWithoutFeedback>
                     )
@@ -102,12 +102,12 @@ export default function HomeRoutes() {
             
             <Tab.Screen name="Settings" 
                 component={SettingNavigator} 
-                options={() => ({
+                options={({ navigation }) => ({
                     headerTitle: 'Ajustes',
                     tabBarLabel: 'Ajustes',
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => navigation.navigate('Settings')}>
                             <ImageWrapper source={focused ? SettingsIconActive: SettingsIconInactive} width={'24px'} height={'24px'}/>
                         </TouchableWithoutFeedback>
                         )

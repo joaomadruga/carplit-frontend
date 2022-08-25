@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 
-const ButtonSecondaryDefaultStyle = styled.TouchableHighlight`
+const ButtonSecondaryDefaultStyle = styled.TouchableOpacity`
   background-color: ${Constants.buttonConfig.Default.Secondary.Default.BackgroundColor};
   border-radius: ${Constants.buttonConfig.Default.Secondary.Default.Radius};
   width: ${Constants.buttonConfig.Default.Secondary.Default.Width};
