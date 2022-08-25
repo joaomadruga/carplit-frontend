@@ -4,16 +4,24 @@ import ConsumeFuelView from '../../../components/settings/ConsumeFuel/ConsumeFue
 import PaddingContent from '../../../components/utils/PaddingContent.component';
 import Input from '../../../components/utils//Input.component';
 import * as Constants from '../../../constants/utils/Constants';
+import InputWithTitleSubtitle from '../../../components/utils/InputWithTitleSubtitle.component';
+import SafeAreaViewDefault from '../../../components/utils/SafeAreaViewLogin.component';
 
 export default function ConsumeFuel() {
     return (
-        <SafeAreaView>
+        <SafeAreaViewDefault>
             <PaddingContent>
-                    <ConsumeFuelView TextTitle={'Consumo médio do seu carro (km/L)'} TextSubtitle={'Esse valor será utilizado para calcular os litros de combustível gastos nos trajetos'}/>
-                    <Input placeholder="Consumo (km/L)" marginBottom={24} color={Constants.inputConfig.Consume.color}/>
-                    <ConsumeFuelView TextTitle={'Custo do combustível por litro'} TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}/>
-                    <Input placeholder="Custo do litro" color={Constants.inputConfig.Consume.color}/>
+                    <InputWithTitleSubtitle
+                    TextTitle={'Consumo médio do seu carro (km/L)'} 
+                    TextSubtitle={'Esse valor será utilizado para calcular os litros de combustível gastos nos trajetos'}
+                    InputPlaceHolder={'Consumo (km/L)'} 
+                    />
+                    <InputWithTitleSubtitle
+                    TextTitle={'Custo do combustível por litro'} 
+                    TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
+                    InputPlaceHolder={'Custo do litro'} 
+                    />
             </PaddingContent>
-        </SafeAreaView>
+        </SafeAreaViewDefault>
     );
 }

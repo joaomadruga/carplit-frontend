@@ -52,8 +52,8 @@ const SettingNavigator = ({ navigation, route }) => {
         <StackSettings.Navigator screenOptions={screenOptionsStackNavigator} initialRouteName='SettingsScreen'>
                 <StackSettings.Screen options={{headerShown: false}} name="SettingsScreen" component={SettingsScreen} />
                 <StackSettings.Screen options={({ navigation }) => ({
-              headerTitle: 'Entrar',
-              title: 'Entrar',
+              headerTitle: 'Consumo e combustível',
+              title: 'Consumo e combustível',
               headerLeft: () =>  ( 
               <TouchableWithoutFeedback onPress={navigation.goBack}>
                 <ImageWrapper style={{cursor: 'pointer'}} width={'48px'} height={'48px'} source={ArrowLeft} />

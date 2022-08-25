@@ -1,8 +1,9 @@
 import { View } from 'react-native';
 import styled from 'styled-components/native';
-import * as Constants from '../../../constants/utils/Constants';
+import * as Constants from '../../constants/utils/Constants';
+import Input from './Input.component';
 
-const ConsumeFuelViewStyle = styled.View`
+const InputWithTitleSubtitleStyle = styled.View`
     background-color: ${Constants.colors.gray[0]};
     margin-top: 8px;
 `;
@@ -21,11 +22,12 @@ const Subtitle = styled.Text`
     margin-bottom: 16px;
 `;
 
-export default function ConsumeFuelView({ TextTitle, TextSubtitle, ...props }) { 
+export default function InputWithTitleSubtitle({ TextTitle, TextSubtitle, InputPlaceHolder, ...props }) { 
     return (
-        <ConsumeFuelViewStyle {...props}>
+        <InputWithTitleSubtitleStyle {...props}>
             <Title>{TextTitle}</Title>
             <Subtitle>{TextSubtitle}</Subtitle>
-        </ConsumeFuelViewStyle>
+            <Input placeholder={InputPlaceHolder} marginBottom={24} color={Constants.inputConfig.Ontouch.Settings.Color}/>
+        </InputWithTitleSubtitleStyle>
     )
 };
