@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import SafeAreaViewLogin from '../../components/login/SafeAreaViewLogin.component';
+import SafeAreaViewLogin from '../../components/utils/SafeAreaViewLogin.component';
 import LoginTitle from '../../components/login/TitleLogin.component.component';
 import Input from '../../components/utils/Input.component';
 import ButtonPrimaryDefault from '../../components/utils/ButtonPrimaryDefault.component'
@@ -11,6 +11,7 @@ import { LoginContext } from '../../routes/routes';
 import CenteredView from '../../components/utils/CenteredView.component';
 import PaddingContent from '../../components/utils/PaddingContent.component';
 import { TextInput } from 'react-native-paper';
+import SafeAreaViewDefault from '../../components/utils/SafeAreaViewLogin.component';
 
 export default function LoginScreen( {navigation} ) {
   
@@ -19,7 +20,7 @@ export default function LoginScreen( {navigation} ) {
     setLoginInfo(prev => ({...prev, [type]: value}))
   }
   return (
-    <SafeAreaViewLogin>
+    <SafeAreaViewDefault>
       <PaddingContent style={{marginTop: 40}}>
         <Input placeholder="Login" marginBottom={12} onChangeText={(value) => {handleChange(value, 'login')}} value={loginInfo.login}/>
         <Input placeholder="Senha" secureTextEntry={true} marginBottom={38} onChangeText={(value) => {handleChange(value, 'password')}} value={loginInfo.password}/>
@@ -39,6 +40,6 @@ export default function LoginScreen( {navigation} ) {
         />
         <TextForgotPassword>Esqueci minha senha</TextForgotPassword>
       </PaddingContent>
-    </SafeAreaViewLogin>
+    </SafeAreaViewDefault>
   );
 }

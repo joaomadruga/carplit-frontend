@@ -5,7 +5,7 @@ const PaddingContentStyle = styled.View`
   background-color: ${Constants.colors.gray[0]};
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
 `;
 
