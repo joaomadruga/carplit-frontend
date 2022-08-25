@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button, Image, Text, TouchableWithoutFeedback } from "react-native";
 import * as Constants from "../constants/utils/Constants";
-import SettingsScreen from "../views/settings";
+import SettingsScreen from "../views/home/views/settings";
 import ImageWrapper from "../components/utils/ImageWrapper.component";
 import CarIconInactive from "../../assets/Home/car-icon-inactive.png";
 import CarIconActive from "../../assets/Home/car-icon-active.png";
@@ -15,7 +15,7 @@ import Carpool from '../views/home/views/carpool';
 import Finance from '../views/home/views/finance';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ConsumeFuel from '../views/settings/ConsumeFuel';
+import ConsumeFuel from '../views/home/views/settings/ConsumeFuel';
 import { useLayoutEffect, useState } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
