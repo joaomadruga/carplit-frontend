@@ -26,7 +26,6 @@ export default function LoginScreen( {navigation} ) {
         <Input placeholder="Senha" secureTextEntry={true} marginBottom={38} onChangeText={(value) => {handleChange(value, 'password')}} value={loginInfo.password}/>
         <ButtonPrimaryDefault
           title='Entrar'
-          underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
           onPress={() => navigation.dispatch(
             CommonActions.reset({
               index: 1,

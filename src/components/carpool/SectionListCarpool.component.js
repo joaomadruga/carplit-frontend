@@ -5,22 +5,22 @@ import * as Constants from "../../constants/utils/Constants";
 import DateText from './DateText.component';
 import TouchableListItem from './TouchableListItem.component';
 
-const FlatListCarpoolStyle = styled.FlatList`
-
-`;
-
-function Item({titleText, subtitleText}) {
-    return <TouchableListItem titleText={titleText} subtitleText={subtitleText} />
+function Item({titleText, subtitleText, date, navigation}) {
+    return (
+        <TouchableListItem
+            titleText={titleText} 
+            subtitleText={subtitleText} 
+            onPress={() => { navigation.navigate('CarpoolDetails', { titleText: titleText, date: date } )  }}
+        />
+    )
 }
 
-export default function FlatListCarpool({ listOfCarpools, ...props }) {
-    const [DateObject, setDateObject] = useState({})
-    //console.log(listOfCarpools)
+export default function SectionListCarpool({ listOfCarpools, navigation, ...props }) {
     return (
         <SectionList
         sections={listOfCarpools}
         stickySectionHeadersEnabled={true}
-        renderItem={({ item }) => <Item titleText={item.titleText} subtitleText={item.subtitleText} />}
+        renderItem={({ item, section: { date } }) => <Item titleText={item.titleText} subtitleText={item.subtitleText} date={date} navigation={navigation}/>}
         renderSectionHeader={({ section: { date } }) => <DateText>{date}</DateText>}
         {...props}
         />

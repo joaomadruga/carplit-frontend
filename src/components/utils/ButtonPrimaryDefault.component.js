@@ -26,7 +26,7 @@ const ButtonText = styled.Text`
 
 export default function ButtonPrimaryDefault({ title, ...props }) {
     return (
-        <ButtonPrimaryDefaultStyle {...props}>
+        <ButtonPrimaryDefaultStyle underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor} {...props}>
             <ButtonText>{title}</ButtonText>
         </ButtonPrimaryDefaultStyle>
     );
