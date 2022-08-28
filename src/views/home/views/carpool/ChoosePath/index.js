@@ -9,7 +9,7 @@ import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLog
 
 
 export default function ChoosePath({ navigation, route }) {
-    const [listOfPaths, setListOfPaths] = useState([{titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: '16km'}, {titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: '16km'}])
+    const [listOfPaths, setListOfPaths] = useState([{titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: '16km', kmL: 2.54}, {titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: '16km', kmL: 2.54}])
     const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0)
 
     useEffect(() => {

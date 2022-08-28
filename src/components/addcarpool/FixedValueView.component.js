@@ -10,7 +10,7 @@ const FixedValueViewStyle = styled.View`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    margin-top: 16px;
+    margin: 16px 0;
 `
 
 const FixedValueText = styled.Text`
@@ -42,12 +42,8 @@ const InputText = styled.Text`
     color: ${Constants.colors.gray[800]};
 `
 
-export default function FixedValueView(){
-    const [inputValue, setInputValue] = useState('R$ 0,00');
-    var formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    });
+export default function FixedValueView({ fixedPriceState }){
+    const {fixedPrice, setFixedPrice} = fixedPriceState;
 
     return (
         <FixedValueViewStyle>
@@ -55,20 +51,20 @@ export default function FixedValueView(){
             <InputView>
                     <FixedValueInput
                     keyboardType={"numeric"} 
-                    value={inputValue}
+                    value={fixedPrice}
                     
                     onChangeText={(value) => {
                         const valueFiltered = value.replace('.', ',').replace(/[^0-9,]/g, '');
-                        setInputValue("R$ " + valueFiltered);
+                        setFixedPrice("R$ " + valueFiltered);
                     }}
                     onFocus= {() => {
-                        const valueFiltered = inputValue.replace(/[$a-zA-Z.]/g, '');
-                        setInputValue("R$ " + valueFiltered);
+                        const valueFiltered = fixedPrice.replace(/[$a-zA-Z.]/g, '');
+                        setFixedPrice("R$ " + valueFiltered);
                     } }
                     onEndEditing= {() => {
-                        const valueFiltered = inputValue.replace(/[$a-zA-Z.]/g, '').replace(',', '.');
-                        const formatedValue = formatter.format(valueFiltered);
-                        formatedValue.includes("NaN") ? setInputValue("R$ 0,00") : setInputValue(formatedValue)
+                        const valueFiltered = fixedPrice.replace(/[$a-zA-Z.]/g, '').replace(',', '.');
+                        const formatedValue = Constants.formatter.format(valueFiltered);
+                        formatedValue.includes("NaN") ? setFixedPrice("R$ 0,00") : setFixedPrice(formatedValue)
                     } }
                     
                     >

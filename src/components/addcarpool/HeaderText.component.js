@@ -30,11 +30,11 @@ const SmallTitle = styled.Text`
     align-self: flex-start;
 `
 
-export function HeaderText({titleText, subtitleText}){
+export function HeaderText({titleText, subtitleText, kmL, carpoolPrice}){
     return (
         <HeaderTextStyle>
             <Title>{titleText}</Title>
-            <Subtitle>{subtitleText}</Subtitle>
+            <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
             <BottomLine marginTop={24} />
             <SmallTitle>Distribuição de custos</SmallTitle>
         </HeaderTextStyle>

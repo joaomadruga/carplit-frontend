@@ -8,7 +8,7 @@ const AutoValueViewStyle = styled.View`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    margin-top: 16px;
+    margin: 16px 0;
 `
 
 const AutoValueText = styled.Text`
@@ -18,8 +18,9 @@ const AutoValueText = styled.Text`
     margin-right: 8px;
 `
 
-export default function AutoValueView(){
-    const [isEnabled, setIsEnabled] = useState(false);
+export default function AutoValueView({ isEnabledState }){
+    const {isEnabled, setIsEnabled} = isEnabledState;
+
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return (
         <AutoValueViewStyle>

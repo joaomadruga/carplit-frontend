@@ -7,7 +7,7 @@ import FixedValue from "../../views/home/views/carpool/AddCarpool/FixedValue";
 const TopTab = createMaterialTopTabNavigator();
 const initialRouteName = "AutoValue";
 
-export default function SwitchNavigator() {
+export default function SwitchNavigator({ listOfPeople, carpoolPrice }) {
     const [isLeftSelected, setIsLeftSected] = useState(true);
     const [currentPageName, setCurrentPageName] = useState(initialRouteName);
     const invertIsLeftSected = (targetSelection) => { if (targetSelection !== currentPageName) setIsLeftSected(!isLeftSelected)};
@@ -30,8 +30,8 @@ export default function SwitchNavigator() {
             })}
             initialRouteName={initialRouteName}
         >
-            <TopTab.Screen options={{tabBarLabel: "Valor automático"}} name="AutoValue" component={AutoValue} />
-            <TopTab.Screen options={{tabBarLabel: "Valor fixo"}} name="FixedValue" component={FixedValue} />
+            <TopTab.Screen options={{tabBarLabel: "Valor automático"}} name="AutoValue" component={AutoValue} initialParams={{ listOfPeople: listOfPeople, carpoolPrice: carpoolPrice } } />
+            <TopTab.Screen options={{tabBarLabel: "Valor fixo"}} name="FixedValue" component={FixedValue} initialParams={{ listOfPeople: listOfPeople, carpoolPrice: carpoolPrice } }/>
         </TopTab.Navigator>
     )
 }
@@ -43,7 +43,7 @@ const screenOptions = {
     tabBarStyle: {
         backgroundColor: Constants.colors.gray[0],
         borderRadius: 8,
-        elevation: 0
+        elevation: 0,
     },
     tabBarLabelStyle: {
         fontFamily: Constants.fontConfig.Body.Medium.FontFamily, 

@@ -25,8 +25,8 @@ const Subtitle = styled.Text`
     max-width: 90%;
 `
 
-export default function TouchableListItem({titleText, subtitleText, index, stateCheckboxValues,  ...props}){
-    const {checkboxValues, setCheckboxValues} = stateCheckboxValues;
+export default function TouchableListItem({titleText, subtitleText, index, People,  ...props}){
+    const [checkBox, setCheckBox] = useState(false);
     return (
         <>
             <TouchableListItemStyle {...props}>
@@ -35,11 +35,11 @@ export default function TouchableListItem({titleText, subtitleText, index, state
                     <Subtitle>{subtitleText}</Subtitle>
                 </View>
                 <Checkbox.Android
-                    status={checkboxValues[index] ? 'checked' : 'unchecked'}
+                    status={checkBox || People.isDriver ? 'checked' : 'unchecked'}
+                    disabled={People.isDriver ? true : false}
                     onPress={() => {
-                        const tempArray = [...checkboxValues]
-                        tempArray[index] = !tempArray[index]
-                        setCheckboxValues(tempArray)
+                        setCheckBox(!checkBox)
+                        People.isParticipating = !People.isParticipating;
                     }}
                     centered={true}
                 />

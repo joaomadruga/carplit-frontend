@@ -3,17 +3,22 @@ import { HeaderText } from "../../../../../components/addcarpool/HeaderText.comp
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 import SwitchNavigator from "../../../../../components/addcarpool/SwitchNavigator.component";
+import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryDefault.component";
+
+const gasPrice = 7;
+
 
 export default function AddCarpool({ route }) {
-    const { checkboxValues, pathTitle, pathDistance } = route.params;
+    const { listOfPeople, pathTitle, pathDistance, kmL } = route.params;
+    const carpoolPrice = kmL * gasPrice;
     useEffect(() => {
-        console.log(pathTitle, pathDistance)
+        console.log(pathTitle, pathDistance, kmL)
     }, [])
     return (
         <SafeAreaViewDefault>
             <PaddingContent>
-                <HeaderText titleText={pathTitle} subtitleText={pathDistance}/>
-                <SwitchNavigator/>
+                <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} kmL={kmL}/>
+                <SwitchNavigator carpoolPrice={carpoolPrice} listOfPeople={listOfPeople}/>
             </PaddingContent>
         </SafeAreaViewDefault>
     );
