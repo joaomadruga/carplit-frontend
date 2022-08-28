@@ -1,3 +1,6 @@
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 export const headerStyleConfig = { BackgroundColor: '#fff' }
 export const fontWeightConfig = { Regular: 'RetniSans-Regular', BoldItalic: 'RetniSans-BoldItalic', Italic: 'RetniSans-Italic', Light: 'RetniSans-Light', LightItalic: 'RetniSans-LightItalic', Medium: 'RetniSans-Medium', MediumItalic: 'RetniSans-MediumItalic', Bold: 'RetniSans-Bold' }
 export const fontsLoadedConfig = {'RetniSans-Regular': require('../../../assets/fonts/RetniSans-Regular.ttf'),'RetniSans-BoldItalic': require('../../../assets/fonts/RetniSans-BoldItalic.ttf'),'RetniSans-Italic': require('../../../assets/fonts/RetniSans-Italic.ttf'),'RetniSans-Light': require('../../../assets/fonts/RetniSans-Light.ttf'),'RetniSans-LightItalic': require('../../../assets/fonts/RetniSans-LightItalic.ttf'),'RetniSans-Medium': require('../../../assets/fonts/RetniSans-Medium.ttf'),'RetniSans-MediumItalic': require('../../../assets/fonts/RetniSans-MediumItalic.ttf'),'RetniSans-Bold': require('../../../assets/fonts/RetniSans-Bold.ttf')}
@@ -63,3 +66,17 @@ export const inputConfig = {
 }
 export const fontConfig = { H3: { Bold: { FontSize: '18px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '18px', FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '18px', FontFamily: fontWeightConfig.Medium}}, Body: { Bold: { FontSize: '16px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '16px' , FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '16px', FontSizeInt: 16, FontFamily: fontWeightConfig.Medium }}, Sm: { Bold: { FontSize: '14px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '14px', FontFamily: fontWeightConfig.Regular }, Medium: { FontSize: '14px', FontFamily: fontWeightConfig.Medium }}, Xsm: { Bold: { FontSize: '12px', FontFamily: fontWeightConfig.Bold }, Regular: { FontSize: '12px', FontFamily: fontWeightConfig.Regular }, Semibold: { FontSize: '12px', FontFamily: fontWeightConfig.Medium } } }
 export const headingConfig = { Title: { FontFamily: fontWeightConfig.Bold, FontSize: '16px', Color: colors.gray[800], BackgroundColor: colors.gray[0] }}
+export const formatter = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+});
+export function inputFormatter(value) {
+    if (!Number(value)) return "R$ 0,00";
+  
+    const amount = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(value / 100);
+  
+    return `${amount}`;
+}

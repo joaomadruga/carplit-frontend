@@ -8,7 +8,7 @@ const AutoValueViewStyle = styled.View`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    margin-top: 16px;
+    margin: 16px 0;
 `
 
 const AutoValueText = styled.Text`
@@ -18,15 +18,16 @@ const AutoValueText = styled.Text`
     margin-right: 8px;
 `
 
-export default function AutoValueView(){
-    const [isEnabled, setIsEnabled] = useState(false);
+export default function AutoValueHeader({ isEnabledState }){
+    const {isEnabled, setIsEnabled} = isEnabledState;
+
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     return (
         <AutoValueViewStyle>
             <AutoValueText>Se incluir na divisão de custos</AutoValueText>
             <Switch 
             onValueChange={toggleSwitch} 
-            value={isEnabled} 
+            value={isEnabled}
             trackColor={{ false: "#767577", true: Constants.colors.primary[600] }}
             thumbColor={isEnabled ? Constants.colors.gray[0] : "#f4f3f4"}
             />

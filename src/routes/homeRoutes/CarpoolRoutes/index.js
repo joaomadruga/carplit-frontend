@@ -86,7 +86,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                         ),
                     })}
                     name="AddCarpool"
-                    component={AddCarpool} 
+                    component={AddCarpool}
                 />
         </StackSettings.Navigator>
     )

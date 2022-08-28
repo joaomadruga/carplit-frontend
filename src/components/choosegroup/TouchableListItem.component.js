@@ -5,7 +5,7 @@ import { Checkbox } from 'react-native-paper';
 import { useState } from 'react';
 import BottomLine from '../utils/BottomLine.component';
 
-const TouchableListItemStyle = styled.View`
+const TouchableListItemStyle = styled.TouchableOpacity`
     padding: 16px 0;
     flex-direction: row;
     justify-content: space-between;
@@ -25,23 +25,23 @@ const Subtitle = styled.Text`
     max-width: 90%;
 `
 
-export default function TouchableListItem({titleText, subtitleText, index, stateCheckboxValues,  ...props}){
-    const {checkboxValues, setCheckboxValues} = stateCheckboxValues;
+export default function TouchableListItem({titleText, subtitleText, index, People,  ...props}){
+    const [checkBox, setCheckBox] = useState(false);
     return (
         <>
-            <TouchableListItemStyle {...props}>
+            <TouchableListItemStyle {...props} onPress={() => {
+                setCheckBox(!checkBox)
+                People.isParticipating = !People.isParticipating;
+            }}>
                 <View>
                     <Title>{titleText}</Title>
                     <Subtitle>{subtitleText}</Subtitle>
                 </View>
                 <Checkbox.Android
-                    status={checkboxValues[index] ? 'checked' : 'unchecked'}
-                    onPress={() => {
-                        const tempArray = [...checkboxValues]
-                        tempArray[index] = !tempArray[index]
-                        setCheckboxValues(tempArray)
-                    }}
+                    status={checkBox || People.isDriver ? 'checked' : 'unchecked'}
+                    disabled={People.isDriver ? true : false}
                     centered={true}
+                    color={Constants.colors.primary[600]}
                 />
             </TouchableListItemStyle>
             <BottomLine/>

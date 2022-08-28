@@ -8,22 +8,22 @@ import Empty from "../../../../../components/utils/Empty.component";
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 
-
 export default function ChooseGroup({ navigation, route }) {
-    const [listOfPeople, setListOfPeople] = useState([{name: 'Pedro', address: 'Rua Um de Dois, 123, Tamarinasdgasgdeira, Recife - PE'}, 
-    {name: 'Zé', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
-    {name: 'Thaís', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
-    {name: 'Gil', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
-    {name: 'João', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'}
+    const [listOfPeople, setListOfPeople] = useState([
+    {name: 'Zé', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: true},
+    {name: 'Pedro', address: 'Rua Um de Dois, 123, Tamarinasdgasgdeira, Recife - PE', isParticipating: false, isDriver: false}, 
+    {name: 'Thaís', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false},
+    {name: 'Gil', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false},
+    {name: 'João', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false}
     ])
-    const [checkboxValues, setCheckboxValues] = useState(Array(listOfPeople.length).fill(false));
-    const { pathTitle, pathDistance } = route.params;
+    const { pathTitle, pathDistance, kmL } = route.params;
+
     return (
         <SafeAreaViewDefault>
             <PaddingContent>
                 <View style={{height: '100%', width: '100%'}}>
-                    <FlatListChooseGroup stateCheckboxValues={{checkboxValues, setCheckboxValues}} listOfPeople={listOfPeople}/>
-                    <ButtonPrimaryDefault title={"Continuar"} onPress={() => navigation.navigate('AddCarpool', { checkboxValues, pathTitle, pathDistance })} />
+                    <FlatListChooseGroup listOfPeople={listOfPeople}/>
+                    <ButtonPrimaryDefault title={"Continuar"} onPress={() => navigation.navigate('AddCarpool', { listOfPeople, pathTitle, pathDistance, kmL })} />
                 </View>
             </PaddingContent>
         </SafeAreaViewDefault>

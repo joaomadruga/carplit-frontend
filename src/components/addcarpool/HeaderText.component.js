@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import BottomLine from '../utils/BottomLine.component';
+import PaddingContent from '../utils/PaddingContent.component';
 
 const HeaderTextStyle = styled.View`
     margin-top: 16px;
@@ -30,13 +31,15 @@ const SmallTitle = styled.Text`
     align-self: flex-start;
 `
 
-export function HeaderText({titleText, subtitleText}){
+export function HeaderText({titleText, subtitleText, kmL, carpoolPrice}){
     return (
-        <HeaderTextStyle>
-            <Title>{titleText}</Title>
-            <Subtitle>{subtitleText}</Subtitle>
-            <BottomLine marginTop={24} />
-            <SmallTitle>Distribuição de custos</SmallTitle>
-        </HeaderTextStyle>
+        <PaddingContent style={{height: 'auto'}}>
+            <HeaderTextStyle>
+                <Title>{titleText}</Title>
+                <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
+                <BottomLine marginTop={24} />
+                <SmallTitle>Distribuição de custos</SmallTitle>
+            </HeaderTextStyle>
+        </PaddingContent>
     )
 };

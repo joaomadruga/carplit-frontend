@@ -2,23 +2,23 @@ import { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import TouchableListItem from './TouchableListItem.component';
 
-function Item({name, address, index, stateCheckboxValues}) {
+function Item({name, address, index, People, isDriver}) {
     return (
         <TouchableListItem
-            titleText={name} 
-            subtitleText={address} 
+            titleText={isDriver ? "Você" : name} 
+            subtitleText={address}
             index={index}
-            stateCheckboxValues={stateCheckboxValues}
+            People={People}
         />
     )
 }
 
-export default function FlatListChooseGroup({ listOfPeople, stateCheckboxValues, ...props }) {
+export default function FlatListChooseGroup({ listOfPeople, ...props }) {
     return (
         <FlatList
         style={{maxHeight: '85%'}}
         data={listOfPeople}
-        renderItem={({ item, index }) => <Item stateCheckboxValues={stateCheckboxValues} name={item.name} address={item.address} index={index}/>}
+        renderItem={({ item, index }) => <Item isDriver={item.isDriver} People={item} name={item.name} address={item.address} index={index}/>}
         {...props}
         />
     )
