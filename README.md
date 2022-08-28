@@ -2,47 +2,51 @@
 Organizando suas caronas!
 
 
-### 🧾 Conteúdos
+## 🧾 Conteúdos
 <p align="center">
  <a href="#Sobre">Sobre</a> •
- <a href="#Instalar">Instalar</a> • 
  <a href="#Tecnologias">Tecnologias</a> • 
+ <a href="#Requisitos">Requisitos</a> • 
+ <a href="#Executando aplicação localmente">Executando aplicação localmente</a> • 
+ <a href="#Instrutor">Instrutor</a> • 
  <a href="#Autores">Autores</a> • 
- <a href="#Licença">Licença</a>
+ <a href="#Metodologia">Metodologia</a>
 </p>
 
 
-### 📕 Sobre
-(explicar sobre o carplit mais geralzao. o que é?, objetivo, pra que serve, no que pode agregar)
+## 📕 Sobre
 
-O Carplit é uma plataforma web e mobile que tem como objetivo auxiliar os motoristas que oferecem caronas na organização e gerenciamento de custos, tempo e viagens. Possuindo diversas funcionalidades como: 
+O Carplit é uma plataforma web e mobile que tem como objetivo auxiliar os motoristas que oferecem caronas na organização e gerenciamento de custos, tempo e viagens. Possibilitando que ele crie viagens diferentes com passageiros personalizados, tenha controle de quem já pagou ou não e tenha uma maior noção sobre gastos.
 
-- funcionalidade1 (dizer as coisas que tem no app)
-(imagem funcionalidade1)
+## 🛠 Tecnologias
 
-- funcionalidade2 (dizer as coisas que tem no app)
-(imagem funcionalidade2)
-
-## 💻 Instalar
-
-(botar oq precisa para conseguir rodar na máquina)
-
-```bash
-install ??
-```
-
-### 🛠 Tecnologias
-
-As seguintes tecnologias foram utilizadas na realização do projeto:
+Tecnologias utilizadas na realização do projeto:
 
 - [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React Native](https://reactnative.dev/)
+- [React Native](https://reactnative.dev)
 
-### 👨‍🏫 Instrutores
+## ⚙ Requisitos
+
+- [Node.js](https://nodejs.org/en/)
+
+- [Yarn](https://yarnpkg.com/)
+
+## 💻 Executando aplicação localmente
+
+```bash
+# Intalando dependências
+$ yarn install
+```
+
+```bash
+# Executando a aplicação
+$ expo start
+```
+
+## 👨‍🏫 Instrutor
 **Professor** [Vinicius Cardoso Garcia](https://viniciusgarcia.me/) (vcg@cin.ufpe.br)
 
-### 👥 Autores
+## 👥 Autores
 
 **Gilberto Medeiros** - (gmoj2@cin.ufpe.br)
 
@@ -55,6 +59,7 @@ As seguintes tecnologias foram utilizadas na realização do projeto:
 **Thaís Máximo** - (tkpm@cin.ufpe.br)
 
 
-### Licença(?)
-(licença?)
+## 📚 Metodologia
+Utilizamos o quadro Kanban no Notion para ajudar na divisão e organização das tarefas.
 
+Baseado no SCRUM fazemos encontros semanais para alinhamento de ideias, planejamento e review da sprint.
