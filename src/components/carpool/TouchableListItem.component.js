@@ -1,13 +1,10 @@
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import { Dimensions } from 'react-native';
+import BottomLine from '../utils/BottomLine.component';
 
 const TouchableListItemStyle = styled.TouchableOpacity`
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: ${Constants.colors.gray[100]};
-    margin: 0 -20px;
-    padding: 16px 20px;
+    padding: 16px 0;
 `
 
 const Title = styled.Text`
@@ -24,12 +21,13 @@ const Subtitle = styled.Text`
 `
 
 export default function TouchableListItem({titleText, subtitleText, ...props}){
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
     return (
-        <TouchableListItemStyle {...props} style={{width: windowWidth}}>
-            <Title>{titleText}</Title>
-            <Subtitle>{subtitleText}</Subtitle>
-        </TouchableListItemStyle>
+        <>
+            <TouchableListItemStyle {...props}>
+                <Title>{titleText}</Title>
+                <Subtitle>{subtitleText}</Subtitle>
+            </TouchableListItemStyle>
+            <BottomLine />
+        </>
     )
 };

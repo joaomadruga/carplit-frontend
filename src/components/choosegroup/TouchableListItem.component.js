@@ -3,13 +3,10 @@ import * as Constants from "../../constants/utils/Constants";
 import { Dimensions, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { useState } from 'react';
+import BottomLine from '../utils/BottomLine.component';
 
 const TouchableListItemStyle = styled.View`
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: ${Constants.colors.gray[100]};
-    margin: 0 -20px;
-    padding: 16px 20px;
+    padding: 16px 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -28,24 +25,26 @@ const Subtitle = styled.Text`
     max-width: 90%;
 `
 
-export default function TouchableListItem({titleText, subtitleText, ...props}){
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-    const [checked, setChecked] = useState(false);
-
+export default function TouchableListItem({titleText, subtitleText, index, stateCheckboxValues,  ...props}){
+    const {checkboxValues, setCheckboxValues} = stateCheckboxValues;
     return (
-        <TouchableListItemStyle {...props} style={{width: windowWidth}}>
-            <View>
-                <Title>{titleText}</Title>
-                <Subtitle>{subtitleText}</Subtitle>
-            </View>
-            <Checkbox.Android
-                status={checked ? 'checked' : 'unchecked'}
-                onPress={() => {
-                    setChecked(!checked);
-                }}
-                centered={true}
-            />
-        </TouchableListItemStyle>
+        <>
+            <TouchableListItemStyle {...props}>
+                <View>
+                    <Title>{titleText}</Title>
+                    <Subtitle>{subtitleText}</Subtitle>
+                </View>
+                <Checkbox.Android
+                    status={checkboxValues[index] ? 'checked' : 'unchecked'}
+                    onPress={() => {
+                        const tempArray = [...checkboxValues]
+                        tempArray[index] = !tempArray[index]
+                        setCheckboxValues(tempArray)
+                    }}
+                    centered={true}
+                />
+            </TouchableListItemStyle>
+            <BottomLine/>
+        </>
     )
 };

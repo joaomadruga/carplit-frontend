@@ -7,7 +7,7 @@ function Item({titleText, subtitleText, navigation}) {
         <TouchableListItem
             titleText={titleText} 
             subtitleText={subtitleText} 
-            onPress={() => { navigation.navigate('ChooseGroup') }}
+            onPress={() => { navigation.navigate('ChooseGroup', {pathTitle: titleText, pathDistance: subtitleText}) }}
         />
     )
 }

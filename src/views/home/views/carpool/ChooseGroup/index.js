@@ -9,19 +9,21 @@ import PaddingContent from "../../../../../components/utils/PaddingContent.compo
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 
 
-export default function ChooseGroup() {
+export default function ChooseGroup({ navigation, route }) {
     const [listOfPeople, setListOfPeople] = useState([{name: 'Pedro', address: 'Rua Um de Dois, 123, Tamarinasdgasgdeira, Recife - PE'}, 
     {name: 'Zé', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
     {name: 'Thaís', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
     {name: 'Gil', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
     {name: 'João', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'}
     ])
+    const [checkboxValues, setCheckboxValues] = useState(Array(listOfPeople.length).fill(false));
+    const { pathTitle, pathDistance } = route.params;
     return (
         <SafeAreaViewDefault>
             <PaddingContent>
                 <View style={{height: '100%', width: '100%'}}>
-                    <FlatListChooseGroup listOfPeople={listOfPeople}/>
-                    <ButtonPrimaryDefault title={"Continuar"} onPress={() => console.log('Pressed')} />
+                    <FlatListChooseGroup stateCheckboxValues={{checkboxValues, setCheckboxValues}} listOfPeople={listOfPeople}/>
+                    <ButtonPrimaryDefault title={"Continuar"} onPress={() => navigation.navigate('AddCarpool', { checkboxValues, pathTitle, pathDistance })} />
                 </View>
             </PaddingContent>
         </SafeAreaViewDefault>

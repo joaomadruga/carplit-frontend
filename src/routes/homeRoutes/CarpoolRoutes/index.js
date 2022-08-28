@@ -11,6 +11,7 @@ import ArrowLeft from "../../../../assets/Button/arrow-left.png";
 import * as Constants from "../../../constants/utils/Constants";
 import { tabBarStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
+import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
 
 const StackSettings = createNativeStackNavigator();
 
@@ -72,6 +73,20 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                     })}
                     name="ChooseGroup"
                     component={ChooseGroup} 
+                />
+
+                <StackSettings.Screen 
+                    options={({ navigation, route }) => ({
+                        headerTitle: "Adicionar Carona",
+                        title: "Adicionar Carona",
+                        headerLeft: () =>  ( 
+                        <TouchableWithoutFeedback onPress={navigation.goBack}>
+                            <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                        </TouchableWithoutFeedback>
+                        ),
+                    })}
+                    name="AddCarpool"
+                    component={AddCarpool} 
                 />
         </StackSettings.Navigator>
     )
