@@ -1,11 +1,7 @@
-import { useContext } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import ConsumeFuelView from '../../../components/settings/ConsumeFuel/ConsumeFuelView.components';
-import PaddingContent from '../../../components/utils/PaddingContent.component';
-import Input from '../../../components/utils//Input.component';
-import * as Constants from '../../../constants/utils/Constants';
-import InputWithTitleSubtitle from '../../../components/utils/InputWithTitleSubtitle.component';
-import SafeAreaViewDefault from '../../../components/utils/SafeAreaViewLogin.component';
+import InputWithTitleSubtitle from "../../../../../components/utils/InputWithTitleSubtitle.component";
+import PaddingContent from "../../../../../components/utils/PaddingContent.component";
+import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
+
 
 export default function ConsumeFuel() {
     return (

@@ -1,15 +1,12 @@
-import { Image, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import SettingsView from '../../components/settings/SettingsView.component';
-import BigHeaderTitle from '../../components/utils/BigHeaderTitle.component';
-import PaddingContent from '../../components/utils/PaddingContent.component';
-import * as Constants from "../../constants/utils/Constants";
-import GasIcon from "../../../assets/Settings/gas-station-icon.png";
-import PinIcon from "../../../assets/Settings/pin-distance-icon.png";
-import TeamIcon from "../../../assets/Settings/team-icon.png";
-import ButtonSecundaryDefault from '../../components/utils/ButtonSecondaryDefault.component';
-import CenteredView from '../../components/utils/CenteredView.component';
-import ButtonSecondarySmallDefault from '../../components/utils/ButtonSecondarySmall.component';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from "react-native";
+import BigHeaderTitle from "../../../../components/utils/BigHeaderTitle.component";
+import PaddingContent from "../../../../components/utils/PaddingContent.component";
+import SettingsView from "../../../../components/settings/SettingsView.component";
+import ButtonSecondarySmallDefault from "../../../../components/utils/ButtonSecondarySmall.component";
+import TeamIcon from "../../../../../assets/Settings/team-icon.png";
+import PinIcon from "../../../../../assets/Settings/pin-distance-icon.png";
+import GasIcon from "../../../../../assets/Settings/gas-station-icon.png";
+import * as Constants from "../../../../constants/utils/Constants"; 
 
 export default function SettingsScreen({ navigation }) {
     return (

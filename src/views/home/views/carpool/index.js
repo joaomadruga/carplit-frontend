@@ -1,19 +1,23 @@
 import { useContext, useEffect, useState } from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, TouchableHighlight } from 'react-native';
 import CarpoolContent from '../../../../components/carpool/CarpoolContent.component';
-import DateText from '../../../../components/carpool/DateText.component';
-import Empty from '../../../../components/carpool/Empty.component';
-import FlatListCarpool from '../../../../components/carpool/FlatListCarpool.component';
-import TouchableListItem from '../../../../components/carpool/TouchableListItem.component';
+import SectionListCarpool from '../../../../components/carpool/SectionListCarpool.component';
 import BigHeaderTitle from '../../../../components/utils/BigHeaderTitle.component';
-import ImageWrapper from '../../../../components/utils/ImageWrapper.component';
+import Empty from '../../../../components/utils/Empty.component';
 import PaddingContent from '../../../../components/utils/PaddingContent.component';
 import RoundedPlusButton from '../../../../components/utils/RoundedPlusButton.component';
+import SafeAreaViewDefault from '../../../../components/utils/SafeAreaViewLogin.component';
 import { LoginContext } from '../../../../routes/routes';
 
-export default function Carpool() {
+export default function Carpool({ navigation }) {
         const { loginInfo, setLoginInfo } = useContext(LoginContext);
-        const [listOfCarpools, setListOfCarpools] = useState([])
+        const [listOfCarpools, setListOfCarpools] = useState([
+        {
+            date: `${parseInt(Math.random() * (31 - 1) + 1)}/07/2002`,
+            data: [ 
+            { titleText: 'Casa - UFPE (via Boa Viagem) ', subtitleText: `${parseInt(Math.random() * (4 - 1) + 1)} pessoas + você` }, 
+            { titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: `${parseInt(Math.random() * (4 - 1) + 1)} pessoas + você` }
+        ]}])
         const [isListOfCarpoolsEmpty, setIsListOfCarpoolsEmpty] = useState(listOfCarpools.length == 0)
         //const { userLogin } = route.params;
 
@@ -22,26 +26,27 @@ export default function Carpool() {
         }, [listOfCarpools])
         //console.log(userLogin)
         return (
-            <SafeAreaView>
+            <SafeAreaViewDefault>
                 <PaddingContent>
                     <BigHeaderTitle title={'Caronas'}/>
-                    <RoundedPlusButton onPress={() => {setListOfCarpools([...listOfCarpools, 
+                    {/*<RoundedPlusButton onPress={() => {setListOfCarpools([...listOfCarpools, 
                     {
                         date: `${parseInt(Math.random() * (31 - 1) + 1)}/07/2002`,
                         data: [ 
                         { titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: `${parseInt(Math.random() * (4 - 1) + 1)} pessoas + você` }, 
                         { titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: `${parseInt(Math.random() * (4 - 1) + 1)} pessoas + você` }
                     ]}
-                    ])}}/>
+                    ])}}/> */}
+                    <RoundedPlusButton onPress={() => { navigation.navigate('ChoosePath') }} />
                     <CarpoolContent justifyContent={isListOfCarpoolsEmpty ? 'center' : 'flex-start'}>
-                        {isListOfCarpoolsEmpty && (<Empty/>)}
+                        {isListOfCarpoolsEmpty && (<Empty title={"Você ainda não registrou caronas!"} subtitle={"Toque no botão de adicionar + para registar uma nova carona"}/>)}
                         {!isListOfCarpoolsEmpty && (
                         <>
-                            <FlatListCarpool listOfCarpools={listOfCarpools}/>
+                            <SectionListCarpool listOfCarpools={listOfCarpools} navigation={navigation}/>
                         </>
                         )}
                     </CarpoolContent>
                 </PaddingContent>
-            </SafeAreaView>
+            </SafeAreaViewDefault>
     );
 }
