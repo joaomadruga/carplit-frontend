@@ -8,6 +8,7 @@ Organizando suas caronas!
  <a href="#Tecnologias">Tecnologias</a> • 
  <a href="#Requisitos">Requisitos</a> • 
  <a href="#Executando aplicação localmente">Executando aplicação localmente</a> • 
+ <a href="#Testes">Testes</a> • 
  <a href="#Instrutor">Instrutor</a> • 
  <a href="#Autores">Autores</a> • 
  <a href="#Metodologia">Metodologia</a>
@@ -43,6 +44,10 @@ $ yarn install
 $ expo start
 ```
 
+## 🚨 Testes
+
+- [jest](https://jestjs.io/)
+
 ## 👨‍🏫 Instrutor
 **Professor** [Vinicius Cardoso Garcia](https://viniciusgarcia.me/) (vcg@cin.ufpe.br)
 
@@ -63,3 +68,5 @@ $ expo start
 Utilizamos o quadro Kanban no Notion para ajudar na divisão e organização das tarefas.
 
 Baseado no SCRUM fazemos encontros semanais para alinhamento de ideias, planejamento e review da sprint.
+
+🚧🚧Projeto em andamento!🚧🚧
