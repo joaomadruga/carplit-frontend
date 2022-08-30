@@ -4,15 +4,15 @@ Organizando suas caronas!
 
 ## 🧾 Conteúdos
 <p align="center">
- <a href="#Sobre">Sobre</a> •
- <a href="#Tecnologias">Tecnologias</a> • 
- <a href="#Requisitos">Requisitos</a> • 
- <a href="#Executando aplicação localmente">Executando aplicação localmente</a> • 
- <a href="#Testes">Testes</a> • 
- <a href="#Instrutor">Instrutor</a> • 
- <a href="#Autores">Autores</a> • 
- <a href="#Metodologia">Metodologia</a> •
- <a href="#Entregas">Entregas</a>
+ <a href="#📕 Sobre">Sobre</a> •
+ <a href="#🛠 Tecnologias">Tecnologias</a> • 
+ <a href="#⚙ Requisitos">Requisitos</a> • 
+ <a href="#💻 Executando aplicação localmente">Executando aplicação localmente</a> • 
+ <a href="#🚨 Testes">Testes</a> • 
+ <a href="#👨‍🏫 Instrutor">Instrutor</a> • 
+ <a href="#👥 Autores">Autores</a> • 
+ <a href="#📚 Metodologia">Metodologia</a> •
+ <a href="#🔗 Entregas">Entregas</a>
 </p>
 
 
