@@ -4,13 +4,15 @@ Organizando suas caronas!
 
 ## 🧾 Conteúdos
 <p align="center">
- <a href="#Sobre">Sobre</a> •
- <a href="#Tecnologias">Tecnologias</a> • 
- <a href="#Requisitos">Requisitos</a> • 
- <a href="#Executando aplicação localmente">Executando aplicação localmente</a> • 
- <a href="#Instrutor">Instrutor</a> • 
- <a href="#Autores">Autores</a> • 
- <a href="#Metodologia">Metodologia</a>
+ <a href="#📕 Sobre">Sobre</a> •
+ <a href="#🛠 Tecnologias">Tecnologias</a> • 
+ <a href="#⚙ Requisitos">Requisitos</a> • 
+ <a href="#💻 Executando aplicação localmente">Executando aplicação localmente</a> • 
+ <a href="#🚨 Testes">Testes</a> • 
+ <a href="#👨‍🏫 Instrutor">Instrutor</a> • 
+ <a href="#👥 Autores">Autores</a> • 
+ <a href="#📚 Metodologia">Metodologia</a> •
+ <a href="#🔗 Entregas">Entregas</a>
 </p>
 
 
@@ -43,6 +45,10 @@ $ yarn install
 $ expo start
 ```
 
+## 🚨 Testes
+
+- [jest](https://jestjs.io/)
+
 ## 👨‍🏫 Instrutor
 **Professor** [Vinicius Cardoso Garcia](https://viniciusgarcia.me/) (vcg@cin.ufpe.br)
 
@@ -63,3 +69,11 @@ $ expo start
 Utilizamos o quadro Kanban no Notion para ajudar na divisão e organização das tarefas.
 
 Baseado no SCRUM fazemos encontros semanais para alinhamento de ideias, planejamento e review da sprint.
+
+## 🔗 Entregas
+
+- [Notion](https://majestic-iguanodon-1ef.notion.site/Carplit-45357668df2241ed89df9be8335cc62c)
+
+- [Apresentação Pitch](https://docs.google.com/presentation/d/1Q-Kd_0Us4Hjw7TkxjH17AzH425KhfQq1tzYCENAqAy8/edit?usp=sharing)
+
+🚧🚧Projeto em andamento!🚧🚧
