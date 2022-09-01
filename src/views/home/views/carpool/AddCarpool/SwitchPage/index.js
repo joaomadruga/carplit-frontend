@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AutoValueHeader from "../../../../../components/addcarpool/AutoValueHeader.component";
-import FixedValueHeader from "../../../../../components/addcarpool/FixedValueHeader.component";
-import FlatListAddCarpool from "../../../../../components/addcarpool/FlatListAddCarpool.component";
+import AutoValueHeader from "../../../../../../components/addcarpool/AutoValueHeader.component";
+import FixedValueHeader from "../../../../../../components/addcarpool/FixedValueHeader.component";
+import FlatListAddCarpool from "../../../../../../components/addcarpool/FlatListAddCarpool.component";
 
 export default function SwitchPage({ carpoolPrice, listOfPeople, isLeftSelected }) {
     const filterListOfPeople = () => { return listOfPeople.filter((item) => {
@@ -13,6 +13,14 @@ export default function SwitchPage({ carpoolPrice, listOfPeople, isLeftSelected 
     const totalPrice = fixedPrice.replace(/[$a-zA-Z.]/g, '').replace(',', '.') * (availablePeople.length - 1);
     const [splitedPrice, setSplitedPrice] = useState(carpoolPrice/(availablePeople.length - 1));
     
+    useEffect(() => {
+        if(isEnabled) {
+            setSplitedPrice(carpoolPrice/availablePeople.length)
+        } else {
+            setSplitedPrice(carpoolPrice/(availablePeople.length - 1))
+        }
+    }, [isEnabled])
+
     return (
             <>
                 {

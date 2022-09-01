@@ -4,7 +4,8 @@ import PaddingContent from "../../../../../components/utils/PaddingContent.compo
 import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryDefault.component";
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { SwitchButton } from "../../../../../components/addcarpool/SwitchButton.component";
-import SwitchPage from "../SwitchPage";
+import SwitchPage from "./SwitchPage";
+import * as Constants from "../../../../../constants/utils/Constants";
 
 const gasPrice = 5.5;
 
@@ -14,10 +15,9 @@ export default function AddCarpool({ route }) {
     const [isLeftSelected, setIsLeftSelected] = useState(true);
     const carpoolPrice = kmL * gasPrice;
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
             <PaddingContent>
                 <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} kmL={kmL}/>
-                {/*<SwitchNavigator carpoolPrice={carpoolPrice} listOfPeople={listOfPeople}/>*/}
                 <SwitchButton isLeftSelectedState={{isLeftSelected: isLeftSelected, setIsLeftSelected: setIsLeftSelected}}/>
                 <SwitchPage carpoolPrice={carpoolPrice} listOfPeople={listOfPeople} isLeftSelected={isLeftSelected}/>
                 <ButtonPrimaryDefault marginTop={43} marginBottom={30} title={"Adicionar carona"} onPress={() => console.log("pressed")} />
