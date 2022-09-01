@@ -2,6 +2,8 @@ export const headerStyleConfig = { BackgroundColor: '#fff' }
 export const fontWeightConfig = { Regular: 'RetniSans-Regular', BoldItalic: 'RetniSans-BoldItalic', Italic: 'RetniSans-Italic', Light: 'RetniSans-Light', LightItalic: 'RetniSans-LightItalic', Medium: 'RetniSans-Medium', MediumItalic: 'RetniSans-MediumItalic', Bold: 'RetniSans-Bold' }
 export const fontsLoadedConfig = {'RetniSans-Regular': require('../../../assets/fonts/RetniSans-Regular.ttf'),'RetniSans-BoldItalic': require('../../../assets/fonts/RetniSans-BoldItalic.ttf'),'RetniSans-Italic': require('../../../assets/fonts/RetniSans-Italic.ttf'),'RetniSans-Light': require('../../../assets/fonts/RetniSans-Light.ttf'),'RetniSans-LightItalic': require('../../../assets/fonts/RetniSans-LightItalic.ttf'),'RetniSans-Medium': require('../../../assets/fonts/RetniSans-Medium.ttf'),'RetniSans-MediumItalic': require('../../../assets/fonts/RetniSans-MediumItalic.ttf'),'RetniSans-Bold': require('../../../assets/fonts/RetniSans-Bold.ttf')}
 export const colors = {primary: {900: '#551892', 600: '#6E1DBE', 400: '#D4C9E0', 200: '#F3EDFA'}, gray: {0: '#FFFFFF', 100: '#F2F2F3', 400: '#E1E1E4', 600: '#8A8F95', 700: '#686D73', 800: '#19191A'}, support: {Blue: {100: '#E0EDFA', 500: '#1671C5' }, Purple: {100: '#F0E3FC', 500: '#752CBD'}, Green: {100: '#DCF3E5', 500: '#0C663B'}, Red: {100: '#FDEDED', 500: '#C51818'}}}
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
 export const buttonConfig = { 
     Utils: { fontFamily: 'RetniSans-Bold' }, 
     Default: 

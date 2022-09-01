@@ -8,6 +8,7 @@ import ArrowLeft from "../../../../assets/Button/arrow-left.png";
 import * as Constants from "../../../constants/utils/Constants";
 import { tabBarStyle } from "..";
 import SettingsScreen from "../../../views/home/views/settings";
+import Passengers from "../../../views/home/views/settings/Passengers"
 
 const StackSettings = createNativeStackNavigator();
 
@@ -36,6 +37,19 @@ export const SettingNavigator = ({ navigation, route }) => {
               
             name="ConsumeFuel" 
             component={ConsumeFuel} />
+            
+                <StackSettings.Screen options={({ navigation }) => ({
+                    headerTitle: 'Passageiros',
+                    title: 'Passageiros',
+                    headerLeft: () =>  ( 
+                    <TouchableWithoutFeedback onPress={navigation.goBack}>
+                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                    </TouchableWithoutFeedback>
+                  )
+                })} 
+                
+                name="Passengers" 
+                component={Passengers} />
         </StackSettings.Navigator>
     )
 }
