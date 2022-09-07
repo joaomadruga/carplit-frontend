@@ -89,7 +89,6 @@ const screenOptions = {
     headerStyle: { backgroundColor: Constants.headerStyleConfig.BackgroundColor },
     headerShadowVisible: false,
     headerTitleAlign: 'center',
-    tabBarInactiveTintColor: Constants.colors.gray[600],
     tabBarActiveTintColor: Constants.colors.primary[600],
 }
 //height: 55 + insets.bottom

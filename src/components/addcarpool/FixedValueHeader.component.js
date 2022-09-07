@@ -38,7 +38,6 @@ const InputView = styled.View`
 
 export default function FixedValueHeader({ fixedPriceState }){
     const {fixedPrice, setFixedPrice} = fixedPriceState;
-
     return (
         <FixedValueViewStyle>
             <FixedValueText>Valor fixo</FixedValueText>

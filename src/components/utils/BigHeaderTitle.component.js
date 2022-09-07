@@ -12,4 +12,4 @@ export default function BigHeaderTitle({ title, ...props }) {
     return (
       <BigHeaderTitleStyle style={{marginTop: Platform.OS === 'android' ? insets.top + 32 : 32}}>{title}</BigHeaderTitleStyle>
     );
-  }
+}

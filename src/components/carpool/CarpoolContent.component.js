@@ -7,6 +7,7 @@ const CarpoolContent = styled.View`
   display: flex;
   justify-content: ${props => props.justifyContent};
   margin-top: 16px;
+  flex: 1;
 `;
 
 export default CarpoolContent;
