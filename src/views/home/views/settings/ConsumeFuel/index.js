@@ -1,3 +1,4 @@
+import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryDefault.component";
 import InputWithTitleSubtitle from "../../../../../components/utils/InputWithTitleSubtitle.component";
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
@@ -17,6 +18,7 @@ export default function ConsumeFuel() {
                     TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
                     InputPlaceHolder={'Custo do litro'} 
                     />
+                    <ButtonPrimaryDefault marginTop={40} title={"Salvar alterações"} onPress={() => console.log("pressed")} />
             </PaddingContent>
         </SafeAreaViewDefault>
     );
