@@ -45,7 +45,7 @@ export default function SwitchPage({ props }) {
                 }
             })
         }
-    }, [fixedPrice]);
+    }, [fixedPrice, isLeftSelected]);
 
     return (
             <>

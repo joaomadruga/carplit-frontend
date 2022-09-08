@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";

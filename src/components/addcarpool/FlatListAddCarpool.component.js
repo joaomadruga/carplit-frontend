@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FlatList, ScrollView, Text, View } from 'react-native';
 import TouchableListItem from './TouchableListItem.component';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import ButtonPrimaryDefault from '../utils/ButtonPrimaryDefault.component';
 
