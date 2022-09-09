@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, ScrollView, Text, View } from 'react-native';
 import TouchableListItem from './TouchableListItem.component';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import ButtonPrimaryDefault from '../utils/ButtonPrimaryDefault.component';
 
@@ -24,6 +24,7 @@ const TextView = styled.View`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    flex: 1;
 `
 function Item({titleText, splitedPrice, isDriver, isDisabled}) {
     return (
@@ -39,12 +40,12 @@ export default function FlatListAddCarpool({ availablePeople, splitedPrice, tota
     const totalPriceFormated = Constants.formatter.format(totalPrice);
     const overPriceFormated = Constants.formatter.format(totalPrice - carpoolPrice);
     return (
-        <View style={{flex: 0}}>
-            <FlatList
-            data={availablePeople}
-            renderItem={({ item }) => <Item isDisabled={isDisabled} isDriver={item.isDriver} titleText={item.name} splitedPrice={splitedPrice}/>}
-            {...props}
-            />
+        <View style={{flex: 1}}>
+            {availablePeople.map((item, index) => {
+                return (
+                    <Item key={index} isDisabled={isDisabled} isDriver={item.isDriver} titleText={item.name} splitedPrice={splitedPrice}/>
+                )
+            })}
             <TextView>
                 <Title>Total a receber</Title>
                 <Title>{totalPriceFormated}</Title>
@@ -57,7 +58,6 @@ export default function FlatListAddCarpool({ availablePeople, splitedPrice, tota
                 <Subtitle>Saldo da carona</Subtitle>
                 <Subtitle>{overPriceFormated}</Subtitle>
             </TextView>
-            <ButtonPrimaryDefault marginTop={40} title={"Adicionar carona"} onPress={() => console.log("pressed")} />
         </View>
     )
 }

@@ -1,3 +1,6 @@
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 export const headerStyleConfig = { BackgroundColor: '#fff' }
 export const fontWeightConfig = { Regular: 'RetniSans-Regular', BoldItalic: 'RetniSans-BoldItalic', Italic: 'RetniSans-Italic', Light: 'RetniSans-Light', LightItalic: 'RetniSans-LightItalic', Medium: 'RetniSans-Medium', MediumItalic: 'RetniSans-MediumItalic', Bold: 'RetniSans-Bold' }
 export const fontsLoadedConfig = {'RetniSans-Regular': require('../../../assets/fonts/RetniSans-Regular.ttf'),'RetniSans-BoldItalic': require('../../../assets/fonts/RetniSans-BoldItalic.ttf'),'RetniSans-Italic': require('../../../assets/fonts/RetniSans-Italic.ttf'),'RetniSans-Light': require('../../../assets/fonts/RetniSans-Light.ttf'),'RetniSans-LightItalic': require('../../../assets/fonts/RetniSans-LightItalic.ttf'),'RetniSans-Medium': require('../../../assets/fonts/RetniSans-Medium.ttf'),'RetniSans-MediumItalic': require('../../../assets/fonts/RetniSans-MediumItalic.ttf'),'RetniSans-Bold': require('../../../assets/fonts/RetniSans-Bold.ttf')}
@@ -69,3 +72,13 @@ export const formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
 });
+export function inputFormatter(value) {
+    if (!Number(value)) return "R$ 0,00";
+  
+    const amount = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(value / 100);
+  
+    return `${amount}`;
+}

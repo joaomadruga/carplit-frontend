@@ -1,11 +1,20 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 import * as Constants from "../../constants/utils/Constants";
-import AutoValue from "../../views/home/views/carpool/AddCarpool/AutoValue";
-import FixedValue from "../../views/home/views/carpool/AddCarpool/FixedValue";
+import SwitchPage from "../../views/home/views/carpool/SwitchPage";
 
 const TopTab = createMaterialTopTabNavigator();
 const initialRouteName = "AutoValue";
+const DefaultPage = () => (
+    <View
+      flex={1}
+      alignItems="center"
+      justifyContent="center"
+    >
+        <Text>LOADING</Text>
+    </View>
+  )
 
 export default function SwitchNavigator({ listOfPeople, carpoolPrice }) {
     const [isLeftSelected, setIsLeftSected] = useState(true);
@@ -21,6 +30,7 @@ export default function SwitchNavigator({ listOfPeople, carpoolPrice }) {
                 borderBottomLeftRadius: isLeftSelected ? 8 : 0,
                 borderTopRightRadius: isLeftSelected ? 0 : 8,
                 borderBottomRightRadius: isLeftSelected ? 0 : 8,
+                flexGrow: 1
             }}}
             screenListeners={({ navigation, route }) => ({
                 state: (e) => {
@@ -30,8 +40,8 @@ export default function SwitchNavigator({ listOfPeople, carpoolPrice }) {
             })}
             initialRouteName={initialRouteName}
         >
-            <TopTab.Screen options={{tabBarLabel: "Valor automático"}} name="AutoValue" component={AutoValue} initialParams={{ listOfPeople: listOfPeople, carpoolPrice: carpoolPrice } } />
-            <TopTab.Screen options={{tabBarLabel: "Valor fixo"}} name="FixedValue" component={FixedValue} initialParams={{ listOfPeople: listOfPeople, carpoolPrice: carpoolPrice } }/>
+            <TopTab.Screen options={{tabBarLabel: "Valor automático"}} name="AutoValue" component={currentPageName === "AutoValue" ? SwitchPage : DefaultPage} initialParams={{ listOfPeople: listOfPeople, carpoolPrice: carpoolPrice } } />
+            <TopTab.Screen options={{tabBarLabel: "Valor fixo"}} name="FixedValue" component={currentPageName === "FixedValue" ? SwitchPage : DefaultPage} initialParams={{ listOfPeople: listOfPeople, carpoolPrice: carpoolPrice } }/>
         </TopTab.Navigator>
     )
 }
@@ -44,6 +54,8 @@ const screenOptions = {
         backgroundColor: Constants.colors.gray[0],
         borderRadius: 8,
         elevation: 0,
+        marginLeft: 20,
+        marginRight: 20
     },
     tabBarLabelStyle: {
         fontFamily: Constants.fontConfig.Body.Medium.FontFamily, 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Text } from "react-native";
 import ChoosePathContent from "../../../../../components/choosepath/ChoosePathContent.component";
 import FlatListChoosePath from "../../../../../components/choosepath/FlatListChoosePath.component";
@@ -6,11 +6,11 @@ import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryD
 import Empty from "../../../../../components/utils/Empty.component";
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
+import { CarpoolContext } from "../../../../../routes/homeRoutes/CarpoolRoutes";
 
-
-export default function ChoosePath({ navigation, route }) {
-    const [listOfPaths, setListOfPaths] = useState([{titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: '16km', kmL: 2.54}, {titleText: 'Casa - UFPE (via Boa Viagem)', subtitleText: '16km', kmL: 2.54}])
-    const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0)
+export default function ChoosePath({ navigation }) {
+    const { listOfPaths } = useContext(CarpoolContext);
+    const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0);
 
     useEffect(() => {
         setIsListOfPathsEmpty(listOfPaths.length == 0)

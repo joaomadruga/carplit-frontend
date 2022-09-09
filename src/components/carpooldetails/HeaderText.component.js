@@ -31,15 +31,23 @@ const SmallTitle = styled.Text`
     align-self: flex-start;
 `
 
+const TextView = styled.View`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+`
+
 export function HeaderText({titleText, subtitleText, kmL, carpoolPrice}){
     return (
-        <PaddingContent style={{height: 'auto'}}>
-            <HeaderTextStyle>
-                <Title>{titleText}</Title>
-                <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
-                <BottomLine marginTop={24} />
-                <SmallTitle>Distribuição de custos</SmallTitle>
-            </HeaderTextStyle>
-        </PaddingContent>
+        <HeaderTextStyle>
+            <Title>{titleText}</Title>
+            <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
+            <BottomLine marginTop={24} />
+            <TextView>
+                <SmallTitle>Registro de pagamentos</SmallTitle>
+                <SmallTitle>Pagou?</SmallTitle>
+            </TextView>
+        </HeaderTextStyle>
     )
 };
