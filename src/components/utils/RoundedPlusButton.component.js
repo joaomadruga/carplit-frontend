@@ -8,7 +8,7 @@ const RoundedPlusButtonStyle = styled.View`
     position: absolute;
     bottom: 20px;
     right: 20px;
-    z-index: 999;
+    z-index: 998;
 `;
 
 export default function RoundedPlusButton({ ...props }) {

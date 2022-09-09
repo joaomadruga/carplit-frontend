@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import { Dimensions, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BottomLine from '../utils/BottomLine.component';
 
 const TouchableListItemStyle = styled.TouchableOpacity`
@@ -25,13 +25,22 @@ const Subtitle = styled.Text`
     max-width: 90%;
 `
 
-export default function TouchableListItem({titleText, subtitleText, index, People,  ...props}){
+export default function TouchableListItem({titleText, subtitleText, index, People, totalPriceState, ...props}){
     const [checkBox, setCheckBox] = useState(false);
+    const { totalPrice, setTotalPrice } = totalPriceState;
+    const changeTotalPrice = (checkBox) => {
+        if (checkBox) {
+            setTotalPrice(totalPrice + People.price);
+        } else {
+            setTotalPrice(totalPrice - People.price);
+        }
+    }
     return (
         <>
             <TouchableListItemStyle {...props} onPress={() => {
                 setCheckBox(!checkBox)
-                People.isParticipating = !People.isParticipating;
+                People.hasPaid = !People.hasPaid;
+                changeTotalPrice(!checkBox);
             }}>
                 <View>
                     <Title>{titleText}</Title>

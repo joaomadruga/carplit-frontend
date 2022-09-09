@@ -1,6 +1,6 @@
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useLayoutEffect } from "react";
+import { createContext, useEffect, useLayoutEffect, useState } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import ImageWrapper from "../../../components/utils/ImageWrapper.component";
 import Carpool from "../../../views/home/views/carpool";
@@ -11,69 +11,120 @@ import ArrowLeft from "../../../../assets/Button/arrow-left.png";
 import * as Constants from "../../../constants/utils/Constants";
 import { tabBarStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
+import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
 
 const StackSettings = createNativeStackNavigator();
+export const CarpoolContext = createContext();
+const gasPrice = 5.5;
 
 export const CarpoolNavigator = ({ navigation, route }) => {
+    const [listOfCarpools, setListOfCarpools] = useState([]);
+    //listofpaths should come from settings
+    const [listOfPaths, setListOfPaths] = useState([
+        {
+            date: `31/07/2002`,
+            data: [
+            { pathTitle: 'Casa - UFPE (via Boa Viagem)', pathDistance: '16km', kmL: 2.54, gasPrice: gasPrice,
+            listOfPeople: [
+                {name: 'Zé', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: true, isDriver: true, hasPaid: true, price: 0},
+                {name: 'Pedro', address: 'Rua Um de Dois, 123, Tamarinasdgasgdeira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0}, 
+                {name: 'Thaís', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0},
+                {name: 'Gil', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0},
+                {name: 'João', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0}
+            ] }
+            ]
+        }
+    ]);
+
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "CarpoolScreen"){
-            navigation.setOptions({tabBarStyle: { display: 'none' }});
+            navigation.setOptions({tabBarStyle: { backgroundColor: 'white', display: 'none' }})
+            
         } else {
             navigation.setOptions({tabBarStyle: { display: 'flex', ...tabBarStyle}});
         }
     }, [navigation, route]);
 
     return (
-        <StackSettings.Navigator screenOptions={screenOptions} initialRouteName='CarpoolScreen'>
-                <StackSettings.Screen options={{headerShown: false}} name="CarpoolScreen" component={Carpool} />
-                <StackSettings.Screen 
-                options={({ navigation, route }) => ({
-                    headerTitle: route.params.date,
-                    title: route.params.date,
-                    headerLeft: () =>  ( 
-                    <TouchableWithoutFeedback onPress={navigation.goBack}>
-                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
-                    </TouchableWithoutFeedback>
-                    )
-                })}
-                name="CarpoolDetails"
-                component={CarpoolDetails} 
-                />
-                
-                <StackSettings.Screen 
+        <CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>
+            <StackSettings.Navigator screenOptions={screenOptions} initialRouteName='CarpoolScreen'>
+                    <StackSettings.Screen 
+                    options={{headerShown: false}} 
+                    name="CarpoolScreen" 
+                    component={Carpool} 
+                    />
+
+                    <StackSettings.Screen
                     options={({ navigation, route }) => ({
-                        headerTitle: "Selecione o trajeto",
-                        title: "Selecione o trajeto",
+                        headerTitle: route.params.date,
+                        title: route.params.date,
                         headerLeft: () =>  ( 
                         <TouchableWithoutFeedback onPress={navigation.goBack}>
                             <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
                         </TouchableWithoutFeedback>
-                        ),
-                        headerRight: () => (
-                            <TouchableWithoutFeedback>
-                                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
-                            </TouchableWithoutFeedback>
                         )
                     })}
-                    name="ChoosePath"
-                    component={ChoosePath} 
-                />
+                    name="CarpoolDetails"
+                    component={CarpoolDetails} 
+                    />
 
-                <StackSettings.Screen 
-                    options={({ navigation, route }) => ({
-                        headerTitle: "Selecione as pessoas",
-                        title: "Selecione as pessoas",
-                        headerLeft: () =>  ( 
-                        <TouchableWithoutFeedback onPress={navigation.goBack}>
-                            <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
-                        </TouchableWithoutFeedback>
-                        ),
-                    })}
-                    name="ChooseGroup"
-                    component={ChooseGroup} 
-                />
-        </StackSettings.Navigator>
+                    <StackSettings.Screen 
+                        options={({ navigation, route }) => ({
+                            headerTitle: "Selecione o trajeto",
+                            title: "Selecione o trajeto",
+                            headerLeft: () =>  ( 
+                            <TouchableWithoutFeedback onPress={navigation.goBack}>
+                                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                            </TouchableWithoutFeedback>
+                            ),
+                            headerRight: () => {
+                                if (listOfPaths.length === 0) {
+                                    return ( 
+                                        <TouchableWithoutFeedback>
+                                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
+                                        </TouchableWithoutFeedback> 
+                                        ) 
+                                }
+                            }
+                                
+                                
+                        })}
+                        name="ChoosePath"
+                        component={ChoosePath} 
+                    />
+
+                    <StackSettings.Screen 
+                        options={({ navigation, route }) => ({
+                            headerTitle: "Selecione as pessoas",
+                            title: "Selecione as pessoas",
+                            headerLeft: () =>  ( 
+                            <TouchableWithoutFeedback onPress={navigation.goBack}>
+                                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                            </TouchableWithoutFeedback>
+                            ),
+                        })}
+                        name="ChooseGroup"
+                        component={ChooseGroup} 
+                    />
+
+                    <StackSettings.Screen 
+                        options={({ navigation, route }) => ({
+                            headerTitle: "Adicionar Carona",
+                            title: "Adicionar Carona",
+                            headerLeft: () =>  ( 
+                            <TouchableWithoutFeedback onPress={navigation.goBack}>
+                                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                            </TouchableWithoutFeedback>
+                            ),
+                        })}
+                        name="AddCarpool"
+                        component={AddCarpool}
+                    />
+
+                    
+            </StackSettings.Navigator>
+        </CarpoolContext.Provider>
     )
 }
 

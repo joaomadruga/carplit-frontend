@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import FlatListChooseGroup from "../../../../../components/choosegroup/FlatListChooseGroup.component";
 import ChoosePathContent from "../../../../../components/choosepath/ChoosePathContent.component";
@@ -7,21 +7,18 @@ import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryD
 import Empty from "../../../../../components/utils/Empty.component";
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
+import { CarpoolContext } from "../../../../../routes/homeRoutes/CarpoolRoutes";
 
+export default function ChooseGroup({ navigation, route }) {
+    const { selectedPath } = route.params;
+    const { listOfPeople } = selectedPath.data[0];
 
-export default function ChooseGroup() {
-    const [listOfPeople, setListOfPeople] = useState([{name: 'Pedro', address: 'Rua Um de Dois, 123, Tamarinasdgasgdeira, Recife - PE'}, 
-    {name: 'Zé', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
-    {name: 'Thaís', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
-    {name: 'Gil', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'},
-    {name: 'João', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE'}
-    ])
     return (
         <SafeAreaViewDefault>
             <PaddingContent>
                 <View style={{height: '100%', width: '100%'}}>
                     <FlatListChooseGroup listOfPeople={listOfPeople}/>
-                    <ButtonPrimaryDefault title={"Continuar"} onPress={() => console.log('Pressed')} />
+                    <ButtonPrimaryDefault title={"Continuar"} onPress={() => navigation.navigate('AddCarpool', { selectedPath })} />
                 </View>
             </PaddingContent>
         </SafeAreaViewDefault>
