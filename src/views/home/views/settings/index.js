@@ -15,7 +15,7 @@ export default function SettingsScreen({ navigation }) {
             <PaddingContent>
                     <BigHeaderTitle title={'Ajustes'}/>
                     <SettingsView onPress={() => navigation.navigate('ConsumeFuel')} style={{marginTop: 16}} TextTitle={'Consumo e combustível'} TextSubtitle={'Consumo médio do seu carro e custo/L do combustível'} SourceImage={GasIcon}/>
-                    <SettingsView onPress={() => navigation.navigate('Passengers')} TextTitle={'Passageiros'} TextSubtitle={'Cadastros das pessoas que dividem o custo da viagem com você'} SourceImage={TeamIcon}/>
+                    <SettingsView TextTitle={'Passageiros'} TextSubtitle={'Cadastros das pessoas que dividem o custo da viagem com você'} SourceImage={TeamIcon}/>
                     <SettingsView TextTitle={'Trajetos'} TextSubtitle={'Cadastro das distâncias totais das suas rotas'} SourceImage={PinIcon}/>
                     <ButtonSecondarySmallDefault
                         title='Sair'

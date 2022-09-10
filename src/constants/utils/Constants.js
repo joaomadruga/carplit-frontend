@@ -82,3 +82,25 @@ export function inputFormatter(value) {
   
     return `${amount}`;
 }
+
+export function ConsumeInputFormatter(value) {
+    if (!Number(value)) return "0,00 km/L";
+  
+    const amount = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(value / 100);
+  
+    return `${amount} km/L`;
+}
+
+export function GasPriceInputFormatter(value) {
+    if (!Number(value)) return "R$ 0,00 / litro";
+  
+    const amount = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    }).format(value / 100);
+  
+    return `${amount} / litro`;
+}
