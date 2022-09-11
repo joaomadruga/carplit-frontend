@@ -24,14 +24,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
         {
             date: `31/07/2002`,
             data: [
-            { pathTitle: 'Casa - UFPE (via Boa Viagem)', pathDistance: '16km', kmL: 2.54, gasPrice: gasPrice,
-            listOfPeople: [
-                {name: 'Zé', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: true, isDriver: true, hasPaid: true, price: 0},
-                {name: 'Pedro', address: 'Rua Um de Dois, 123, Tamarinasdgasgdeira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0}, 
-                {name: 'Thaís', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0},
-                {name: 'Gil', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0},
-                {name: 'João', address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', isParticipating: false, isDriver: false, hasPaid: false, price: 0}
-            ] }
+            { pathTitle: 'Casa - UFPE (via Boa Viagem)', pathDistance: '16km', kmL: 2.54, gasPrice: gasPrice }
             ]
         }
     ]);

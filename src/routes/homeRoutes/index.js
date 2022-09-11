@@ -12,8 +12,10 @@ import Finance from '../../views/home/views/finance';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CarpoolNavigator } from './CarpoolRoutes';
 import { SettingNavigator } from './SettingsRoutes';
+import { createContext, useState } from 'react';
 
 const Tab = createBottomTabNavigator();
+export const HomeContext = createContext();
 //const TopTab = createMaterialTopTabNavigator();
 
 /*
@@ -33,52 +35,63 @@ const TopNavigator = () => {
 
 export default function HomeRoutes() {
   const insets = useSafeAreaInsets();
-  return (
-        <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabBarStyle}}>
-            
-            <Tab.Screen name="Home" 
-                component={CarpoolNavigator}
-                options={({ navigation }) => ({
-                    headerTitle: 'Início',
-                    tabBarLabel: 'Início',
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
-                        <ImageWrapper source={focused ? CarIconActive : CarIconInactive} width={'24px'} height={'24px'}/>
-                    </TouchableWithoutFeedback>
-                    )
-                })}
-            />
+  const [listOfRiders, setListOfRiders] = useState(
+    [{name: 'Zé', 
+    address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', 
+    isParticipating: true, 
+    isDriver: true, 
+    hasPaid: true, 
+    price: 0,
+    carpoolHistory: []}]);
 
-            <Tab.Screen name="Finance" 
-                component={Finance}
-                options={({ navigation }) => ({
-                    headerTitle: 'Finanças',
-                    tabBarLabel: 'Finanças',
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Finance')}>
-                        <ImageWrapper source={focused ? WalletIconActive : WalletIconInactive} width={'24px'} height={'24px'}/>
-                    </TouchableWithoutFeedback>
-                    )
-                })}
-            />
+  return (
+        <HomeContext.Provider value={{ listOfRiders, setListOfRiders }}>
+            <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabBarStyle}}>
             
-            <Tab.Screen name="Settings" 
-                component={SettingNavigator} 
-                options={({ navigation }) => ({
-                    headerTitle: 'Ajustes',
-                    tabBarLabel: 'Ajustes',
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <TouchableWithoutFeedback onPress={() => navigation.navigate('Settings')}>
-                            <ImageWrapper source={focused ? SettingsIconActive: SettingsIconInactive} width={'24px'} height={'24px'}/>
+                <Tab.Screen name="Home" 
+                    component={CarpoolNavigator}
+                    options={({ navigation }) => ({
+                        headerTitle: 'Início',
+                        tabBarLabel: 'Início',
+                        headerShown: false,
+                        tabBarIcon: ({ focused }) => (
+                        <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
+                            <ImageWrapper source={focused ? CarIconActive : CarIconInactive} width={'24px'} height={'24px'}/>
                         </TouchableWithoutFeedback>
                         )
-                })}
-            />
+                    })}
+                />
+
+                <Tab.Screen name="Finance" 
+                    component={Finance}
+                    options={({ navigation }) => ({
+                        headerTitle: 'Finanças',
+                        tabBarLabel: 'Finanças',
+                        headerShown: false,
+                        tabBarIcon: ({ focused }) => (
+                        <TouchableWithoutFeedback onPress={() => navigation.navigate('Finance')}>
+                            <ImageWrapper source={focused ? WalletIconActive : WalletIconInactive} width={'24px'} height={'24px'}/>
+                        </TouchableWithoutFeedback>
+                        )
+                    })}
+                />
+                
+                <Tab.Screen name="Settings" 
+                    component={SettingNavigator} 
+                    options={({ navigation }) => ({
+                        headerTitle: 'Ajustes',
+                        tabBarLabel: 'Ajustes',
+                        headerShown: false,
+                        tabBarIcon: ({ focused }) => (
+                            <TouchableWithoutFeedback onPress={() => navigation.navigate('Settings')}>
+                                <ImageWrapper source={focused ? SettingsIconActive: SettingsIconInactive} width={'24px'} height={'24px'}/>
+                            </TouchableWithoutFeedback>
+                            )
+                    })}
+                />
             
-        </Tab.Navigator>
+            </Tab.Navigator>
+        </HomeContext.Provider>
   );
 }
 

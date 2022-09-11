@@ -13,11 +13,11 @@ function Item({name, address, index, People, isDriver}) {
     )
 }
 
-export default function FlatListChooseGroup({ listOfPeople, ...props }) {
+export default function FlatListChooseGroup({ listOfRiders, ...props }) {
     return (
         <FlatList
         style={{maxHeight: '85%'}}
-        data={listOfPeople}
+        data={listOfRiders}
         renderItem={({ item, index }) => <Item isDriver={item.isDriver} People={item} name={item.name} address={item.address} index={index}/>}
         {...props}
         />
