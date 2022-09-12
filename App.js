@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useCallback } from 'react';
 import Routes from './src/routes/routes';
 import { fontsLoadedConfig } from './src/constants/utils/Constants';
+import { Portal } from 'react-native-paper';
 
 export default function App() {
   const [fontsLoaded] = useFonts(fontsLoadedConfig);
@@ -28,8 +29,10 @@ export default function App() {
 
   return (
     <View style={{flex: 1}}>
-      <View onLayout={onLayoutRootView}/>
-      <Routes/>
+      <Portal.Host>
+        <View onLayout={onLayoutRootView}/>
+        <Routes/>
+      </Portal.Host>
     </View>
   );
 }

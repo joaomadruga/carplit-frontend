@@ -3,7 +3,7 @@ import { FlatList, Text, View } from 'react-native';
 import TouchableListItem from './TouchableListItem.component';
 
 function Item({pathTitle, pathDistance, navigation, listOfPaths, index}) {
-    const currentPath = JSON.parse(JSON.stringify(listOfPaths[index]))
+    const currentPath = JSON.parse(JSON.stringify(listOfPaths[index]));
     return (
         <TouchableListItem
             titleText={pathTitle} 

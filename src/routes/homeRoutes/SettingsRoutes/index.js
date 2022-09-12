@@ -9,6 +9,8 @@ import * as Constants from "../../../constants/utils/Constants";
 import { tabBarStyle } from "..";
 import SettingsScreen from "../../../views/home/views/settings";
 import AddIcon from "../../../../assets/Home/add-icon.png";
+import Riders from "../../../views/home/views/settings/Riders";
+import { RidersNavigator } from "./Riders";
 
 const StackSettings = createNativeStackNavigator();
 
@@ -37,6 +39,11 @@ export const SettingNavigator = ({ navigation, route }) => {
               
             name="ConsumeFuel" 
             component={ConsumeFuel} />
+
+                <StackSettings.Screen
+                options={{headerShown: false}}
+                component={RidersNavigator}
+                name="RidersNavigator"/>
         </StackSettings.Navigator>
     )
 }

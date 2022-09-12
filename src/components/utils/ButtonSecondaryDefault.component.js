@@ -23,13 +23,12 @@ const ButtonSecondaryDefaultStyle = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-size: ${Constants.fontConfig.Body.Bold.FontSize};
   font-family: ${Constants.fontConfig.Body.Bold.FontFamily};
-  color: ${Constants.buttonConfig.Default.Secondary.Default.Color};
 `;
 
-export default function ButtonSecundaryDefault({ title, ...props }) {
+export default function ButtonSecundaryDefault({ title, textColor, ...props }) {
     return (
         <ButtonSecondaryDefaultStyle {...props}>
-            <ButtonText>{title}</ButtonText>
+            <ButtonText style={{color: textColor ? textColor : Constants.buttonConfig.Default.Secondary.Default.Color}}>{title}</ButtonText>
         </ButtonSecondaryDefaultStyle>
     );
 }

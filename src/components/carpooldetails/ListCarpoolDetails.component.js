@@ -33,6 +33,7 @@ function Item({name, address, index, People, isDriver, totalPriceState}) {
             subtitleText={address}
             index={index}
             People={People}
+            isDriver={isDriver}
             totalPriceState={totalPriceState}
         />
     )

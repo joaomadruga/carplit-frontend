@@ -25,13 +25,13 @@ const Subtitle = styled.Text`
     max-width: 90%;
 `
 
-export default function TouchableListItem({titleText, subtitleText, index, People, totalPriceState, ...props}){
+export default function TouchableListItem({titleText, subtitleText, index, People, isDriver, totalPriceState, ...props}){
     const [checkBox, setCheckBox] = useState(false);
     const { totalPrice, setTotalPrice } = totalPriceState;
     const changeTotalPrice = (checkBox) => {
-        if (checkBox) {
+        if (checkBox && !isDriver) {
             setTotalPrice(totalPrice + People.price);
-        } else {
+        } else if (!checkBox && !isDriver) {
             setTotalPrice(totalPrice - People.price);
         }
     }
