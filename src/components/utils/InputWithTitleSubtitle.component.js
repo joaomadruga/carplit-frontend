@@ -24,10 +24,10 @@ const Subtitle = styled.Text`
 
 export default function InputWithTitleSubtitle({ TextTitle, TextSubtitle, InputPlaceHolder, ...props }) { 
     return (
-        <InputWithTitleSubtitleStyle {...props}>
+        <InputWithTitleSubtitleStyle>
             <Title>{TextTitle}</Title>
             <Subtitle>{TextSubtitle}</Subtitle>
-            <Input placeholder={InputPlaceHolder} marginBottom={24} color={Constants.inputConfig.Ontouch.Settings.Color}/>
+            <Input placeholder={InputPlaceHolder} marginBottom={24} color={Constants.inputConfig.Ontouch.Settings.Color} {...props}/>
         </InputWithTitleSubtitleStyle>
     )
 };
