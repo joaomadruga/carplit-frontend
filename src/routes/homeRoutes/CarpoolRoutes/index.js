@@ -61,7 +61,6 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                     name="CarpoolDetails"
                     component={CarpoolDetails} 
                     />
-
                     <StackSettings.Screen 
                         options={({ navigation, route }) => ({
                             headerTitle: "Selecione o trajeto",

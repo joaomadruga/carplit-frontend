@@ -8,7 +8,6 @@ import PaddingContent from "../../../../../components/utils/PaddingContent.compo
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 import { CarpoolContext } from "../../../../../routes/homeRoutes/CarpoolRoutes";
 
-
 export default function ChoosePath({ navigation }) {
     const { listOfPaths } = useContext(CarpoolContext);
     const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0);

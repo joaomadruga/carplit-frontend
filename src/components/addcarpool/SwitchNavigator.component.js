@@ -6,7 +6,6 @@ import SwitchPage from "../../views/home/views/carpool/SwitchPage";
 
 const TopTab = createMaterialTopTabNavigator();
 const initialRouteName = "AutoValue";
-
 const DefaultPage = () => (
     <View
       flex={1}
