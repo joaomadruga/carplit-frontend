@@ -9,8 +9,8 @@ import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLog
 import * as Constants from "../../../../../constants/utils/Constants"
 
 export default function ConsumeFuel() {
-    const [fixedPriceFuel, setFixedPriceFuel] = useState("R$ 0,00 / litro")
-    const [fixedConsumeFuel, setFixedConsumeFuel] = useState("0,00 km/L")
+    const [fixedPriceFuel, setFixedPriceFuel] = useState("R$ 0,00");
+    const [fixedConsumeFuel, setFixedConsumeFuel] = useState("0,00");
     return (
         <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
         <SafeAreaViewDefault>
@@ -18,12 +18,12 @@ export default function ConsumeFuel() {
                     <ConsumeFuelInput
                     TextTitle={'Consumo médio do seu carro (km/L)'} 
                     TextSubtitle={'Esse valor será utilizado para calcular os litros de combustível gastos nos trajetos'}
-                    fixedPriceState={{fixedConsumeFuel, setFixedConsumeFuel}} 
+                    fixedPriceState={{fixedState: fixedConsumeFuel, setFixedState: setFixedConsumeFuel}} 
                     />
                     <PriceFuelInput
                     TextTitle={'Custo do combustível por litro'} 
                     TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
-                    fixedPriceState={{fixedPriceFuel, setFixedPriceFuel}}
+                    fixedPriceState={{fixedState: fixedPriceFuel, setFixedState: setFixedPriceFuel}}
                     />
                     <ButtonPrimaryDefault marginTop={40} title={"Salvar alterações"} onPress={() => console.log("pressed")} />
             </PaddingContent>

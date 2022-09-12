@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components/native';
 import * as Constants from '../../../constants/utils/Constants';
-import Input from '../../utils/Input.component';
+import Input from './Input.component';
 
 
 const InputWithTitleSubtitleStyle = styled.View`
@@ -40,19 +40,11 @@ const styles = StyleSheet.create({
   })
 
 export default function ConsumeFuelInput({ TextTitle, TextSubtitle, fixedPriceState, ...props }) {
-    const {fixedConsumeFuel, setFixedConsumeFuel} = fixedPriceState
     return (
         <InputWithTitleSubtitleStyle {...props}>
             <Title>{TextTitle}</Title>
             <Subtitle>{TextSubtitle}</Subtitle>
-            <Input marginBottom={24} color={Constants.inputConfig.Ontouch.Settings.Color} 
-            keyboardType={"numeric"}
-            value={fixedConsumeFuel}
-
-            onChangeText={(value) => {
-                const valueFiltered = value.replace(',', '.').replace(/[^0-9]/g, '');
-                setFixedConsumeFuel(Constants.ConsumeInputFormatter(valueFiltered));
-            }}/>
+            <Input fixedPriceState={fixedPriceState} SufixValue={"km/L"} InputFormatter={Constants.ConsumeInputFormatter}/>
         </InputWithTitleSubtitleStyle>
     )
 };

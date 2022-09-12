@@ -84,23 +84,26 @@ export function inputFormatter(value) {
 }
 
 export function ConsumeInputFormatter(value) {
-    if (!Number(value)) return "0,00 km/L";
+    if (!Number(value)) return "0,00";
   
     const amount = new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL"
-    }).format(value / 100);
+    })
+    .format(value / 100)
+    .replace("R$", "")
+    .trim();
   
-    return `${amount} km/L`;
+    return `${amount}`;
 }
 
 export function GasPriceInputFormatter(value) {
-    if (!Number(value)) return "R$ 0,00 / litro";
+    if (!Number(value)) return "R$ 0,00";
   
     const amount = new Intl.NumberFormat("pt-BR", {
       style: "currency",
       currency: "BRL"
     }).format(value / 100);
   
-    return `${amount} / litro`;
+    return `${amount}`;
 }
