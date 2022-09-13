@@ -12,7 +12,7 @@ import Finance from '../../views/home/views/finance';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CarpoolNavigator } from './CarpoolRoutes';
 import { SettingNavigator } from './SettingsRoutes';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const Tab = createBottomTabNavigator();
 export const HomeContext = createContext();
@@ -32,7 +32,6 @@ const TopNavigator = () => {
     )
 }
 */
-
 export default function HomeRoutes() {
   const insets = useSafeAreaInsets();
   const [listOfRiders, setListOfRiders] = useState(
@@ -44,8 +43,19 @@ export default function HomeRoutes() {
     price: 0,
     carpoolHistory: []}]);
 
+    const [listOfPaths, setListOfPaths] = useState([{ 
+        pathTitle: 'Casa - UFPE (via Boa Viagem)', 
+        pathDistance: '16km' 
+    }
+    ]);
+
+    const [consumeAndFuel, setConsumeAndFuel] = useState({
+        priceFuel: 0,
+        consumeFuel: 0
+    });
+
   return (
-        <HomeContext.Provider value={{ listOfRiders, setListOfRiders }}>
+        <HomeContext.Provider value={{ listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, consumeAndFuel, setConsumeAndFuel }}>
             <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabBarStyle}}>
             
                 <Tab.Screen name="Home" 

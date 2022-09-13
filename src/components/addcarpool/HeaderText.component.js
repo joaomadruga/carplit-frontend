@@ -31,12 +31,12 @@ const SmallTitle = styled.Text`
     align-self: flex-start;
 `
 
-export function HeaderText({titleText, subtitleText, kmL, carpoolPrice}){
+export function HeaderText({titleText, subtitleText, consumeFuel, carpoolPrice}){
     return (
         <PaddingContent style={{height: 'auto'}}>
             <HeaderTextStyle>
                 <Title>{titleText}</Title>
-                <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
+                <Subtitle>{`${subtitleText} - ${consumeFuel}L - R$ ${carpoolPrice}`}</Subtitle>
                 <BottomLine marginTop={24} />
                 <SmallTitle>Distribuição de custos</SmallTitle>
             </HeaderTextStyle>

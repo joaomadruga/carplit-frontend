@@ -8,8 +8,6 @@ import ImageWrapper from '../utils/ImageWrapper.component';
 const ButtonPrimarySmallStyle = styled.TouchableHighlight`
   background-color: ${Constants.buttonConfig.Default.Primary.Small.BackgroundColor};
   border-radius: ${Constants.buttonConfig.Default.Primary.Small.Radius};
-  border-color: ${Constants.buttonConfig.Default.Primary.Small.BorderColor};
-  border-width: ${Constants.buttonConfig.Default.Primary.Small.BorderWidth};
   padding: 14px 24px;
   display: flex;
   flex-direction: row;

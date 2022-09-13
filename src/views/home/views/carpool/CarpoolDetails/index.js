@@ -11,11 +11,10 @@ import ListCarpoolDetails from "../../../../../components/carpooldetails/ListCar
 
 export default function CarpoolDetails({ route }) {
     const { listOfCarpools } = useContext(CarpoolContext);
-    const { index } = route.params;
-    const { listOfRiders, pathTitle, pathDistance, kmL, gasPrice } = listOfCarpools[index].data[0];
+    const { columnIndex, rowIndex } = route.params;
+    const { listOfRiders, pathTitle, pathDistance, priceFuel, consumeFuel } = listOfCarpools[columnIndex].data[rowIndex];
     const [totalPrice, setTotalPrice] = useState(listOfRiders[0].price);
-    const { date } = listOfCarpools[index];
-    const carpoolPrice = kmL * gasPrice;
+    const carpoolPrice = consumeFuel * priceFuel;
     const filterListOfRiders = () => { return listOfRiders.filter((item) => {
         if (item.isParticipating) return item
     }) };
@@ -23,7 +22,7 @@ export default function CarpoolDetails({ route }) {
     return (
         <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
             <PaddingContent>
-                <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} kmL={kmL}/>
+                <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} consumeFuel={consumeFuel}/>
                 <ListCarpoolDetails totalPriceState={{ totalPrice, setTotalPrice }} availablePeople={listOfAvailablePeople} carpoolPrice={carpoolPrice}/>
             </PaddingContent>
         </ScrollView>

@@ -30,8 +30,10 @@ export default function TouchableListItem({titleText, subtitleText, index, Peopl
     return (
         <>
             <TouchableListItemStyle {...props} onPress={() => {
-                setCheckBox(!checkBox)
-                People.isParticipating = !People.isParticipating;
+                if (!People.isDriver) {
+                    setCheckBox(!checkBox)
+                    People.isParticipating = !People.isParticipating;
+                }
             }}>
                 <View>
                     <Title>{titleText}</Title>

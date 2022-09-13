@@ -22,7 +22,7 @@ export default function ChooseGroup({ navigation, route }) {
                     <FlatListChooseGroup listOfRiders={currentRiders} />
                     <ButtonPrimaryDefault
                     title={"Continuar"}
-                    onPress={() => { selectedPath.data[0].listOfRiders = currentRiders, navigation.navigate('AddCarpool', { selectedPath }) }} />
+                    onPress={() => { selectedPath['listOfRiders'] = currentRiders, navigation.navigate('AddCarpool', { selectedPath }) }} />
                     
                 </View>
             </PaddingContent>

@@ -28,6 +28,7 @@
     "expo-status-bar": "~1.4.0",
     "intl": "^1.2.5",
     "jest-expo": "^46.0.1",
+    "moment": "^2.29.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.5",

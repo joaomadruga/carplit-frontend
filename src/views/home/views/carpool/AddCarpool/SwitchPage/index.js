@@ -5,9 +5,12 @@ import FixedValueHeader from "../../../../../../components/addcarpool/FixedValue
 import FlatListAddCarpool from "../../../../../../components/addcarpool/FlatListAddCarpool.component";
 import ButtonPrimaryDefault from "../../../../../../components/utils/ButtonPrimaryDefault.component";
 import { HomeContext } from "../../../../../../routes/homeRoutes";
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 export default function SwitchPage({ props }) {
-    const { carpoolPrice, setListOfCarpools, tempListOfRiders, isLeftSelected, gasPrice, kmL, pathTitle, pathDistance, navigation } = props;
+    const { carpoolPrice, consumeAndFuel, listOfCarpools, setListOfCarpools, tempListOfRiders, isLeftSelected, pathTitle, pathDistance, navigation } = props;
+    const { priceFuel, consumeFuel } = consumeAndFuel;
     const availablePeople = tempListOfRiders.filter((item) => {
         if (item.isParticipating || item.isDriver) return item
     });
@@ -68,10 +71,10 @@ export default function SwitchPage({ props }) {
                     title={"Adicionar carona"} 
                     onPress={() => {
                         const currentCarpool = { 
-                            date: '31/07/2022',
-                            data: [ { 
-                            pathTitle: pathTitle, pathDistance: pathDistance, kmL: kmL, gasPrice: gasPrice,
-                            listOfRiders: availablePeople 
+                            date: `${moment().locale("pt-br").format('dddd, MM/DD/YYYY')}`,
+                            data: [{ 
+                            pathTitle: pathTitle, pathDistance: pathDistance, consumeFuel: consumeFuel, priceFuel: priceFuel,
+                            listOfRiders: availablePeople
                         }]
                         }
 
@@ -82,7 +85,19 @@ export default function SwitchPage({ props }) {
                                 item.carpoolHistory.push({ ...availablePeople[index], date: currentCarpool.date });
                             }
                         })
-                        setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
+                        if (listOfCarpools) {
+                            const hasFind = listOfCarpools.some((item) => {
+                                if (item.date === currentCarpool.date) {
+                                    item.data.push(currentCarpool.data[0]);
+                                    console.log(item.data)
+                                    return true;
+                                }
+                                return false;
+                            });
+                            if (!hasFind) setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
+                        } else {
+                            setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
+                        }
                         navigation.dispatch(
                             CommonActions.reset({
                             index: 0,

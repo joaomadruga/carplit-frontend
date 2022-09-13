@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ScrollView } from "react-native";
 import PriceFuelInput from "../../../../../components/settings/ConsumeFuel/PriceFuelInput.component";
 import ConsumeFuelInput from "../../../../../components/settings/ConsumeFuel/ConsumeFuelInput.component";
@@ -7,8 +7,10 @@ import InputWithTitleSubtitle from "../../../../../components/utils/InputWithTit
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 import * as Constants from "../../../../../constants/utils/Constants"
+import { HomeContext } from "../../../../../routes/homeRoutes";
 
-export default function ConsumeFuel() {
+export default function ConsumeFuel({ navigation }) {
+    const { setConsumeAndFuel } = useContext(HomeContext);
     const [fixedPriceFuel, setFixedPriceFuel] = useState("R$ 0,00");
     const [fixedConsumeFuel, setFixedConsumeFuel] = useState("0,00");
     return (
@@ -25,7 +27,17 @@ export default function ConsumeFuel() {
                     TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
                     fixedPriceState={{fixedState: fixedPriceFuel, setFixedState: setFixedPriceFuel}}
                     />
-                    <ButtonPrimaryDefault marginTop={40} title={"Salvar alterações"} onPress={() => console.log("pressed")} />
+                    <ButtonPrimaryDefault 
+                        marginTop={40} 
+                        title={"Salvar alterações"} 
+                        onPress={() => { 
+                            setConsumeAndFuel({
+                                priceFuel: parseFloat(fixedPriceFuel.replace('R$', '').trim().replace(',', '.')), 
+                                consumeFuel: parseFloat(fixedConsumeFuel.replace(',', '.'))
+                            });
+                            navigation.goBack();
+                        }} 
+                    />
             </PaddingContent>
         </SafeAreaViewDefault>
         </ScrollView>

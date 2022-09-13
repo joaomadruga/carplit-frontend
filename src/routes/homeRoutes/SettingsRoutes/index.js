@@ -11,6 +11,7 @@ import SettingsScreen from "../../../views/home/views/settings";
 import AddIcon from "../../../../assets/Home/add-icon.png";
 import Riders from "../../../views/home/views/settings/Riders";
 import { RidersNavigator } from "./Riders";
+import { PathsNavigator } from "./Paths";
 
 const StackSettings = createNativeStackNavigator();
 
@@ -28,22 +29,28 @@ export const SettingNavigator = ({ navigation, route }) => {
         <StackSettings.Navigator screenOptions={screenOptions} initialRouteName='SettingsScreen'>
                 <StackSettings.Screen options={{headerShown: false}} name="SettingsScreen" component={SettingsScreen} />
                 <StackSettings.Screen options={({ navigation }) => ({
-              headerTitle: 'Consumo e combustível',
-              title: 'Consumo e combustível',
-              headerLeft: () =>  ( 
-              <TouchableWithoutFeedback onPress={navigation.goBack}>
-                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
-              </TouchableWithoutFeedback>
-              )
-            })}
-              
-            name="ConsumeFuel" 
-            component={ConsumeFuel} />
+                    headerTitle: 'Consumo e combustível',
+                    title: 'Consumo e combustível',
+                    headerLeft: () =>  ( 
+                    <TouchableWithoutFeedback onPress={navigation.goBack}>
+                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                    </TouchableWithoutFeedback>
+                    )
+                    })}
+                    name="ConsumeFuel" 
+                    component={ConsumeFuel} 
+                />
 
                 <StackSettings.Screen
                 options={{headerShown: false}}
                 component={RidersNavigator}
                 name="RidersNavigator"/>
+
+                <StackSettings.Screen
+                options={{headerShown: false}}
+                component={PathsNavigator}
+                name="PathsNavigator"/>
+                
         </StackSettings.Navigator>
     )
 }
