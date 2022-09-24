@@ -31,7 +31,7 @@ export default function HomeRoutes({ route }) {
 
     const [listOfPaths, setListOfPaths] = useState([{ 
         pathTitle: 'Casa - UFPE (via Boa Viagem)', 
-        pathDistance: '16km' 
+        pathDistance: 16
     }
     ]);
 

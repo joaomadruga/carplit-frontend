@@ -16,12 +16,14 @@ export default function AddCarpool({ navigation, route }) {
     const { consumeAndFuel } = useContext(Store.HomeContext)
     const { listOfRiders, pathTitle, pathDistance } = selectedPath;
     const [isLeftSelected, setIsLeftSelected] = useState(true);
-    const carpoolPrice = consumeAndFuel.priceFuel * consumeAndFuel.consumeFuel;
+    const consumePath = (pathDistance / consumeAndFuel.consumeFuel).toFixed(2);
+    const carpoolPrice = (consumeAndFuel.priceFuel * consumePath).toFixed(2);
+    
 
     return (
         <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
             <PaddingContent>
-                <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} consumeFuel={consumeAndFuel.consumeFuel}/>
+                <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} consumePath={consumePath}/>
                 <SwitchButton isLeftSelectedState={{isLeftSelected: isLeftSelected, setIsLeftSelected: setIsLeftSelected}}/>
                 <SwitchPage props={{ carpoolPrice, listOfCarpools, setListOfCarpools, tempListOfRiders: listOfRiders, isLeftSelected, consumeAndFuel, pathTitle, pathDistance, navigation }}/>
             </PaddingContent>

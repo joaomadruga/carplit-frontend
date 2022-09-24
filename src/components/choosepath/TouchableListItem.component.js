@@ -33,7 +33,7 @@ export default function TouchableListItem({titleText, subtitleText, ...props}){
             <TouchableListItemStyle {...props}>
                 <View>
                     <Title>{titleText}</Title>
-                    <Subtitle>{subtitleText}</Subtitle>
+                    <Subtitle>{subtitleText}km</Subtitle>
                 </View>
                 <ImageWrapper source={ArrowRight} width={'24px'} height={'24px'} />
             </TouchableListItemStyle>

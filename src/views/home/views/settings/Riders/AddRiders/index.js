@@ -27,8 +27,8 @@ export default function AddRiders({ navigation, route }) {
                     <View>
                         <InputWithTitleSubtitle
                         TextTitle={'Nome da pessoa'} 
-                        TextSubtitle={'Como você costuma chamar a sua rota (ex: Candeias - UFPE via Boa Viagem)'}
-                        InputPlaceHolder={'Nome do trajeto'}
+                        TextSubtitle={'Como você chama a pessoa que está cadastrando ;)'}
+                        InputPlaceHolder={'Nome da pessoa'}
                         onChangeText={(value) => {handleChange(value, 'name')}} 
                         value={riderInfo.name}
                         />

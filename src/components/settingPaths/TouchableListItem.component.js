@@ -31,7 +31,7 @@ export default function TouchableListItem({pathTitle, index, pathDistance, open,
             <TouchableListItemStyle {...props}>
                 <View>
                     <Title>{pathTitle}</Title>
-                    <Subtitle>{pathDistance}</Subtitle>
+                    <Subtitle>{pathDistance}km</Subtitle>
                 </View>
                     <TouchableWithoutFeedback onPress={() => {setCurrentItemIndex(index), open() }}>
                             <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={MoreDots} />
