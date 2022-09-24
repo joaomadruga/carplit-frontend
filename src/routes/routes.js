@@ -3,30 +3,25 @@ import { createContext, useState } from "react";
 import { LogBox } from "react-native";
 import HomeRoutes from "./homeRoutes";
 import InitialRoutes from "./initialRoutes";
+import * as Store from "../redux/store/store";
 
 LogBox.ignoreLogs([
   'Require cycle:'
 ]);
 
-export const LoginContext = createContext();
-
 export default function Routes() {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(false);
   const [loginInfo, setLoginInfo] = useState({
     login: "",
-    password: ""
-  })
+    password: "",
+    authToken: ""
+  });
   return (
     <>
       <NavigationContainer>
-        <LoginContext.Provider value={{ loginInfo: loginInfo.login, setLoginInfo: setLoginInfo }}>
-          {!isLogin && (<InitialRoutes HomeRoutes={HomeRoutes}/>)}
-        </LoginContext.Provider>
-
-        <LoginContext.Provider value={{ loginInfo: loginInfo.login }}>
-          {isLogin && (<HomeRoutes/>)}
-        </LoginContext.Provider>
-        
+        <Store.LoginContext.Provider value={{ loginInfo, setLoginInfo, isLogin, setIsLogin }}>  
+          <InitialRoutes HomeRoutes={HomeRoutes}/>
+        </Store.LoginContext.Provider>
       </NavigationContainer>
     </>
   )

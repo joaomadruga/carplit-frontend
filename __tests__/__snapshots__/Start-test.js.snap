@@ -110,7 +110,7 @@ exports[`renders correctly 1`] = `
           ]
         }
       >
-        mudei
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante elit
       </Text>
     </View>
     <View
@@ -202,9 +202,11 @@ exports[`renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#6E1DBE",
                 "fontFamily": "RetniSans-Bold",
                 "fontSize": 16,
+              },
+              Object {
+                "color": "#6E1DBE",
               },
             ]
           }

@@ -3,12 +3,12 @@ import { Animated, Modal, Text, View, Easing, Bounce, TouchableWithoutFeedback }
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import CloseIcon from "../../../assets/Home/close-icon.png";
-import ImageWrapper from '../utils/ImageWrapper.component';
+import ImageWrapper from './ImageWrapper.component';
 
-const CarpoolPopupStyle = styled(Animated.View)`
+const NotificationPopupStyle = styled(Animated.View)`
     align-self: center;
     position: absolute;
-    bottom: 15px;
+    bottom: ${props => props.bottom};
     background-color: ${Constants.colors.gray[700]};
     width: 100%;
     border-radius: 8px;
@@ -19,13 +19,13 @@ const CarpoolPopupStyle = styled(Animated.View)`
     align-items: center;
 `;
 
-const CarpoolTextPopupStyle = styled.Text`
+const NotificationTextPopupStyle = styled.Text`
     font-family: ${Constants.fontConfig.Body.Regular.FontFamily};
     font-size: ${Constants.fontConfig.Body.Regular.FontSize};
     color: ${Constants.colors.gray[100]};
 `
 
-export default function CarpoolPopup({ setShowPopup }) {
+export default function NotificationPopup({ title, setShowPopup, bottom }) {
     const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
     const positionAnim = useRef(new Animated.Value(100)).current  // Initial value for position: 100
     const fadeIn = () => {
@@ -61,11 +61,11 @@ export default function CarpoolPopup({ setShowPopup }) {
     }, [])
 
     return (
-        <CarpoolPopupStyle style={{transform: [{ translateY: positionAnim }], opacity: fadeAnim}}>
-            <CarpoolTextPopupStyle>Trajeto adicionado com sucesso</CarpoolTextPopupStyle>
+        <NotificationPopupStyle bottom={bottom} style={{transform: [{ translateY: positionAnim }], opacity: fadeAnim}}>
+            <NotificationTextPopupStyle>{title}</NotificationTextPopupStyle>
             <TouchableWithoutFeedback onPress={() => fadeOut()}>
                 <ImageWrapper source={CloseIcon} width={'24px'} height={'24px'}/>
             </TouchableWithoutFeedback>
-        </CarpoolPopupStyle>
+        </NotificationPopupStyle>
     )
 };

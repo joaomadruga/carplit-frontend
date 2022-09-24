@@ -4,15 +4,15 @@ import Empty from '../../../../../components/utils/Empty.component';
 import PaddingContent from '../../../../../components/utils/PaddingContent.component';
 import SafeAreaViewDefault from '../../../../../components/utils/SafeAreaViewLogin.component';
 import * as Constants from '../../../../../constants/utils/Constants';
-import { HomeContext } from '../../../../../routes/homeRoutes';
 import ListOfPaths from '../../../../../components/settingPaths/ListOfPaths.component';
 import PathsContent from '../../../../../components/settingPaths/PathsContent.component';
 import { Modalize, useModalize } from 'react-native-modalize';
 import ModalOptions from "../../../../../components/utils/ModalOptions.component";
 import ModalPopup from '../../../../../components/utils/ModalPopup.component';
+import * as Store from "../../../../../redux/store/store";
 
 export default function Paths({ navigation, route }) {
-        const { listOfPaths, setListOfPaths } = useContext(HomeContext);
+        const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
         const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0);
         const [modalVisible, setModalVisible] = useState(false);
         const [currentItemIndex, setCurrentItemIndex] = useState(0);

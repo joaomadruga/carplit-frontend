@@ -7,12 +7,11 @@ import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryD
 import Empty from "../../../../../components/utils/Empty.component";
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
-import { HomeContext } from "../../../../../routes/homeRoutes";
-import { CarpoolContext } from "../../../../../routes/homeRoutes/CarpoolRoutes";
+import * as Store from "../../../../../redux/store/store";
 
 export default function ChooseGroup({ navigation, route }) {
     const { selectedPath } = route.params;
-    const { listOfRiders } = useContext(HomeContext);
+    const { listOfRiders } = useContext(Store.HomeContext);
     const [currentRiders, setCurrentRiders] = useState(JSON.parse(JSON.stringify(listOfRiders)));
     //navigation.navigate('AddCarpool', { selectedPath })
     return (

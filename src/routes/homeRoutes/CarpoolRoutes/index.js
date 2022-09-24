@@ -9,19 +9,28 @@ import ChoosePath from "../../../views/home/views/carpool/ChoosePath";
 import AddIcon from "../../../../assets/Home/add-icon.png";
 import ArrowLeft from "../../../../assets/Button/arrow-left.png";
 import * as Constants from "../../../constants/utils/Constants";
-import { HomeContext, tabBarStyle } from "..";
+import { tabBarStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
 import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
+import { getCarpools } from "../../../helper/utils";
+import * as Store from "../../../redux/store/store";
 
 const StackSettings = createNativeStackNavigator();
-export const CarpoolContext = createContext();
 
 export const CarpoolNavigator = ({ navigation, route }) => {
     const [listOfCarpools, setListOfCarpools] = useState([]);
-    const { listOfPaths, setListOfPaths } = useContext(HomeContext);
-    //listofpaths should come from settings
-    
-
+    const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
+    const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
+    const loadCarpoolData = async () => {
+        console.log(loginInfo)
+        const responseCarpools = await getCarpools(loginInfo.authToken)
+        .then(response => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "CarpoolScreen"){
@@ -32,12 +41,17 @@ export const CarpoolNavigator = ({ navigation, route }) => {
         }
     }, [navigation, route]);
 
+    useEffect(() => {
+        loadCarpoolData();
+    }, [])
+    
     return (
-        <CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>
+        <Store.CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>
             <StackSettings.Navigator screenOptions={screenOptions} initialRouteName='CarpoolScreen'>
                     <StackSettings.Screen 
-                    options={{headerShown: false}} 
-                    name="CarpoolScreen" 
+                    options={{headerShown: false}}
+                    initialParams={route.params}
+                    name="CarpoolScreen"
                     component={Carpool} 
                     />
 
@@ -110,7 +124,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
 
                     
             </StackSettings.Navigator>
-        </CarpoolContext.Provider>
+        </Store.CarpoolContext.Provider>
     )
 }
 

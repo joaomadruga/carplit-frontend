@@ -4,7 +4,7 @@ import AutoValueHeader from "../../../../../../components/addcarpool/AutoValueHe
 import FixedValueHeader from "../../../../../../components/addcarpool/FixedValueHeader.component";
 import FlatListAddCarpool from "../../../../../../components/addcarpool/FlatListAddCarpool.component";
 import ButtonPrimaryDefault from "../../../../../../components/utils/ButtonPrimaryDefault.component";
-import { HomeContext } from "../../../../../../routes/homeRoutes";
+import * as Store from "../../../../../../redux/store/store";
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -14,7 +14,7 @@ export default function SwitchPage({ props }) {
     const availablePeople = tempListOfRiders.filter((item) => {
         if (item.isParticipating || item.isDriver) return item
     });
-    const { listOfRiders, setListOfRiders } = useContext(HomeContext);
+    const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
     const [isEnabled, setIsEnabled] = useState(false);
     const [fixedPrice, setFixedPrice] = useState("R$ 0,00");
     const totalPrice = fixedPrice.replace(/[$a-zA-Z.]/g, '').replace(',', '.') * (availablePeople.length - 1);
@@ -89,7 +89,6 @@ export default function SwitchPage({ props }) {
                             const hasFind = listOfCarpools.some((item) => {
                                 if (item.date === currentCarpool.date) {
                                     item.data.push(currentCarpool.data[0]);
-                                    console.log(item.data)
                                     return true;
                                 }
                                 return false;

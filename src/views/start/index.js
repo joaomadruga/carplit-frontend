@@ -10,8 +10,10 @@ import CenteredView from '../../components/utils/CenteredView.component';
 import ImageWrapper from '../../components/utils/ImageWrapper.component';
 import ButtonSecundaryDefault from '../../components/utils/ButtonSecondaryDefault.component';
 import PaddingContent from '../../components/utils/PaddingContent.component';
-export default function StartScreen({ navigation }) {
+import api from '../../helper/api';
+import { useEffect } from 'react';
 
+export default function StartScreen({ navigation }) {
   return (
     <SafeAreaViewStart>
       <PaddingContent style={{justifyContent: 'space-evenly', alignItems: 'center'}}>
@@ -25,11 +27,7 @@ export default function StartScreen({ navigation }) {
           <ButtonPrimaryDefault
             title='Criar uma conta'
             underlayColor={Constants.buttonConfig.Ontouch.Primary.Default.BackgroundColor}
-            onPress={() => {
-              let whatsAppMsg = 'da p escolher o contato do zap'
-              let url = 'whatsapp://send?text=' + whatsAppMsg;
-              Linking.openURL(url);
-            }}
+            onPress={() => { navigation.navigate('Register') }}
             marginBottom={10}
           />
           <ButtonSecundaryDefault

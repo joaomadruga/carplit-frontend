@@ -9,8 +9,33 @@ import GasIcon from "../../../../../assets/Settings/gas-station-icon.png";
 import * as Constants from "../../../../constants/utils/Constants"; 
 import SafeAreaViewDefault from "../../../../components/utils/SafeAreaViewLogin.component";
 import { CommonActions } from "@react-navigation/native";
+import ModalPopup from "../../../../components/utils/ModalPopup.component";
+import { useContext, useState } from "react";
+import * as Store from "../../../../redux/store/store";
 
 export default function SettingsScreen({ navigation }) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const { loginInfo, setLoginInfo, setIsLogin } = useContext(Store.LoginContext);
+
+    const logout = async () => {
+        const delay = async (ms) => new Promise(res => setTimeout(res, ms));
+        setModalVisible(false);
+        await delay(400);
+        setIsLogin(false);
+        setLoginInfo({
+            login: "",
+            password: "",
+            authToken: ""
+        });
+        navigation.dispatch(
+            CommonActions.reset({
+            index: 0,
+            routes: [{
+                name: 'Start'
+            }],
+            })
+        );
+    }
     return (
         <SafeAreaViewDefault>
             <PaddingContent>
@@ -21,17 +46,17 @@ export default function SettingsScreen({ navigation }) {
                     <ButtonSecondarySmallDefault
                         title='Sair'
                         underlayColor={Constants.buttonConfig.Ontouch.Secondary.Default.BackgroundColor}
-                        onPress={() => navigation.dispatch(
-                            CommonActions.reset({
-                            index: 0,
-                            routes: [{
-                                name: 'Start'
-                            }],
-                            })
-                        ) }
-                        
+                        onPress={() =>  setModalVisible(true)}
                     />
             </PaddingContent>
+            <ModalPopup 
+                modalState={{ modalVisible, setModalVisible }} 
+                title={"Sair"} 
+                subtitle={"Tem certeza que deseja sair da sua conta?"} 
+                leftButtonTitle={"Cancelar"} 
+                rightButtonTitle={"Sair"} 
+                rightButtonPressed={() => { logout() }}
+            />
         </SafeAreaViewDefault>
     );
 }

@@ -7,10 +7,10 @@ import InputWithTitleSubtitle from "../../../../../components/utils/InputWithTit
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 import * as Constants from "../../../../../constants/utils/Constants"
-import { HomeContext } from "../../../../../routes/homeRoutes";
+import * as Store from "../../../../../redux/store/store";
 
 export default function ConsumeFuel({ navigation }) {
-    const { setConsumeAndFuel } = useContext(HomeContext);
+    const { setConsumeAndFuel } = useContext(Store.HomeContext);
     const [fixedPriceFuel, setFixedPriceFuel] = useState("R$ 0,00");
     const [fixedConsumeFuel, setFixedConsumeFuel] = useState("0,00");
     return (

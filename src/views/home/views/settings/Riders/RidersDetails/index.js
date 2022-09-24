@@ -1,13 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button, Modal, ScrollView, Text, TouchableWithoutFeedback, View, LogBox } from "react-native";
 import { TouchableOpacity } from "react-native-web";
+import { FinanceView } from "../../../../../../components/ridersdetails/FinanceView.component";
 import { HeaderText } from "../../../../../../components/ridersdetails/HeaderText.component";
 import ListHistoryCarpools from "../../../../../../components/ridersdetails/ListHistoryCarpools.component";
 import ModalOptions from "../../../../../../components/utils/ModalOptions.component";
 import ModalPopup from "../../../../../../components/utils/ModalPopup.component";
 import PaddingContent from "../../../../../../components/utils/PaddingContent.component";
 import * as Constants from "../../../../../../constants/utils/Constants";
-import { HomeContext } from "../../../../../../routes/homeRoutes";
+import * as Store from "../../../../../../redux/store/store";
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
@@ -15,16 +16,16 @@ LogBox.ignoreLogs([
 
 export default function RidersDetails({ route, navigation }) {
     const { index, ref } = route.params;
-    const { listOfRiders, setListOfRiders } = useContext(HomeContext);
+    const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
     const [currentRider, setCurrentRider] = useState(listOfRiders[index]);
     const [modalVisible, setModalVisible] = useState(false);
     const CloseModalOption = () => ref.current?.close();
-    
     return (
         <>
             <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
                 <PaddingContent>
                     <HeaderText name={currentRider.name} address={currentRider.address}/>
+                    <FinanceView carpoolHistory={currentRider.carpoolHistory}/>
                     <ListHistoryCarpools carpoolHistory={currentRider.carpoolHistory}/>
                 </PaddingContent>
             </ScrollView>

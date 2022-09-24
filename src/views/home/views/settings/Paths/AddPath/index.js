@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { Image, SafeAreaView, Text, TouchableOpacity, View, TouchableHighlight, ScrollView } from 'react-native';
-import { HomeContext } from '../../../../../../routes/homeRoutes';
 import PaddingContent from '../../../../../../components/utils/PaddingContent.component';
 import SafeAreaViewDefault from '../../../../../../components/utils/SafeAreaViewLogin.component';
 import InputWithTitleSubtitle from '../../../../../../components/utils/InputWithTitleSubtitle.component';
 import ButtonPrimaryDefault from '../../../../../../components/utils/ButtonPrimaryDefault.component';
+import * as Store from "../../../../../../redux/store/store";
 
 export default function AddPath({ navigation, route }) {
-        const { listOfPaths, setListOfPaths } = useContext(HomeContext);
+        const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
         const [pathInfo, setPathInfo] = useState({ 
             pathTitle: '', 
             pathDistance: '',

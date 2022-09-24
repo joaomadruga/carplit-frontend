@@ -12,27 +12,13 @@ import Finance from '../../views/home/views/finance';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CarpoolNavigator } from './CarpoolRoutes';
 import { SettingNavigator } from './SettingsRoutes';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import * as Store from "../../redux/store/store";
 
 const Tab = createBottomTabNavigator();
-export const HomeContext = createContext();
-//const TopTab = createMaterialTopTabNavigator();
 
-/*
-const TopNavigator = () => {
-    return (
-        <TopTab.Navigator screenOptions={{
-            tabBarInactiveTintColor: Constants.colors.gray[600],
-            tabBarActiveTintColor: Constants.colors.primary[600], 
-            tabBarIndicatorStyle: {backgroundColor: Constants.colors.primary[600]}
-            }}>
-            <TopTab.Screen name="Carpool" component={Carpool} />
-            <TopTab.Screen name="Finance" component={Finance} />
-        </TopTab.Navigator>
-    )
-}
-*/
-export default function HomeRoutes() {
+
+export default function HomeRoutes({ route }) {
   const insets = useSafeAreaInsets();
   const [listOfRiders, setListOfRiders] = useState(
     [{name: 'Zé', 
@@ -53,13 +39,14 @@ export default function HomeRoutes() {
         priceFuel: 0,
         consumeFuel: 0
     });
-
+    
   return (
-        <HomeContext.Provider value={{ listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, consumeAndFuel, setConsumeAndFuel }}>
+        <Store.HomeContext.Provider value={{ listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, consumeAndFuel, setConsumeAndFuel }}>
             <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabBarStyle}}>
             
-                <Tab.Screen name="Home" 
+                <Tab.Screen name="Home"
                     component={CarpoolNavigator}
+                    initialParams={route ? route.params : {'isRegister': false}}
                     options={({ navigation }) => ({
                         headerTitle: 'Início',
                         tabBarLabel: 'Início',
@@ -101,7 +88,7 @@ export default function HomeRoutes() {
                 />
             
             </Tab.Navigator>
-        </HomeContext.Provider>
+        </Store.HomeContext.Provider>
   );
 }
 
