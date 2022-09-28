@@ -4,14 +4,17 @@ import AutoValueHeader from "../../../../../../components/addcarpool/AutoValueHe
 import FixedValueHeader from "../../../../../../components/addcarpool/FixedValueHeader.component";
 import FlatListAddCarpool from "../../../../../../components/addcarpool/FlatListAddCarpool.component";
 import ButtonPrimaryDefault from "../../../../../../components/utils/ButtonPrimaryDefault.component";
-import { HomeContext } from "../../../../../../routes/homeRoutes";
+import * as Store from "../../../../../../redux/store/store";
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 export default function SwitchPage({ props }) {
-    const { carpoolPrice, setListOfCarpools, tempListOfRiders, isLeftSelected, gasPrice, kmL, pathTitle, pathDistance, navigation } = props;
+    const { carpoolPrice, consumeAndFuel, listOfCarpools, setListOfCarpools, tempListOfRiders, isLeftSelected, pathTitle, pathDistance, navigation } = props;
+    const { priceFuel, consumeFuel } = consumeAndFuel;
     const availablePeople = tempListOfRiders.filter((item) => {
         if (item.isParticipating || item.isDriver) return item
     });
-    const { listOfRiders, setListOfRiders } = useContext(HomeContext);
+    const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
     const [isEnabled, setIsEnabled] = useState(false);
     const [fixedPrice, setFixedPrice] = useState("R$ 0,00");
     const totalPrice = fixedPrice.replace(/[$a-zA-Z.]/g, '').replace(',', '.') * (availablePeople.length - 1);
@@ -68,10 +71,10 @@ export default function SwitchPage({ props }) {
                     title={"Adicionar carona"} 
                     onPress={() => {
                         const currentCarpool = { 
-                            date: '31/07/2022',
-                            data: [ { 
-                            pathTitle: pathTitle, pathDistance: pathDistance, kmL: kmL, gasPrice: gasPrice,
-                            listOfRiders: availablePeople 
+                            date: `${moment().locale("pt-br").format('dddd, MM/DD/YYYY')}`,
+                            data: [{ 
+                            pathTitle: pathTitle, pathDistance: pathDistance, consumeFuel: consumeFuel, priceFuel: priceFuel,
+                            listOfRiders: availablePeople
                         }]
                         }
 
@@ -82,7 +85,18 @@ export default function SwitchPage({ props }) {
                                 item.carpoolHistory.push({ ...availablePeople[index], date: currentCarpool.date });
                             }
                         })
-                        setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
+                        if (listOfCarpools) {
+                            const hasFind = listOfCarpools.some((item) => {
+                                if (item.date === currentCarpool.date) {
+                                    item.data.push(currentCarpool.data[0]);
+                                    return true;
+                                }
+                                return false;
+                            });
+                            if (!hasFind) setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
+                        } else {
+                            setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
+                        }
                         navigation.dispatch(
                             CommonActions.reset({
                             index: 0,

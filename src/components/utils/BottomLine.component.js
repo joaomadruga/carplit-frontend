@@ -9,9 +9,9 @@ const LineStyle = styled.View`
     margin-left: -20px;
 `
 
-export default function BottomLine({ marginTop }) {
+export default function BottomLine({ marginTop, ...props }) {
     const windowWidth = Dimensions.get('window').width;
     return (
-        <LineStyle style={{width: windowWidth, marginTop: marginTop}}/>
+        <LineStyle style={{width: windowWidth, marginTop: marginTop}} {...props}/>
     )
 }

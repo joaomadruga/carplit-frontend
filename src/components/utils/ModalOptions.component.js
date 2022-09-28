@@ -8,6 +8,7 @@ import ImageWrapper from "./ImageWrapper.component";
 import ButtonSecondarySmallDefault from "../settings/ButtonSecondarySmall.component";
 import ButtonSecundaryDefault from "./ButtonSecondaryDefault.component";
 import { TouchableWithoutFeedback } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const HeaderModal = styled.View`
     color: ${Constants.colors.gray[700]};
@@ -26,9 +27,10 @@ const HeaderTitle = styled.Text`
 
 export default function ModalOptions({ modalizeRef, firstText, secondText, actionFirstButton, actionSecondButton }){
     const Close = () => modalizeRef.current?.close();
+    const insets = useSafeAreaInsets();
     return (
         <Portal>
-            <Modalize modalStyle={{backgroundColor: Constants.colors.gray[0], paddingLeft: 20, paddingRight: 20}} adjustToContentHeight={true} ref={modalizeRef} >
+            <Modalize modalStyle={{backgroundColor: Constants.colors.gray[0], paddingLeft: 20, paddingRight: 20, borderTopLeftRadius: 24, borderTopRightRadius: 24}} adjustToContentHeight={true} ref={modalizeRef} >
                 <HeaderModal>
                     <View style={{width: 24, height: 24}}/>
                     <HeaderTitle>Opções</HeaderTitle>
@@ -47,7 +49,7 @@ export default function ModalOptions({ modalizeRef, firstText, secondText, actio
                 title={secondText}
                 onPress={() => actionSecondButton()}
                 underlayColor={Constants.buttonConfig.Ontouch.Secondary.Default.BackgroundColor}
-                style={{marginTop: 8, marginBottom: 20}}
+                style={{marginTop: 8, marginBottom: insets.bottom + 20}}
                 textColor={Constants.colors.support.Red[500]}
                 />
             </Modalize>

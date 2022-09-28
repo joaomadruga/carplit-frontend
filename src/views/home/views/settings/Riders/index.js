@@ -6,10 +6,10 @@ import Empty from '../../../../../components/utils/Empty.component';
 import PaddingContent from '../../../../../components/utils/PaddingContent.component';
 import SafeAreaViewDefault from '../../../../../components/utils/SafeAreaViewLogin.component';
 import * as Constants from '../../../../../constants/utils/Constants';
-import { HomeContext } from '../../../../../routes/homeRoutes';
+import * as Store from "../../../../../redux/store/store";
 
 export default function Riders({ navigation, route }) {
-        const { listOfRiders } = useContext(HomeContext);
+        const { listOfRiders } = useContext(Store.HomeContext);
         const [isListOfRidersEmpty, setIsListOfRidersEmpty] = useState(listOfRiders.length == 0);
 
         useEffect(() => {

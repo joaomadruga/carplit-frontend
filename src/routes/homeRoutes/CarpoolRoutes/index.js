@@ -1,6 +1,6 @@
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createContext, useEffect, useLayoutEffect, useState } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useState } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import ImageWrapper from "../../../components/utils/ImageWrapper.component";
 import Carpool from "../../../views/home/views/carpool";
@@ -12,23 +12,25 @@ import * as Constants from "../../../constants/utils/Constants";
 import { tabBarStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
 import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
+import { getCarpools } from "../../../helper/utils";
+import * as Store from "../../../redux/store/store";
 
 const StackSettings = createNativeStackNavigator();
-export const CarpoolContext = createContext();
-const gasPrice = 5.5;
 
 export const CarpoolNavigator = ({ navigation, route }) => {
     const [listOfCarpools, setListOfCarpools] = useState([]);
-    //listofpaths should come from settings
-    const [listOfPaths, setListOfPaths] = useState([
-        {
-            date: `31/07/2002`,
-            data: [
-            { pathTitle: 'Casa - UFPE (via Boa Viagem)', pathDistance: '16km', kmL: 2.54, gasPrice: gasPrice }
-            ]
-        }
-    ]);
-
+    const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
+    const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
+    const loadCarpoolData = async () => {
+        console.log(loginInfo)
+        const responseCarpools = await getCarpools(loginInfo.authToken)
+        .then(response => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "CarpoolScreen"){
@@ -39,12 +41,17 @@ export const CarpoolNavigator = ({ navigation, route }) => {
         }
     }, [navigation, route]);
 
+    useEffect(() => {
+        loadCarpoolData();
+    }, [])
+    
     return (
-        <CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>
+        <Store.CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>
             <StackSettings.Navigator screenOptions={screenOptions} initialRouteName='CarpoolScreen'>
                     <StackSettings.Screen 
-                    options={{headerShown: false}} 
-                    name="CarpoolScreen" 
+                    options={{headerShown: false}}
+                    initialParams={route.params}
+                    name="CarpoolScreen"
                     component={Carpool} 
                     />
 
@@ -72,9 +79,10 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                             ),
                             headerRight: () => {
                                 if (listOfPaths.length === 0) {
-                                    return ( 
+                                    ///* onPress={() => navigation.navigate('PathsScreen')} */
+                                    return (
                                         <TouchableWithoutFeedback>
-                                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
+                                            <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
                                         </TouchableWithoutFeedback> 
                                         ) 
                                 }
@@ -116,7 +124,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
 
                     
             </StackSettings.Navigator>
-        </CarpoolContext.Provider>
+        </Store.CarpoolContext.Provider>
     )
 }
 

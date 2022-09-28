@@ -6,6 +6,8 @@ import { useEffect, useCallback } from 'react';
 import Routes from './src/routes/routes';
 import { fontsLoadedConfig } from './src/constants/utils/Constants';
 import { Portal } from 'react-native-paper';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   const [fontsLoaded] = useFonts(fontsLoadedConfig);
@@ -28,11 +30,13 @@ export default function App() {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <GestureHandlerRootView style={{flex: 1}}>
       <Portal.Host>
-        <View onLayout={onLayoutRootView}/>
-        <Routes/>
+        <SafeAreaProvider>
+          <View onLayout={onLayoutRootView}/>
+          <Routes/>
+        </SafeAreaProvider>
       </Portal.Host>
-    </View>
+    </GestureHandlerRootView>
   );
 }

@@ -38,11 +38,11 @@ const TextView = styled.View`
     flex-direction: row;
 `
 
-export function HeaderText({titleText, subtitleText, kmL, carpoolPrice}){
+export function HeaderText({titleText, subtitleText, consumeFuel, carpoolPrice}){
     return (
         <HeaderTextStyle>
             <Title>{titleText}</Title>
-            <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
+            <Subtitle>{`${subtitleText} - ${consumeFuel}L - R$ ${carpoolPrice}`}</Subtitle>
             <BottomLine marginTop={24} />
             <TextView>
                 <SmallTitle>Registro de pagamentos</SmallTitle>

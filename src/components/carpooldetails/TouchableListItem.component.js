@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
-import { Dimensions, View } from 'react-native';
+import { Dimensions, Switch, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import { useEffect, useState } from 'react';
 import BottomLine from '../utils/BottomLine.component';
 
-const TouchableListItemStyle = styled.TouchableOpacity`
+const ViewListItemStyle = styled.View`
     padding: 16px 0;
     flex-direction: row;
     justify-content: space-between;
@@ -35,24 +35,27 @@ export default function TouchableListItem({titleText, subtitleText, index, Peopl
             setTotalPrice(totalPrice - People.price);
         }
     }
+    const toggleSwitch = () => { 
+        setCheckBox(previousState => !previousState) 
+        People.hasPaid = !People.hasPaid;
+        changeTotalPrice(!checkBox);
+    };
+
     return (
         <>
-            <TouchableListItemStyle {...props} onPress={() => {
-                setCheckBox(!checkBox)
-                People.hasPaid = !People.hasPaid;
-                changeTotalPrice(!checkBox);
-            }}>
+            <ViewListItemStyle {...props}>
                 <View>
                     <Title>{titleText}</Title>
                     <Subtitle>{subtitleText}</Subtitle>
                 </View>
-                <Checkbox.Android
-                    status={checkBox || People.isDriver ? 'checked' : 'unchecked'}
+                <Switch 
+                    onValueChange={toggleSwitch} 
+                    value={checkBox}
+                    trackColor={{ false: "#767577", true: Constants.colors.primary[600] }}
+                    thumbColor={checkBox ? Constants.colors.gray[0] : "#f4f3f4"}
                     disabled={People.isDriver ? true : false}
-                    centered={true}
-                    color={Constants.colors.primary[600]}
                 />
-            </TouchableListItemStyle>
+            </ViewListItemStyle>
             <BottomLine/>
         </>
     )

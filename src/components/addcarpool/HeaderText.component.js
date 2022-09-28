@@ -27,16 +27,17 @@ const SmallTitle = styled.Text`
     color: ${Constants.colors.gray[700]};
     font-family: ${Constants.fontConfig.Body.Bold.FontFamily};
     font-size: ${Constants.fontConfig.Body.Bold.FontSize};
-    margin: 16px 0;
+    margin: 16px;
+    margin-left: -16px;
     align-self: flex-start;
 `
 
-export function HeaderText({titleText, subtitleText, kmL, carpoolPrice}){
+export function HeaderText({titleText, subtitleText, consumePath, carpoolPrice}){
     return (
         <PaddingContent style={{height: 'auto'}}>
             <HeaderTextStyle>
                 <Title>{titleText}</Title>
-                <Subtitle>{`${subtitleText} - ${kmL}L - R$ ${carpoolPrice}`}</Subtitle>
+                <Subtitle>{`${subtitleText}km - ${consumePath}L - R$ ${carpoolPrice}`}</Subtitle>
                 <BottomLine marginTop={24} />
                 <SmallTitle>Distribuição de custos</SmallTitle>
             </HeaderTextStyle>

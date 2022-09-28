@@ -25,7 +25,7 @@ export default function TouchableListItem({titleText, subtitleText, ...props}){
         <>
             <TouchableListItemStyle {...props}>
                 <Title>{titleText}</Title>
-                <Subtitle>{subtitleText}</Subtitle>
+                <Subtitle>{subtitleText}km</Subtitle>
             </TouchableListItemStyle>
             <BottomLine />
         </>

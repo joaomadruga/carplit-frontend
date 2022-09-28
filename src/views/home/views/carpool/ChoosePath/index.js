@@ -6,10 +6,11 @@ import ButtonPrimaryDefault from "../../../../../components/utils/ButtonPrimaryD
 import Empty from "../../../../../components/utils/Empty.component";
 import PaddingContent from "../../../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
-import { CarpoolContext } from "../../../../../routes/homeRoutes/CarpoolRoutes";
+import * as Store from "../../../../../redux/store/store";
+
 
 export default function ChoosePath({ navigation }) {
-    const { listOfPaths } = useContext(CarpoolContext);
+    const { listOfPaths } = useContext(Store.CarpoolContext);
     const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0);
 
     useEffect(() => {
