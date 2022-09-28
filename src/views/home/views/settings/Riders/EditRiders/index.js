@@ -25,7 +25,7 @@ export default function EditRiders({ navigation, route }) {
                         <InputWithTitleSubtitle
                         TextTitle={'Nome da pessoa'} 
                         TextSubtitle={'Como você costuma chamar a sua rota (ex: Candeias - UFPE via Boa Viagem)'}
-                        InputPlaceHolder={'Nome do trajeto'}
+                        InputPlaceHolder={'Nome da pessoa'}
                         onChangeText={(value) => {handleChange(value, 'name')}} 
                         value={riderInfo.name}
                         />

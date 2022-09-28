@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { LogBox } from "react-native";
 import HomeRoutes from "./homeRoutes";
 import InitialRoutes from "./initialRoutes";

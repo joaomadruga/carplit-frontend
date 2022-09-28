@@ -22,7 +22,6 @@ const Subtitle = styled.Text`
     font-family: ${Constants.fontConfig.Body.Regular.FontFamily};
     font-size: ${Constants.fontConfig.Sm.Regular.FontSize};
     color: ${Constants.colors.gray[700]};
-    max-width: 90%;
 `
 
 export default function TouchableListItem({titleText, subtitleText, index, People,  ...props}){
@@ -35,7 +34,7 @@ export default function TouchableListItem({titleText, subtitleText, index, Peopl
                     People.isParticipating = !People.isParticipating;
                 }
             }}>
-                <View>
+                <View style={{maxWidth: '70%'}}>
                     <Title>{titleText}</Title>
                     <Subtitle>{subtitleText}</Subtitle>
                 </View>

@@ -25,7 +25,7 @@ export default function HomeRoutes({ route }) {
     address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', 
     isParticipating: true, 
     isDriver: true, 
-    hasPaid: true, 
+    hasPaid: true,
     price: 0,
     carpoolHistory: []}]);
 

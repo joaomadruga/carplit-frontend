@@ -1,8 +1,9 @@
-import { Dimensions, Linking, View } from 'react-native';
+import { Dimensions, Linking, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import PaddingContent from '../utils/PaddingContent.component';
-import WhatsappIcon from "../../../assets/Settings/whatsapp-icon.png"
+import WhatsappGreenIcon from "../../../assets/Settings/whatsapp-icon.png";
+import WhatsappGrayIcon from "../../../assets/Settings/whatsapp-gray-icon.png";
 import ImageWrapper from '../utils/ImageWrapper.component';
 import { useEffect, useState } from 'react';
 
@@ -59,7 +60,7 @@ export function FinanceView({ carpoolHistory }){
     }) };
     
     const sendWhatsappMensage = () => {
-        let whatsAppMsg = `Oi, passando pra te lembrar da carona! Ficou um valor de ${Constants.formatter.format(totalPending)} em aberto. Valeu!`
+        let whatsAppMsg = `Oi, passando pra te lembrar da carona! Ficou um valor de ${Constants.formatter.format(totalPending)} em aberto. Valeu!\n\n\n_OBS: valores calculados automaticamente pelo app Carplit!_`
         let url = 'whatsapp://send?text=' + whatsAppMsg;
         Linking.openURL(url);
     }
@@ -80,9 +81,9 @@ export function FinanceView({ carpoolHistory }){
                     <MoneyText>{Constants.formatter.format(totalPending)}</MoneyText>
                 </View>
             </View>
-            <WhatsappButton onPress={() => { sendWhatsappMensage() } }>
-                <WhatsappButtonText>Enviar valores pendentes</WhatsappButtonText>
-                <ImageWrapper source={WhatsappIcon} width={'24px'} height={'24px'} />
+            <WhatsappButton disabled={totalPending === 0 ? true : false} style={totalPending === 0 ? {backgroundColor: Constants.colors.gray[400]} : ""} onPress={() => { sendWhatsappMensage() } }>
+                <WhatsappButtonText style={totalPending === 0 ? {color: Constants.colors.gray[700]} : ""}>Enviar valores pendentes</WhatsappButtonText>
+                <ImageWrapper source={totalPending === 0 ? WhatsappGrayIcon : WhatsappGreenIcon } width={'24px'} height={'24px'} />
             </WhatsappButton>
         </FinanceViewStyle>
     )

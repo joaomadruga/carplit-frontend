@@ -7,9 +7,9 @@ import * as Constants from '../../../../../constants/utils/Constants';
 import ListOfPaths from '../../../../../components/settingPaths/ListOfPaths.component';
 import PathsContent from '../../../../../components/settingPaths/PathsContent.component';
 import { Modalize, useModalize } from 'react-native-modalize';
-import ModalOptions from "../../../../../components/utils/ModalOptions.component";
 import ModalPopup from '../../../../../components/utils/ModalPopup.component';
 import * as Store from "../../../../../redux/store/store";
+import ModalOptions from '../../../../../components/utils/ModalOptions.component';
 
 export default function Paths({ navigation, route }) {
         const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);

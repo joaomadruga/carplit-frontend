@@ -23,7 +23,7 @@ export default function LoginScreen( { navigation } ) {
       setIsDisabled(true);
       const responseLogin = await utils.getAuthTokenLogin(loginInfo.login.toLowerCase().trim(), loginInfo.password)
       .then(response => {
-        handleChange(response.data.auth_token, 'authToken');
+        handleChange(response.data.token, 'authToken');
         navigation.dispatch(
           CommonActions.reset({
             index: 1,
