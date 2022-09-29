@@ -31,27 +31,35 @@ export async function getAuthTokenRegister(name, email, password, averageConsump
     return response;
 };
 
-/*
 export async function getCarpools(authToken) {
-    console.log(authToken)
-    const response = await api.get('/api/v1/trips/trips/', {
-        headers: { Authorization: `Token ${authToken}` }
-    });
-    return response;
-}
-*/
-
-export async function getCarpools(authToken) {
-    console.log(authToken)
     const response = await api.get('/api/v1/trips/trips/', {
         headers: {
             'Accept': 'application/json',
             'Content-Type':'application/json',
           },
-          xsrfCookieName:"csrftoken",
-          xsrfHeaderName:'X-CSRFToken',
           body:JSON.stringify({ Authorization: `Token ${authToken}` })
     });
     return response;
 }
       
+export async function getPath(authToken) {
+    const response = await api.get('/path/get/', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
+    });
+    return response; 
+}
+
+export async function updatePath(authToken, id, updateObj) {
+    const response = await api.put(`/path/update/${id}`, updateObj, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${authToken}`
+        },
+    });
+    return response; 
+}

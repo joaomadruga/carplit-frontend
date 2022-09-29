@@ -12,7 +12,7 @@ import * as Constants from "../../../constants/utils/Constants";
 import { tabBarStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
 import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
-import { getCarpools } from "../../../helper/utils";
+import { getCarpools, getPath } from "../../../helper/utils";
 import * as Store from "../../../redux/store/store";
 
 const StackSettings = createNativeStackNavigator();
@@ -21,16 +21,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
     const [listOfCarpools, setListOfCarpools] = useState([]);
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
     const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
-    const loadCarpoolData = async () => {
-        console.log(loginInfo)
-        const responseCarpools = await getCarpools(loginInfo.authToken)
-        .then(response => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "CarpoolScreen"){
@@ -40,10 +31,6 @@ export const CarpoolNavigator = ({ navigation, route }) => {
             navigation.setOptions({tabBarStyle: { display: 'flex', ...tabBarStyle}});
         }
     }, [navigation, route]);
-
-    useEffect(() => {
-        loadCarpoolData();
-    }, [])
     
     return (
         <Store.CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>

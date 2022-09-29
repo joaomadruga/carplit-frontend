@@ -11,9 +11,25 @@ import ImageWrapper from '../../components/utils/ImageWrapper.component';
 import ButtonSecundaryDefault from '../../components/utils/ButtonSecondaryDefault.component';
 import PaddingContent from '../../components/utils/PaddingContent.component';
 import api from '../../helper/api';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import * as Store from "../../redux/store/store";
+import { CommonActions } from '@react-navigation/native';
 
 export default function StartScreen({ navigation }) {
+  const { isLogin } = useContext(Store.LoginContext);
+  useEffect(() => {
+    if (isLogin) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{
+            name: 'HomeRoutes',
+            params: {'isRegister': false}
+          }],
+        })
+      );
+    }
+  }, [isLogin]);
   return (
     <SafeAreaViewStart>
       <PaddingContent style={{justifyContent: 'space-evenly', alignItems: 'center'}}>

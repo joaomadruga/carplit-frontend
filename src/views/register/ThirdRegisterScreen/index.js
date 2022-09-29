@@ -25,10 +25,9 @@ export default function ThirdRegisterScreen({ navigation }) {
     setIsDisabled(true);
     const priceFuel = parseFloat(fixedPriceFuel.replace('R$', '').trim().replace(',', '.'));
     const consumeFuel = parseFloat(fixedConsumeFuel.replace(',', '.'));
-    const name = 'joao';
-    const responseRegister = await utils.getAuthTokenRegister(name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
+    const responseRegister = await utils.getAuthTokenRegister(loginInfo.name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
     .then(response => {
-      loginInfo.authToken = response.data.token;
+      setLoginInfo(prev => ({...prev, ["authToken"]: response.data.token}));
       navigation.dispatch(
         CommonActions.reset({
           index: 1,

@@ -49,6 +49,13 @@ export default function RegisterScreen( {navigation} ) {
             <View>
                 <CurrentScreenWidget numberOfFilledWidgets={1} />
                 <InputWithTitleSubtitle
+                    TextTitle={'Insira seu nome preferido'} 
+                    TextSubtitle={'Como você deseja ser chamado'}
+                    InputPlaceHolder={'Nome'}
+                    onChangeText={(value) => {handleChange(value, 'name')}} 
+                    value={loginInfo.name}
+                />
+                <InputWithTitleSubtitle
                     TextTitle={'Insira seu email'} 
                     TextSubtitle={'Não vamos te enviar spam nem nada, é só pra entrar no aplicativo mesmo :)'}
                     InputPlaceHolder={'Email'}

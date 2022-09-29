@@ -14,8 +14,8 @@ export default function LoginScreen( { navigation } ) {
   const [showPopup, setShowPopup] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const { loginInfo, setLoginInfo, setIsLogin } = useContext(Store.LoginContext);
-  const handleChange = (value, type) => {
-    setLoginInfo(prev => ({...prev, [type]: value}))
+  const handleChange = async (value, type) => {
+    setLoginInfo(prev => ({...prev, [type]: value}));
   };
   const onSubmit = async () => {
     const isEmailValid = () => { return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginInfo.login) };

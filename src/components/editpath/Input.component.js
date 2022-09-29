@@ -1,7 +1,7 @@
 import { createRef, useRef } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
-import * as Constants from "../../../constants/utils/Constants";
+import * as Constants from "../../constants/utils/Constants";
 
 const InputStyle = styled.TextInput`
   background-color: ${Constants.inputConfig.Default.BackgroundColor};
@@ -29,21 +29,25 @@ const SufixText = styled.Text`
     margin-left: 5px;
 `
 
-export default function Input({ fixedPriceState, SufixValue, InputFormatter, ...props }) {
-    const {fixedState, setFixedState} = fixedPriceState;
+export default function Input({ InputPlaceHolder, pathInfoState, SufixValue, InputFormatter, ...props }) {
+    const {pathInfo, setPathInfo} = pathInfoState;
     const inputRef = useRef();
+    const handleChange = (value, type) => {
+        setPathInfo(prev => ({...prev, [type]: value}))
+    }
     return (
         <ViewInput onPress={() => inputRef.current.focus()} activeOpacity={1} >
             <InputStyle
             ref={inputRef}
             keyboardType={"numeric"}
+            placeholder={InputPlaceHolder}
+            value={pathInfo.pathDistance}
             placeholderTextColor={Constants.inputConfig.Default.Color}
-            value={fixedState}
             onChangeText={(value) => {
                 const valueFiltered = value.replace(',', '.').replace(/[^0-9]/g, '');
-                setFixedState(InputFormatter(valueFiltered));
+                handleChange(InputFormatter(valueFiltered), 'pathDistance');
             }}/>
-            <SufixText>{SufixValue}</SufixText>
+            {pathInfo.pathDistance && <SufixText>{SufixValue}</SufixText>}
         </ViewInput>
     );
 }

@@ -14,12 +14,23 @@ import { CarpoolNavigator } from './CarpoolRoutes';
 import { SettingNavigator } from './SettingsRoutes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as Store from "../../redux/store/store";
+import { getPath } from '../../helper/utils';
 
 const Tab = createBottomTabNavigator();
 
+export const loadListOfPaths = async (authToken, setListOfPaths) => {
+    const responsePaths = await getPath(authToken)
+    .then(response => {
+        setListOfPaths(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export default function HomeRoutes({ route }) {
   const insets = useSafeAreaInsets();
+  const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
   const [listOfRiders, setListOfRiders] = useState(
     [{name: 'Zé', 
     address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', 
@@ -29,16 +40,16 @@ export default function HomeRoutes({ route }) {
     price: 0,
     carpoolHistory: []}]);
 
-    const [listOfPaths, setListOfPaths] = useState([{ 
-        pathTitle: 'Casa - UFPE (via Boa Viagem)', 
-        pathDistance: 16
-    }
-    ]);
+    const [listOfPaths, setListOfPaths] = useState([]);
 
     const [consumeAndFuel, setConsumeAndFuel] = useState({
         priceFuel: 0,
         consumeFuel: 0
     });
+
+    useEffect(() => {
+        loadListOfPaths(loginInfo.authToken, setListOfPaths);
+    }, []);
     
   return (
         <Store.HomeContext.Provider value={{ listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, consumeAndFuel, setConsumeAndFuel }}>

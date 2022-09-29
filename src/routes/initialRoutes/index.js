@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Button, Image, Text, TouchableWithoutFeedback } from "react-native";
 import ArrowLeft from "../../../assets/Button/arrow-left.png";
 import ImageWrapper from "../../components/utils/ImageWrapper.component";
@@ -10,14 +10,12 @@ import RegisterScreen from '../../views/register';
 import SecondRegisterScreen from '../../views/register/SecondRegisterScreen';
 import ThirdRegisterScreen from '../../views/register/ThirdRegisterScreen';
 import StartScreen from "../../views/start";
-import * as Store from "../../redux/store/store";
 
 const Stack = createNativeStackNavigator();
 
 export default function InitialRoutes({ HomeRoutes }) {
-  const { isLogin } = useContext(Store.LoginContext);
   return (
-        <Stack.Navigator initialRouteName={isLogin ? "HomeRoutes" : "Start"} screenOptions={screenOptions} >
+        <Stack.Navigator initialRouteName={"Start"} screenOptions={screenOptions} >
           <Stack.Screen 
             name="Start"
             component={StartScreen}

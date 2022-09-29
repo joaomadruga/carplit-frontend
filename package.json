@@ -26,6 +26,7 @@
     "axios": "^0.27.2",
     "expo": "~46.0.7",
     "expo-font": "~10.2.0",
+    "expo-secure-store": "^11.3.0",
     "expo-splash-screen": "~0.16.1",
     "expo-status-bar": "~1.4.0",
     "intl": "^1.2.5",
