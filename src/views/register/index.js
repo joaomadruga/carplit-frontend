@@ -15,7 +15,7 @@ import SafeAreaViewDefault from '../../components/utils/SafeAreaViewLogin.compon
 import CurrentScreenWidget from '../../components/register/CurrentScreenWidget.component';
 import InputWithTitleSubtitle from '../../components/utils/InputWithTitleSubtitle.component';
 import NotificationPopup from '../../components/utils/NotificationPopup.component';
-import * as utils from '../../helper/utils';
+import { getIsEmailAvailable } from '../../helper/register/utils';
 
 export default function RegisterScreen( {navigation} ) {
   const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
@@ -29,7 +29,7 @@ export default function RegisterScreen( {navigation} ) {
     const isEmailValid = () => { return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginInfo.login) };
     if (loginInfo.login && isEmailValid()) {
       setIsDisabled(true);
-      const response = await utils.getIsEmailAvailable(loginInfo.login.toLowerCase().trim())
+      const response = await getIsEmailAvailable(loginInfo.login.toLowerCase().trim())
       .then(response => {
         navigation.navigate('SecondRegisterScreen');
       })

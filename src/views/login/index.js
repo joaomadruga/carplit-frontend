@@ -8,7 +8,7 @@ import SafeAreaViewDefault from '../../components/utils/SafeAreaViewLogin.compon
 import * as utils from '../../helper/utils';
 import NotificationPopup from '../../components/utils/NotificationPopup.component';
 import { CommonActions } from '@react-navigation/native';
-import * as Constants from "../../constants/utils/Constants";
+import { getAuthTokenLogin } from '../../helper/login/utils';
 
 export default function LoginScreen( { navigation } ) {
   const [showPopup, setShowPopup] = useState(false);
@@ -21,7 +21,7 @@ export default function LoginScreen( { navigation } ) {
     const isEmailValid = () => { return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginInfo.login) };
     if (loginInfo.login && loginInfo.password && isEmailValid()) {
       setIsDisabled(true);
-      const responseLogin = await utils.getAuthTokenLogin(loginInfo.login.toLowerCase().trim(), loginInfo.password)
+      const responseLogin = await getAuthTokenLogin(loginInfo.login.toLowerCase().trim(), loginInfo.password)
       .then(response => {
         handleChange(response.data.token, 'authToken');
         navigation.dispatch(

@@ -5,10 +5,10 @@ import SafeAreaViewDefault from '../../../../../../components/utils/SafeAreaView
 import InputWithTitleSubtitle from '../../../../../../components/utils/InputWithTitleSubtitle.component';
 import ButtonPrimaryDefault from '../../../../../../components/utils/ButtonPrimaryDefault.component';
 import * as Store from "../../../../../../redux/store/store";
-import { updatePath } from '../../../../../../helper/utils';
 import DistanceInput from '../../../../../../components/editpath/DistanceInput.component';
 import NotificationPopup from '../../../../../../components/utils/NotificationPopup.component';
 import * as Constants from "../../../../../../constants/utils/Constants";
+import { updatePath } from '../../../../../../helper/path/utils';
 
 export default function EditPath({ navigation, route }) {
         const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
@@ -28,21 +28,21 @@ export default function EditPath({ navigation, route }) {
         const onSubmit = async () => {
             setIsDisabled(true);
             if (pathInfo.pathTitle && pathInfo.pathDistance) {
-                console.log(pathInfo.pathDistance.replace('km', '').replace(',', '.'))
                 const updateObj = {
                     "title": pathInfo.pathTitle,
                     "totalDistance": parseFloat(pathInfo.pathDistance.replace('km', '').replace(',', '.'))
                 };
                 const responseUpdatePath = await updatePath(loginInfo.authToken, currentItem.id, updateObj)
                 .then(response => {
-                    console.log(response.data)
+                    listOfPaths[currentItem.index].title = pathInfo.pathTitle;
+                    listOfPaths[currentItem.index].totalDistance = pathInfo.pathDistance;
+                    navigation.navigate('PathsScreen');
                 })
                 .catch((error) => {
                     console.log(error);
+                    setShowPopup(true);
                 });
-                listOfPaths[currentItem.index].title = pathInfo.pathTitle;
-                listOfPaths[currentItem.index].totalDistance = pathInfo.pathDistance;
-                navigation.navigate('PathsScreen');
+                
             } else {
                 setShowPopup(true);
             }

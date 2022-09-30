@@ -14,11 +14,12 @@ import { CarpoolNavigator } from './CarpoolRoutes';
 import { SettingNavigator } from './SettingsRoutes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as Store from "../../redux/store/store";
-import { getPath } from '../../helper/utils';
+import { getPath } from '../../helper/path/utils';
 
 const Tab = createBottomTabNavigator();
 
 export const loadListOfPaths = async (authToken, setListOfPaths) => {
+    
     const responsePaths = await getPath(authToken)
     .then(response => {
         setListOfPaths(response.data);

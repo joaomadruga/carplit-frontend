@@ -11,8 +11,8 @@ import InputWithTitleSubtitle from "../../../components/utils/InputWithTitleSubt
 import PaddingContent from "../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../components/utils/SafeAreaViewLogin.component";
 import * as Store from "../../../redux/store/store";
-import * as utils from '../../../helper/utils';
 import NotificationPopup from "../../../components/utils/NotificationPopup.component";
+import { getAuthTokenRegister } from "../../../helper/register/utils";
 
 export default function ThirdRegisterScreen({ navigation }) {
   const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
@@ -25,7 +25,7 @@ export default function ThirdRegisterScreen({ navigation }) {
     setIsDisabled(true);
     const priceFuel = parseFloat(fixedPriceFuel.replace('R$', '').trim().replace(',', '.'));
     const consumeFuel = parseFloat(fixedConsumeFuel.replace(',', '.'));
-    const responseRegister = await utils.getAuthTokenRegister(loginInfo.name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
+    const responseRegister = await getAuthTokenRegister(loginInfo.name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
     .then(response => {
       setLoginInfo(prev => ({...prev, ["authToken"]: response.data.token}));
       navigation.dispatch(

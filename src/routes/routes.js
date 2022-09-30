@@ -39,7 +39,7 @@ export default function Routes() {
 
   useEffect(() => {
     saveAuthTokenLocal(loginInfo.authToken);
-  }, [loginInfo.authToken])
+  }, [loginInfo.authToken]);
 
   return (
     <>
