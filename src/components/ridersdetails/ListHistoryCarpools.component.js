@@ -33,7 +33,7 @@ function Item({ date, address, price, hasPaid}) {
 }
 
 export default function ListHistoryCarpools({ carpoolHistory, ...props }) {
-    const numberOfCarpools = carpoolHistory.length;
+    const numberOfCarpools = carpoolHistory?.length || 0;
     return (
         <View style={{flex: 1}}>
             <Title>{`Histórico de caronas (${numberOfCarpools})`}</Title>

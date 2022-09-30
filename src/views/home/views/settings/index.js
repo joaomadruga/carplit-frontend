@@ -29,7 +29,7 @@ export default function SettingsScreen({ navigation }) {
         });
         navigation.dispatch(
             CommonActions.reset({
-            index: 1,
+            index: 0,
             routes: [{
                 name: 'Start'
             }],

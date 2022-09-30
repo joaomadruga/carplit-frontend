@@ -20,7 +20,7 @@ export default function FlatListChoosePath({ listOfPaths, navigation, ...props }
         data={listOfPaths}
         renderItem={({ item, index }) => {
             return (
-                 <Item key={index} pathTitle={item.pathTitle} pathDistance={item.pathDistance} navigation={navigation} index={index} listOfPaths={listOfPaths}/>
+                 <Item key={index} pathTitle={item.title} pathDistance={item.totalDistance} navigation={navigation} index={index} listOfPaths={listOfPaths}/>
             )}}
         {...props}
         />

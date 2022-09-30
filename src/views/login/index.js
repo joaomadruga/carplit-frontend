@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from 'react'
 import * as Store from "../../redux/store/store";
 import PaddingContent from '../../components/utils/PaddingContent.component';
 import SafeAreaViewDefault from '../../components/utils/SafeAreaViewLogin.component';
-import * as utils from '../../helper/utils';
 import NotificationPopup from '../../components/utils/NotificationPopup.component';
 import { CommonActions } from '@react-navigation/native';
 import { getAuthTokenLogin } from '../../helper/login/utils';
+import * as Constants from "../../constants/utils/Constants";
 
 export default function LoginScreen( { navigation } ) {
   const [showPopup, setShowPopup] = useState(false);

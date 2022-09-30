@@ -11,9 +11,8 @@ import * as Store from "../../../../../redux/store/store";
 export default function Riders({ navigation, route }) {
         const { listOfRiders } = useContext(Store.HomeContext);
         const [isListOfRidersEmpty, setIsListOfRidersEmpty] = useState(listOfRiders.length == 0);
-
         useEffect(() => {
-            setIsListOfRidersEmpty(listOfRiders.length == 0)
+            setIsListOfRidersEmpty(listOfRiders.length == 0);
         }, [listOfRiders]);
 
         return (
@@ -22,7 +21,7 @@ export default function Riders({ navigation, route }) {
                     <PaddingContent>
                         <RidersContent justifyContent={isListOfRidersEmpty ? 'center' : 'flex-start'}>
                             {isListOfRidersEmpty && <Empty title={"Você ainda não registrou passageiros!"} subtitle={"Toque no botão de adicionar + para registrar passageiros."}/>}
-                            {!isListOfRidersEmpty && <ListOfRiders listOfRiders={listOfRiders} navigation={navigation} />}
+                            {!isListOfRidersEmpty && <ListOfRiders listOfRiders={listOfRiders} navigation={navigation}/>}
                         </RidersContent>
                     </PaddingContent>
                 </ScrollView>

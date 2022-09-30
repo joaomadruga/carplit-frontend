@@ -1,7 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createContext, useEffect, useState } from "react";
 import { LogBox } from "react-native";
-import HomeRoutes from "./homeRoutes";
 import InitialRoutes from "./initialRoutes";
 import * as Store from "../redux/store/store";
 import * as SecureStore from 'expo-secure-store';
@@ -45,7 +44,7 @@ export default function Routes() {
     <>
       <NavigationContainer>
         <Store.LoginContext.Provider value={{ loginInfo, setLoginInfo, isLogin, setIsLogin }}>  
-          <InitialRoutes HomeRoutes={HomeRoutes}/>
+          <InitialRoutes/>
         </Store.LoginContext.Provider>
       </NavigationContainer>
     </>

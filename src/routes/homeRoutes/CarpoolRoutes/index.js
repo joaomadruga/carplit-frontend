@@ -1,4 +1,4 @@
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { CommonActions, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createContext, useContext, useEffect, useLayoutEffect, useState } from "react";
 import { TouchableWithoutFeedback } from "react-native";
@@ -9,15 +9,18 @@ import ChoosePath from "../../../views/home/views/carpool/ChoosePath";
 import AddIcon from "../../../../assets/Home/add-icon.png";
 import ArrowLeft from "../../../../assets/Button/arrow-left.png";
 import * as Constants from "../../../constants/utils/Constants";
-import { tabBarStyle } from "..";
+import { tabStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
 import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
 import { getCarpools, getPath } from "../../../helper/utils";
 import * as Store from "../../../redux/store/store";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import AddPath from "../../../views/home/views/settings/Paths/AddPath";
 
 const StackSettings = createNativeStackNavigator();
 
 export const CarpoolNavigator = ({ navigation, route }) => {
+    const insets = useSafeAreaInsets();
     const [listOfCarpools, setListOfCarpools] = useState([]);
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
     const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
@@ -26,9 +29,8 @@ export const CarpoolNavigator = ({ navigation, route }) => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "CarpoolScreen"){
             navigation.setOptions({tabBarStyle: { backgroundColor: 'white', display: 'none' }})
-            
         } else {
-            navigation.setOptions({tabBarStyle: { display: 'flex', ...tabBarStyle}});
+            navigation.setOptions({tabBarStyle: { display: 'flex', ...tabStyle(insets)}});
         }
     }, [navigation, route]);
     
@@ -66,16 +68,13 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                             ),
                             headerRight: () => {
                                 if (listOfPaths.length === 0) {
-                                    ///* onPress={() => navigation.navigate('PathsScreen')} */
                                     return (
-                                        <TouchableWithoutFeedback>
+                                        <TouchableWithoutFeedback onPress={() => { navigation.navigate('AddPath') }} >
                                             <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
                                         </TouchableWithoutFeedback> 
                                         ) 
                                 }
                             }
-                                
-                                
                         })}
                         name="ChoosePath"
                         component={ChoosePath} 
@@ -109,6 +108,19 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                         component={AddCarpool}
                     />
 
+                    <StackSettings.Screen 
+                        options={({navigation}) => ({
+                            headerTitle: 'Adicionar trajeto',
+                            title: 'Adicionar trajeto',
+                            headerLeft: () =>  ( 
+                                <TouchableWithoutFeedback onPress={navigation.goBack}>
+                                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                                </TouchableWithoutFeedback>
+                            ),
+                        })}
+                        name="AddPath"
+                        component={AddPath}
+                    />
                     
             </StackSettings.Navigator>
         </Store.CarpoolContext.Provider>

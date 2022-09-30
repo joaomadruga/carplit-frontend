@@ -15,46 +15,54 @@ import { SettingNavigator } from './SettingsRoutes';
 import { createContext, useContext, useEffect, useState } from 'react';
 import * as Store from "../../redux/store/store";
 import { getPath } from '../../helper/path/utils';
+import { getRiders } from '../../helper/riders/utils';
+import { CommonActions } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-export const loadListOfPaths = async (authToken, setListOfPaths) => {
-    
+export const loadAllLists = async (authToken, setListOfPaths, setListOfRiders) => {
     const responsePaths = await getPath(authToken)
-    .then(response => {
+    .then((response) => {
         setListOfPaths(response.data);
     })
     .catch((error) => {
       console.log(error);
     });
+    const responseRiders = await getRiders(authToken)
+    .then((response) => {
+        setListOfRiders(response.data);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 };
 
-export default function HomeRoutes({ route }) {
-  const insets = useSafeAreaInsets();
-  const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
-  const [listOfRiders, setListOfRiders] = useState(
+export default function HomeRoutes({ navigation, route }) {
+    const insets = useSafeAreaInsets();
+    const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
+    const [listOfRiders, setListOfRiders] = useState([]);
+    /*
     [{name: 'Zé', 
     address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', 
     isParticipating: true, 
     isDriver: true, 
     hasPaid: true,
     price: 0,
-    carpoolHistory: []}]);
-
+    carpoolHistory: []}]
+    */
     const [listOfPaths, setListOfPaths] = useState([]);
-
     const [consumeAndFuel, setConsumeAndFuel] = useState({
         priceFuel: 0,
         consumeFuel: 0
     });
 
     useEffect(() => {
-        loadListOfPaths(loginInfo.authToken, setListOfPaths);
+        loadAllLists(loginInfo.authToken, setListOfPaths, setListOfRiders);
     }, []);
     
   return (
         <Store.HomeContext.Provider value={{ listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, consumeAndFuel, setConsumeAndFuel }}>
-            <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabBarStyle}}>
+            <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabStyle(insets), headerShown: false}}>
             
                 <Tab.Screen name="Home"
                     component={CarpoolNavigator}
@@ -111,7 +119,6 @@ const screenOptions = {
     headerStyle: { backgroundColor: Constants.headerStyleConfig.BackgroundColor },
     headerShadowVisible: false,
     headerTitleAlign: 'center',
-    tabBarActiveTintColor: Constants.colors.primary[600],
+    tabBarActiveTintColor: Constants.colors.primary[600]
 }
-//height: 55 + insets.bottom
-export const tabBarStyle =  { paddingRight: 32, paddingLeft: 32 } 
+export const tabStyle = (insets) => { return { paddingRight: 32, paddingLeft: 32, height: 72 + insets.bottom, paddingBottom: 15 + insets.bottom, paddingTop: 15 } }

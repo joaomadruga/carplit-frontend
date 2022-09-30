@@ -10,10 +10,11 @@ import RegisterScreen from '../../views/register';
 import SecondRegisterScreen from '../../views/register/SecondRegisterScreen';
 import ThirdRegisterScreen from '../../views/register/ThirdRegisterScreen';
 import StartScreen from "../../views/start";
+import HomeRoutes from "./../homeRoutes/index";
 
 const Stack = createNativeStackNavigator();
 
-export default function InitialRoutes({ HomeRoutes }) {
+export default function InitialRoutes() {
   return (
         <Stack.Navigator initialRouteName={"Start"} screenOptions={screenOptions} >
           <Stack.Screen 
