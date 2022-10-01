@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createContext, useEffect, useState } from "react";
-import { LogBox } from "react-native";
+import { LogBox, Platform } from "react-native";
 import InitialRoutes from "./initialRoutes";
 import * as Store from "../redux/store/store";
 import * as SecureStore from 'expo-secure-store';
@@ -10,7 +10,12 @@ LogBox.ignoreLogs([
 ]);
 
 async function getValueFor(key) {
-  let result = await SecureStore.getItemAsync(key);
+  let result;
+  if (Platform.OS === "web") {
+    result = localStorage.getItem(key);
+  } else {
+    result = await SecureStore.getItemAsync(key);
+  }
   return result;
 }
 
@@ -21,7 +26,7 @@ export default function Routes() {
     password: "",
     authToken: ""
   });
-  const saveAuthTokenLocal = async (value) => await SecureStore.setItemAsync("authToken", value);
+  const saveAuthTokenLocal = async (value) => Platform.OS === "web" ? localStorage.setItem("authToken", value) : await SecureStore.setItemAsync("authToken", value);
 
   useEffect(() => {
     const value = getValueFor("authToken")

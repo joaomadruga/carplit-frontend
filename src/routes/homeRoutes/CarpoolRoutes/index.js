@@ -59,8 +59,8 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                     />
                     <StackSettings.Screen 
                         options={({ navigation, route }) => ({
-                            headerTitle: "Selecione o trajeto",
                             title: "Selecione o trajeto",
+                            headerTitle: "Selecione o trajeto",
                             headerLeft: () =>  ( 
                             <TouchableWithoutFeedback onPress={navigation.goBack}>
                                 <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
@@ -130,7 +130,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
 const screenOptions = {
     headerTintColor: 'black',
     headerBackTitleVisible: false,
-    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold, margin:'200px' },
+    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
     headerStyle: {
         backgroundColor: Constants.headerStyleConfig.BackgroundColor
     },

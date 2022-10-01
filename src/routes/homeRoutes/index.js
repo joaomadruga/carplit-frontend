@@ -16,7 +16,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import * as Store from "../../redux/store/store";
 import { getPath } from '../../helper/path/utils';
 import { getRiders } from '../../helper/riders/utils';
-import { CommonActions } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,42 +66,36 @@ export default function HomeRoutes({ navigation, route }) {
                 <Tab.Screen name="Home"
                     component={CarpoolNavigator}
                     initialParams={route ? route.params : {'isRegister': false}}
-                    options={({ navigation }) => ({
+                    options={() => ({
                         headerTitle: 'Início',
                         tabBarLabel: 'Início',
                         headerShown: false,
                         tabBarIcon: ({ focused }) => (
-                        <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
                             <ImageWrapper source={focused ? CarIconActive : CarIconInactive} width={'24px'} height={'24px'}/>
-                        </TouchableWithoutFeedback>
                         )
                     })}
                 />
 
                 <Tab.Screen name="Finance" 
                     component={Finance}
-                    options={({ navigation }) => ({
+                    options={() => ({
                         headerTitle: 'Finanças',
                         tabBarLabel: 'Finanças',
                         headerShown: false,
                         tabBarIcon: ({ focused }) => (
-                        <TouchableWithoutFeedback onPress={() => navigation.navigate('Finance')}>
                             <ImageWrapper source={focused ? WalletIconActive : WalletIconInactive} width={'24px'} height={'24px'}/>
-                        </TouchableWithoutFeedback>
                         )
                     })}
                 />
                 
-                <Tab.Screen name="Settings" 
+                <Tab.Screen name="SettingNavigator" 
                     component={SettingNavigator} 
-                    options={({ navigation }) => ({
+                    options={() => ({
                         headerTitle: 'Ajustes',
                         tabBarLabel: 'Ajustes',
                         headerShown: false,
                         tabBarIcon: ({ focused }) => (
-                            <TouchableWithoutFeedback onPress={() => navigation.navigate('Settings')}>
                                 <ImageWrapper source={focused ? SettingsIconActive: SettingsIconInactive} width={'24px'} height={'24px'}/>
-                            </TouchableWithoutFeedback>
                             )
                     })}
                 />

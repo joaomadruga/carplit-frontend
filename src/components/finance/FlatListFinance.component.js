@@ -9,7 +9,7 @@ function Item({name, owePrice, navigation, index}) {
         <TouchableListItem
             titleText={name} 
             subtitleText={owePrice} 
-            onPress={() => {navigation.navigate('HomeRoutes', {screen: 'Settings', initial: false, params:  { screen: 'RidersNavigator', initial: false, params: { screen: 'RidersDetails', initial: false, params: {name, index} } } })}}
+            onPress={() => {navigation.navigate('HomeRoutes', {screen: 'SettingNavigator', initial: false, params:  { screen: 'RidersNavigator', initial: false, params: { screen: 'RidersDetails', initial: false, params: {name, index} } } })}}
         />
     )
 }

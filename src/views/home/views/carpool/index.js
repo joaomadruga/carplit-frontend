@@ -41,7 +41,7 @@ export default function Carpool({ navigation, route }) {
                             title={`Cadastro finalizado com sucesso!`} 
                             subtitle={`Adicione passageiros e trajetos em Ajustes para começar a registrar suas caronas.`}
                             textButton={'Ir para a Tela de Ajustes'}
-                            buttonAction={() => { close(), setTimeout(() => navigation.navigate('Settings'), 500) }}
+                            buttonAction={() => { close(), setTimeout(() => navigation.navigate('SettingNavigator'), 500) }}
                         />
                     </CarpoolContent>
                 </PaddingContent>

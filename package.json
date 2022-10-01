@@ -29,6 +29,7 @@
     "expo-secure-store": "^11.3.0",
     "expo-splash-screen": "~0.16.1",
     "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.6",
     "intl": "^1.2.5",
     "jest-expo": "^46.0.1",
     "moment": "^2.29.4",

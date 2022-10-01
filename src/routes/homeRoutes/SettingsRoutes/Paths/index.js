@@ -69,7 +69,7 @@ export const PathsNavigator = ({ navigation, route }) => {
 const screenOptions = {
     headerTintColor: 'black',
     headerBackTitleVisible: false,
-    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold, margin:'200px' },
+    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
     headerStyle: {
         backgroundColor: Constants.headerStyleConfig.BackgroundColor
     },
