@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders login correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "flexGrow": 1,
+        "height": "100%",
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "display": "flex",
+          "height": "100%",
+          "paddingBottom": 0,
+          "paddingLeft": 20,
+          "paddingRight": 20,
+          "paddingTop": 0,
+          "width": "100%",
+        },
+        Object {
+          "alignItems": "center",
+          "marginTop": 40,
+        },
+      ]
+    }
+  >
+    <TextInput
+      marginBottom={12}
+      onChangeText={[Function]}
+      placeholder="Login"
+      placeholderTextColor="#686D73"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#F2F2F3",
+            "borderRadius": 8,
+            "color": "",
+            "fontFamily": "RetniSans-Medium",
+            "fontSize": 16,
+            "height": 64,
+            "marginBottom": 12,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "maxWidth": 500,
+            "paddingBottom": 16,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 16,
+            "width": "100%",
+          },
+        ]
+      }
+    />
+    <TextInput
+      marginBottom={38}
+      onChangeText={[Function]}
+      placeholder="Senha"
+      placeholderTextColor="#686D73"
+      secureTextEntry={true}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#F2F2F3",
+            "borderRadius": 8,
+            "color": "",
+            "fontFamily": "RetniSans-Medium",
+            "fontSize": 16,
+            "height": 64,
+            "marginBottom": 38,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "maxWidth": 500,
+            "paddingBottom": 16,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 16,
+            "width": "100%",
+          },
+        ]
+      }
+    />
+    <View
+      accessibilityState={
+        Object {
+          "disabled": false,
+        }
+      }
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#6E1DBE",
+            "borderRadius": 8,
+            "display": "flex",
+            "height": 64,
+            "justifyContent": "center",
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "maxWidth": 500,
+            "width": "100%",
+          },
+          Object {
+            "backgroundColor": "#6E1DBE",
+          },
+        ]
+      }
+      testID="test"
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "RetniSans-Bold",
+              "fontSize": 16,
+            },
+          ]
+        }
+      >
+        Entrar
+      </Text>
+    </View>
+    <Text
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "color": "#6E1DBE",
+            "fontFamily": "RetniSans-Bold",
+            "fontSize": 16,
+            "marginTop": 30,
+            "textAlign": "center",
+            "width": "100%",
+          },
+        ]
+      }
+      suppressHighlighting={true}
+    >
+      Esqueci minha senha
+    </Text>
+  </View>
+</RCTSafeAreaView>
+`;
