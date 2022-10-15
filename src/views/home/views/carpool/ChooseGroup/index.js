@@ -9,16 +9,28 @@ import PaddingContent from "../../../../../components/utils/PaddingContent.compo
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 import * as Store from "../../../../../redux/store/store";
 
+const getActiveRouteState = function (route) {
+    if (!route.routes || route.routes.length === 0 || route.index >= route.routes.length) {
+        return route;
+    }
+
+    const childActiveRoute = route.routes[route.index];
+    return getActiveRouteState(childActiveRoute);
+}
+
 export default function ChooseGroup({ navigation, route }) {
     const { loginInfo } = useContext(Store.LoginContext);
     const { selectedPath } = route.params;
     const { listOfRiders } = useContext(Store.HomeContext);
     const [currentRiders, setCurrentRiders] = useState(JSON.parse(JSON.stringify(listOfRiders)));
     const driver = {isDriver: true};
+    const activeRoute = getActiveRouteState(navigation.getState());
+
     useEffect(() => {
-        setCurrentRiders([driver, ...currentRiders]);
-    }, []);
-    //navigation.navigate('AddCarpool', { selectedPath })
+        const copyListOfRiders = JSON.parse(JSON.stringify(listOfRiders))
+        setCurrentRiders([driver, ...copyListOfRiders]);
+    }, [activeRoute.name === "ChooseGroup"]);
+
     return (
         <SafeAreaViewDefault>
             <PaddingContent>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Switch, Text, TextInput, View } from 'react-native';
+import { Platform, Switch, Text, TextInput, View } from 'react-native';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import 'intl';
@@ -25,7 +25,7 @@ const FixedValueInput = styled(TextInput)`
     font-size: ${Constants.fontConfig.Body.Medium.FontSize};
     max-width: 100%;
     width: 80px;
-    direction: rtl;
+    direction: ${Platform.OS === 'web' ? "ltr" : "rtl"};
     unicode-bidi: bidi-override;
 `
 

@@ -38,6 +38,18 @@ export async function getCarpoolDetails(authToken, idCarpool) {
     return response;
 }
 
+export async function deleteCarpool(authToken, id) {
+    const response = await api.delete(`/trip/delete/${id}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${authToken}`
+        },
+    });
+    if (response.status !== 200) throw new Error(response.status);
+    return response; 
+}
+
 export async function updatePassengerPayment(authToken, updateObj) {
     const response = await api.put(`/trip/passenger/payment/`, updateObj, {
         headers: {

@@ -5,6 +5,7 @@ import FixedValueHeader from "../../../../../../components/addcarpool/FixedValue
 import FlatListAddCarpool from "../../../../../../components/addcarpool/FlatListAddCarpool.component";
 import ButtonPrimaryDefault from "../../../../../../components/utils/ButtonPrimaryDefault.component";
 import * as Store from "../../../../../../redux/store/store";
+import * as Constants from "../../../../../../constants/utils/Constants";
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import { addCarpool } from "../../../../../../helper/carpools/utils";
@@ -17,6 +18,7 @@ export default function SwitchPage({ props }) {
         if (item.isParticipating || item.isDriver) return item
     });
     const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
+    const [isDisabled, setIsDisabled] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
     const [fixedPrice, setFixedPrice] = useState("R$ 0,00");
     const totalPrice = fixedPrice.replace(/[$a-zA-Z.]/g, '').replace(',', '.') * (availablePeople.length - 1);
@@ -69,9 +71,12 @@ export default function SwitchPage({ props }) {
 
                 <ButtonPrimaryDefault
                     marginTop={43} 
-                    marginBottom={30} 
-                    title={"Adicionar carona"} 
+                    marginBottom={30}
+                    style={{backgroundColor: isDisabled ? Constants.colors.gray[700] : Constants.buttonConfig.Default.Primary.Small.BackgroundColor, marginBottom: 30}}
+                    title={"Adicionar carona"}
+                    disabled={isDisabled}
                     onPress={() => {
+                        setIsDisabled(true);
                         const currentCarpool = { 
                             date: `${moment().locale("pt-br").format('dddd, DD/MM/YYYY')}`,
                             passengers: availablePeople.slice(1),
@@ -85,6 +90,7 @@ export default function SwitchPage({ props }) {
                         const responseCarpools = (async () => { await addCarpool(loginInfo.authToken, currentCarpool)
                             .then((response) => {
                                 setListOfCarpools(response.data);
+                                setIsDisabled(false);
                                 navigation.dispatch(
                                     CommonActions.reset({
                                     index: 0,

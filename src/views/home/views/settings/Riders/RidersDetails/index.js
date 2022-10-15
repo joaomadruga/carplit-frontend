@@ -74,13 +74,13 @@ export default function RidersDetails({ route, navigation }) {
             </ScrollView>
 
             <ModalOptionsRidersDetails
-                    modalizeRef={ref} 
-                    firstText={`Marcar todas as caronas como "Pago" `} 
-                    secondText={`Editar "${currentRider.name}"`}
-                    thirdText={`Excluir "${currentRider.name}"`}
-                    actionThirdButton={() => { CloseModalOption(), setModalVisible(true) }}
-                    actionFirstButton={() => { setModalAllCarpoolVisible(true) }}
-                    actionSecondButton={() => { CloseModalOption(), navigation.navigate('EditRiders', { index, id }) }}
+                modalizeRef={ref} 
+                firstText={`Marcar todas as caronas como "Pago" `} 
+                secondText={`Editar "${currentRider.name}"`}
+                thirdText={`Excluir "${currentRider.name}"`}
+                actionThirdButton={() => { CloseModalOption(), setModalVisible(true) }}
+                actionFirstButton={() => { setModalAllCarpoolVisible(true) }}
+                actionSecondButton={() => { CloseModalOption(), navigation.navigate('EditRiders', { index, id }) }}
             />
 
             <ModalPopup 

@@ -43,6 +43,7 @@ export default function HomeRoutes({ navigation, route }) {
     const [listOfRiders, setListOfRiders] = useState([]);
     const [passengersFinance, setPassengersFinance] = useState({});
     const [listOfPaths, setListOfPaths] = useState([]);
+    const [modalCarpoolDetailsVisible, setModalCarpoolDetailsVisible] = useState(false);
     const [consumeAndFuel, setConsumeAndFuel] = useState({
         priceFuel: 0,
         consumeFuel: 0
@@ -52,7 +53,7 @@ export default function HomeRoutes({ navigation, route }) {
         loadAllLists(loginInfo.authToken, setListOfPaths, setListOfRiders);
     }, []);
   return (
-        <Store.HomeContext.Provider value={{ loginInfo, listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, setConsumeAndFuel, passengersFinance, setPassengersFinance, listOfCarpools, setListOfCarpools }}>
+        <Store.HomeContext.Provider value={{ loginInfo, listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, setConsumeAndFuel, passengersFinance, setPassengersFinance, listOfCarpools, setListOfCarpools, modalCarpoolDetailsVisible, setModalCarpoolDetailsVisible }}>
             <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabStyle(insets), headerShown: false}}>
                 <Tab.Screen name="Home"
                     component={CarpoolNavigator}

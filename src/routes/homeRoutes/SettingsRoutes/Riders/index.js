@@ -11,11 +11,15 @@ import RidersDetails from "../../../../views/home/views/settings/Riders/RidersDe
 import { Modalize, useModalize } from 'react-native-modalize';
 import EditRiders from "../../../../views/home/views/settings/Riders/EditRiders";
 import CarpoolDetails from "../../../../views/home/views/carpool/CarpoolDetails";
+import GarbageIcon from "../../../../../assets/Home/garbage-icon.png";
+import * as Store from "../../../../redux/store/store";
+import { useContext } from "react";
 
 const StackRiders = createNativeStackNavigator();
 
 export const RidersNavigator = ({ navigation, route }) => {
     const { ref, open, close } = useModalize();
+    const { setModalCarpoolDetailsVisible } = useContext(Store.HomeContext);
     return (
         <StackRiders.Navigator screenOptions={screenOptions} initialRouteName='RidersScreen'>
             <StackRiders.Screen
@@ -93,6 +97,11 @@ export const RidersNavigator = ({ navigation, route }) => {
                     <TouchableWithoutFeedback onPress={navigation.goBack}>
                         <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
                     </TouchableWithoutFeedback>
+                    ),
+                    headerRight: () => (
+                        <TouchableWithoutFeedback onPress={() => setModalCarpoolDetailsVisible(true) }>
+                            <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={GarbageIcon} />
+                        </TouchableWithoutFeedback>
                     )
                 })}
                 name="CarpoolDetailsRiders"
