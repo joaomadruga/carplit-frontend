@@ -33,7 +33,7 @@ export default function SecondRegisterScreen( {navigation} ) {
     <SafeAreaViewDefault>
       <PaddingContent>
         <View style={{flexDirection: 'column', justifyContent:'space-between', height: '100%'}}>
-            <View>
+            <View style={{alignSelf: 'center'}}>
                 <CurrentScreenWidget numberOfFilledWidgets={2} />
                 <InputWithTitleSubtitle
                     TextTitle={'Defina uma senha'} 

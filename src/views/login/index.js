@@ -5,28 +5,32 @@ import { useContext, useEffect, useState } from 'react'
 import * as Store from "../../redux/store/store";
 import PaddingContent from '../../components/utils/PaddingContent.component';
 import SafeAreaViewDefault from '../../components/utils/SafeAreaViewLogin.component';
-import * as utils from '../../helper/utils';
 import NotificationPopup from '../../components/utils/NotificationPopup.component';
 import { CommonActions } from '@react-navigation/native';
+import { getAuthTokenLogin } from '../../helper/login/utils';
 import * as Constants from "../../constants/utils/Constants";
 
 export default function LoginScreen( { navigation } ) {
   const [showPopup, setShowPopup] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const { loginInfo, setLoginInfo, setIsLogin } = useContext(Store.LoginContext);
-  const handleChange = (value, type) => {
-    setLoginInfo(prev => ({...prev, [type]: value}))
+  const handleChange = async (value, type) => {
+    setLoginInfo(prev => ({...prev, [type]: value}));
   };
   const onSubmit = async () => {
     const isEmailValid = () => { return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(loginInfo.login) };
     if (loginInfo.login && loginInfo.password && isEmailValid()) {
       setIsDisabled(true);
-      const responseLogin = await utils.getAuthTokenLogin(loginInfo.login.toLowerCase().trim(), loginInfo.password)
+      const responseLogin = await getAuthTokenLogin(loginInfo.login.toLowerCase().trim(), loginInfo.password)
       .then(response => {
+        const currentDate = new Date();
+        handleChange(currentDate.getTime(), 'loginDate');
         handleChange(response.data.token, 'authToken');
+        handleChange(response.data.average_consumption, 'averageConsumption');
+        handleChange(response.data.fuel_per_liter, 'fuelPerLiter');
         navigation.dispatch(
           CommonActions.reset({
-            index: 1,
+            index: 0,
             routes: [{
               name: 'HomeRoutes',
               params: {'isRegister': false}
@@ -46,7 +50,7 @@ export default function LoginScreen( { navigation } ) {
   }
   return (
     <SafeAreaViewDefault>
-      <PaddingContent style={{marginTop: 40}}>
+      <PaddingContent style={{marginTop: 40, alignItems: 'center'}}>
         <Input placeholder="Login" marginBottom={12} onChangeText={(value) => {handleChange(value, 'login')}} value={loginInfo.login}/>
         <Input placeholder="Senha" secureTextEntry={true} marginBottom={38} onChangeText={(value) => {handleChange(value, 'password')}} value={loginInfo.password}/>
         <ButtonPrimaryDefault
@@ -58,7 +62,6 @@ export default function LoginScreen( { navigation } ) {
         <TextForgotPassword suppressHighlighting={true}  onPress={() => navigation.navigate('ForgotPasswordScreen')}>Esqueci minha senha</TextForgotPassword>
         { showPopup && <NotificationPopup title={"Login ou senha incorreto."} setShowPopup={setShowPopup} bottom={'60px'}/> }
       </PaddingContent>
-        
     </SafeAreaViewDefault>
   );
 }

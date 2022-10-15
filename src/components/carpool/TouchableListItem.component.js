@@ -25,7 +25,7 @@ export default function TouchableListItem({titleText, subtitleText, ...props}){
         <>
             <TouchableListItemStyle {...props}>
                 <Title>{titleText}</Title>
-                <Subtitle>{subtitleText}km</Subtitle>
+                <Subtitle>{subtitleText > 0 ? ` ${subtitleText} pessoas + você` : `Apenas você.`}</Subtitle>
             </TouchableListItemStyle>
             <BottomLine />
         </>

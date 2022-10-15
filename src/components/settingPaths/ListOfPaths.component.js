@@ -5,25 +5,26 @@ import * as Constants from "../../constants/utils/Constants";
 import BottomLine from '../utils/BottomLine.component';
 import TouchableListItem from './TouchableListItem.component';
 
-function Item({pathTitle, pathDistance, index, navigation, open, setCurrentItemIndex}) {
+function Item({pathTitle, pathDistance, index, navigation, open, currentItem, setCurrentItem, currentItemId}) {
     return (
         <TouchableListItem
             pathTitle={pathTitle}
             pathDistance={pathDistance}
             index={index}
             open={open}
-            setCurrentItemIndex={setCurrentItemIndex}
-            //onPress={() => {navigation.navigate('PathsDetails', {pathTitle, index})}}
+            setCurrentItem={setCurrentItem}
+            currentItem={currentItem}
+            currentItemId={currentItemId}
         />
     )
 }
 
-export default function ListOfPaths({ listOfPaths, navigation, open, setCurrentItemIndex, ...props }) {
+export default function ListOfPaths({ listOfPaths, navigation, open, setCurrentItem, ...props }) {
     return (
         <View style={{flex: 1}}>
             {listOfPaths.map((item, index) => {
                 return (
-                    <Item key={index} pathTitle={item.pathTitle} pathDistance={item.pathDistance} index={index} navigation={navigation} open={open} setCurrentItemIndex={setCurrentItemIndex}/>
+                    <Item key={index} pathTitle={item.title} pathDistance={item.totalDistance} index={index} navigation={navigation} open={open} setCurrentItem={setCurrentItem} currentItemId={item._id}/>
                 )
             })}
         </View>

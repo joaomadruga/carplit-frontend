@@ -26,7 +26,7 @@ const ContentView = styled.View`
 export default function Empty({ title, subtitle, ...props }) {
   return (
     <ContentView>
-        <ImageWrapper source={EmptyImage} width={'100%'} height={'45%'} resizeMode={'contain'}/>
+        <ImageWrapper source={EmptyImage} width={'185px'} height={'117px'}/>
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>
     </ContentView>

@@ -16,6 +16,7 @@ const Title = styled.Text`
     font-family: ${Constants.fontConfig.Body.Medium.FontFamily};
     font-size: ${Constants.fontConfig.Body.Medium.FontSize};
     color: ${Constants.colors.gray[800]};
+    padding-right: 10%;
 `
 
 const Subtitle = styled.Text`
@@ -25,17 +26,20 @@ const Subtitle = styled.Text`
     margin-top: 4px;
 `
 
-export default function TouchableListItem({pathTitle, index, pathDistance, open, setCurrentItemIndex, ...props}){
+export default function TouchableListItem({pathTitle, index, pathDistance, open, currentItem, setCurrentItem, currentItemId, ...props}){
+    const handleChange = (value, type) => {
+        setCurrentItem(prev => ({...prev, [type]: value}))
+    }
     return (
         <>
-            <TouchableListItemStyle {...props}>
-                <View>
+            <TouchableListItemStyle {...props} activeOpacity={1}>
+                <View style={{maxWidth: '90%'}}>
                     <Title>{pathTitle}</Title>
                     <Subtitle>{pathDistance}km</Subtitle>
                 </View>
-                    <TouchableWithoutFeedback onPress={() => {setCurrentItemIndex(index), open() }}>
-                            <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={MoreDots} />
-                    </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => { handleChange(index, "index"), handleChange(currentItemId, "id"), open() }}>
+                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={MoreDots} />
+                </TouchableWithoutFeedback>
             </TouchableListItemStyle>
             <BottomLine marginTop={16} />
         </>

@@ -24,7 +24,6 @@ const TextView = styled.View`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    flex: 1;
 `
 function Item({titleText, splitedPrice, isDriver, isDisabled}) {
     return (
@@ -40,7 +39,7 @@ export default function FlatListAddCarpool({ availablePeople, splitedPrice, tota
     const totalPriceFormated = Constants.formatter.format(totalPrice);
     const overPriceFormated = Constants.formatter.format(totalPrice - carpoolPrice);
     return (
-        <View style={{flex: 1}}>
+        <View>
             {availablePeople.map((item, index) => {
                 return (
                     <Item key={index} isDisabled={isDisabled} isDriver={item.isDriver} titleText={item.name} splitedPrice={splitedPrice}/>

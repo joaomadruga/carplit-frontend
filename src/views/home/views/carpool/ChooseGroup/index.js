@@ -10,9 +10,14 @@ import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLog
 import * as Store from "../../../../../redux/store/store";
 
 export default function ChooseGroup({ navigation, route }) {
+    const { loginInfo } = useContext(Store.LoginContext);
     const { selectedPath } = route.params;
     const { listOfRiders } = useContext(Store.HomeContext);
     const [currentRiders, setCurrentRiders] = useState(JSON.parse(JSON.stringify(listOfRiders)));
+    const driver = {isDriver: true};
+    useEffect(() => {
+        setCurrentRiders([driver, ...currentRiders]);
+    }, []);
     //navigation.navigate('AddCarpool', { selectedPath })
     return (
         <SafeAreaViewDefault>

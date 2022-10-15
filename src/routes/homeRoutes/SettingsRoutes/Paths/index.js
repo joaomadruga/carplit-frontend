@@ -47,28 +47,6 @@ export const PathsNavigator = ({ navigation, route }) => {
                 ),
             })}
             />
-            {/* 
-            <StackPaths.Screen
-            options={({ navigation, route }) => ({
-                headerTitle: route.params.name,
-                title: route.params.name,
-                headerLeft: () =>  (
-                <TouchableWithoutFeedback onPress={navigation.goBack}>
-                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
-                </TouchableWithoutFeedback>
-                ),
-                headerRight: () => (
-                <TouchableWithoutFeedback onPress={() => open()}>
-                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={MoreDots} />
-                </TouchableWithoutFeedback>
-                )
-            })}
-            name="PathsDetails"
-            initialParams={{ ref }}
-
-            component={PathsDetails}
-            />
-            */}
             <StackPaths.Screen
             options={({navigation}) => ({
                 headerTitle: 'Editar trajeto',
@@ -91,7 +69,7 @@ export const PathsNavigator = ({ navigation, route }) => {
 const screenOptions = {
     headerTintColor: 'black',
     headerBackTitleVisible: false,
-    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold, margin:'200px' },
+    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
     headerStyle: {
         backgroundColor: Constants.headerStyleConfig.BackgroundColor
     },

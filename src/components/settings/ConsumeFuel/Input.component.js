@@ -37,6 +37,7 @@ export default function Input({ fixedPriceState, SufixValue, InputFormatter, ...
             <InputStyle
             ref={inputRef}
             keyboardType={"numeric"}
+            placeholderTextColor={Constants.inputConfig.Default.Color}
             value={fixedState}
             onChangeText={(value) => {
                 const valueFiltered = value.replace(',', '.').replace(/[^0-9]/g, '');

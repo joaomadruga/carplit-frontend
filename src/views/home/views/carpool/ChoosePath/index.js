@@ -14,8 +14,8 @@ export default function ChoosePath({ navigation }) {
     const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0);
 
     useEffect(() => {
-        setIsListOfPathsEmpty(listOfPaths.length == 0)
-    }, [listOfPaths])
+        setIsListOfPathsEmpty(listOfPaths.length == 0);
+    }, [listOfPaths]);
     return (
         <SafeAreaViewDefault>
             <PaddingContent>

@@ -5,12 +5,12 @@ import * as Constants from "../../constants/utils/Constants";
 import BottomLine from '../utils/BottomLine.component';
 import TouchableListItem from './TouchableListItem.component';
 
-function Item({name, index, navigation}) {
+function Item({name, index, navigation, id}) {
     return (
         <TouchableListItem
             name={name}
             index={index}
-            onPress={() => {navigation.navigate('RidersDetails', {name, index})}}
+            onPress={() => {navigation.navigate('RidersDetails', {name, index, id})}}
         />
     )
 }
@@ -20,7 +20,7 @@ export default function ListOfRiders({ listOfRiders, navigation, ...props }) {
         <View style={{flex: 1}}>
             {listOfRiders.map((item, index) => {
                 return (
-                    <Item key={index} name={item.name} index={index} navigation={navigation}/>
+                    <Item key={index} name={item.name} index={index} navigation={navigation} id={item._id}/>
                 )
             })}
         </View>

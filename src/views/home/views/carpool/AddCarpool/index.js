@@ -11,21 +11,20 @@ import { CommonActions } from "@react-navigation/native";
 
 
 export default function AddCarpool({ navigation, route }) {
-    const { listOfCarpools ,setListOfCarpools } = useContext(Store.CarpoolContext);
+    const { listOfCarpools, setListOfCarpools } = useContext(Store.CarpoolContext);
     const { selectedPath } = route.params;
-    const { consumeAndFuel } = useContext(Store.HomeContext)
-    const { listOfRiders, pathTitle, pathDistance } = selectedPath;
+    const { loginInfo } = useContext(Store.LoginContext);
+    const { listOfRiders, title, totalDistance, _id } = selectedPath;
     const [isLeftSelected, setIsLeftSelected] = useState(true);
-    const consumePath = (pathDistance / consumeAndFuel.consumeFuel).toFixed(2);
-    const carpoolPrice = (consumeAndFuel.priceFuel * consumePath).toFixed(2);
-    
+    const consumePath = (totalDistance / loginInfo.averageConsumption).toFixed(2);
+    const carpoolPrice = (loginInfo.fuelPerLiter * consumePath).toFixed(2);
 
     return (
         <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
             <PaddingContent>
-                <HeaderText carpoolPrice={carpoolPrice} titleText={pathTitle} subtitleText={pathDistance} consumePath={consumePath}/>
+                <HeaderText carpoolPrice={carpoolPrice} titleText={title} subtitleText={totalDistance} consumePath={consumePath}/>
                 <SwitchButton isLeftSelectedState={{isLeftSelected: isLeftSelected, setIsLeftSelected: setIsLeftSelected}}/>
-                <SwitchPage props={{ carpoolPrice, listOfCarpools, setListOfCarpools, tempListOfRiders: listOfRiders, isLeftSelected, consumeAndFuel, pathTitle, pathDistance, navigation }}/>
+                <SwitchPage props={{ carpoolPrice, listOfCarpools, setListOfCarpools, tempListOfRiders: listOfRiders, isLeftSelected, loginInfo, title, totalDistance, navigation, pathId: _id }}/>
             </PaddingContent>
         </ScrollView>
     );

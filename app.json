@@ -2,6 +2,8 @@
   "expo": {
     "name": "carplit",
     "slug": "carplit",
+    "privacy": "public",
+    "description": "An app that centralizes routines of carpool drivers",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/carplit-icon.png",
@@ -24,10 +26,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/carplit-icon.png",
         "backgroundColor": "#6E1DBE"
-      }
+      },
+      "package": "com.carplit"
     },
     "web": {
       "favicon": "./assets/carplit-icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "27f3eca1-cccd-4e3f-a487-9135b3ef933c"
+      }
     }
   }
 }

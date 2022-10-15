@@ -47,34 +47,19 @@ const WhatsappButtonText = styled.Text`
     margin-right: 10px;
 `
 
-export function FinanceView({ carpoolHistory }){
-    const [totalPaid, setTotalPaid] = useState(0);
-    const [totalPending, setTotalPending] = useState(0);
-    const filteredCarpoolHistory = () => { return carpoolHistory.filter((carpool) => {
-        if (carpool.hasPaid) {
-            setTotalPaid(carpool.price + totalPaid);
-        } else {
-            setTotalPending(carpool.price + totalPending);
-        }
-        return carpool.price;
-    }) };
-    
+export function FinanceView({ carpoolHistory, totalPending, userReceived }){
     const sendWhatsappMensage = () => {
         let whatsAppMsg = `Oi, passando pra te lembrar da carona! Ficou um valor de ${Constants.formatter.format(totalPending)} em aberto. Valeu!\n\n\n_OBS: valores calculados automaticamente pelo app Carplit!_`
         let url = 'whatsapp://send?text=' + whatsAppMsg;
         Linking.openURL(url);
     }
-
-    useEffect(() => {
-        filteredCarpoolHistory();
-    }, [carpoolHistory]);
     return (
         <FinanceViewStyle>
             <Title>Financeiro</Title>
             <View style={{flexDirection: 'row'}}>
                 <View style={{marginRight: 32}}>
                     <SmallTitle>Total Pago</SmallTitle>
-                    <MoneyText>{Constants.formatter.format(totalPaid)}</MoneyText>
+                    <MoneyText>{Constants.formatter.format(userReceived)}</MoneyText>
                 </View>
                 <View>
                     <SmallTitle>Total Pendente</SmallTitle>

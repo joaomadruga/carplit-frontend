@@ -1,6 +1,6 @@
 import { CommonActions } from "@react-navigation/native";
 import { useContext, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useModalize } from "react-native-modalize";
 import CurrentScreenWidget from "../../../components/register/CurrentScreenWidget.component";
 import TextPrivacy from "../../../components/register/TextPrivacy.component";
@@ -11,8 +11,9 @@ import InputWithTitleSubtitle from "../../../components/utils/InputWithTitleSubt
 import PaddingContent from "../../../components/utils/PaddingContent.component";
 import SafeAreaViewDefault from "../../../components/utils/SafeAreaViewLogin.component";
 import * as Store from "../../../redux/store/store";
-import * as utils from '../../../helper/utils';
+import * as Constants from "../../../constants/utils/Constants";
 import NotificationPopup from "../../../components/utils/NotificationPopup.component";
+import { getAuthTokenRegister } from "../../../helper/register/utils";
 
 export default function ThirdRegisterScreen({ navigation }) {
   const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
@@ -25,53 +26,63 @@ export default function ThirdRegisterScreen({ navigation }) {
     setIsDisabled(true);
     const priceFuel = parseFloat(fixedPriceFuel.replace('R$', '').trim().replace(',', '.'));
     const consumeFuel = parseFloat(fixedConsumeFuel.replace(',', '.'));
-    const name = 'joao';
-    const responseRegister = await utils.getAuthTokenRegister(name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
-    .then(response => {
-      loginInfo.authToken = response.data.token;
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [{
-            name: 'HomeRoutes',
-            params: {'isRegister': true}
-          }],
-        })
-      );
-    })
-    .catch((error) => {
-      console.log(error);
+    
+    if (priceFuel !== 0 && consumeFuel !== 0) {
+      const responseRegister = await getAuthTokenRegister(loginInfo.name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
+      .then(response => {
+        const currentDate = new Date();
+        setLoginInfo(prev => ({...prev, ["loginDate"]: currentDate.getTime()}));
+        setLoginInfo(prev => ({...prev, ["authToken"]: response.data.token}));
+        setLoginInfo(prev => ({...prev, ["averageConsumption"]: consumeFuel}));
+        setLoginInfo(prev => ({...prev, ["fuelPerLiter"]: priceFuel}));
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{
+              name: 'HomeRoutes',
+              params: {'isRegister': true}
+            }],
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowPopup(true);
+      });
+      setIsDisabled(false);
+    } else {
       setShowPopup(true);
-    });
-    setIsDisabled(false);
-
+      setIsDisabled(false);
+    }
   };
 
   return (
     <SafeAreaViewDefault>
-      <PaddingContent>
-        <View style={{flexDirection: 'column', justifyContent:'space-between', height: '100%'}}>
-            <View>
-                <CurrentScreenWidget numberOfFilledWidgets={3} />
-                <ConsumeFuelInput
-                  TextTitle={'Consumo médio do seu carro (km/L)'} 
-                  TextSubtitle={'Esse valor será utilizado para calcular os litros de combustível gastos nos trajetos'}
-                  fixedPriceState={{fixedState: fixedConsumeFuel, setFixedState: setFixedConsumeFuel}}   
-                  InputPlaceHolder={'Consumo (km/L)'}
-                />
-                <PriceFuelInput
-                    TextTitle={'Custo do combustível por litro'} 
-                    TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
-                    fixedPriceState={{fixedState: fixedPriceFuel, setFixedState: setFixedPriceFuel}}
-                />
-            </View>
-            <View>
-              <TextPrivacy/>
-              <ButtonPrimaryDefault title={'Finalizar cadastro'} style={{marginBottom: 30}} onPress={() => onSubmit()} disabled={isDisabled}/>
-            </View>
-        </View>
-        { showPopup && <NotificationPopup title={"Impossível de criar a conta, tente com outras credenciais.."} setShowPopup={setShowPopup} bottom={'60px'}/> }
-      </PaddingContent>
+      <ScrollView contentContainerStyle={{flexGrow: 1}} style={{backgroundColor: Constants.colors.gray[0]}}>
+        <PaddingContent>
+          <View style={{flexDirection: 'column', justifyContent:'space-between', height: '100%'}}>
+              <View style={{alignSelf: 'center'}}>
+                  <CurrentScreenWidget numberOfFilledWidgets={3} />
+                  <ConsumeFuelInput
+                    TextTitle={'Consumo médio do seu carro (km/L)'} 
+                    TextSubtitle={'Esse valor será utilizado para calcular os litros de combustível gastos nos trajetos'}
+                    fixedPriceState={{fixedState: fixedConsumeFuel, setFixedState: setFixedConsumeFuel}}   
+                    InputPlaceHolder={'Consumo (km/L)'}
+                  />
+                  <PriceFuelInput
+                      TextTitle={'Custo do combustível por litro'} 
+                      TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
+                      fixedPriceState={{fixedState: fixedPriceFuel, setFixedState: setFixedPriceFuel}}
+                  />
+              </View>
+              <View>
+                <TextPrivacy/>
+                <ButtonPrimaryDefault title={'Finalizar cadastro'} onPress={() => onSubmit()} disabled={isDisabled} style={{backgroundColor: isDisabled ? Constants.colors.gray[700] : Constants.buttonConfig.Default.Primary.Small.BackgroundColor, marginBottom: 30}}/>
+              </View>
+          </View>
+          { showPopup && <NotificationPopup title={"Impossível de criar a conta, tente com outras credenciais.."} setShowPopup={setShowPopup} bottom={'60px'}/> }
+        </PaddingContent>
+      </ScrollView>
     </SafeAreaViewDefault>
   );
 }

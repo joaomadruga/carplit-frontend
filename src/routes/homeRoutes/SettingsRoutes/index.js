@@ -1,28 +1,29 @@
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useLayoutEffect } from "react";
+import { createNativeStackNavigator,  } from "@react-navigation/native-stack";
+import { useEffect, useLayoutEffect } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import ImageWrapper from "../../../components/utils/ImageWrapper.component";
 import ConsumeFuel from "../../../views/home/views/settings/ConsumeFuel";
 import ArrowLeft from "../../../../assets/Button/arrow-left.png";
 import * as Constants from "../../../constants/utils/Constants";
-import { tabBarStyle } from "..";
+import { tabStyle } from "..";
 import SettingsScreen from "../../../views/home/views/settings";
 import AddIcon from "../../../../assets/Home/add-icon.png";
 import Riders from "../../../views/home/views/settings/Riders";
 import { RidersNavigator } from "./Riders";
 import { PathsNavigator } from "./Paths";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const StackSettings = createNativeStackNavigator();
 
 export const SettingNavigator = ({ navigation, route }) => {
-    useLayoutEffect(() => {
+    const insets = useSafeAreaInsets();
+    useEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "SettingsScreen"){
             navigation.setOptions({tabBarStyle: { display: 'none' }});
-        } else {
-            navigation.setOptions({tabBarStyle: { display: 'flex', ...tabBarStyle}});
         }
+        return () => navigation.setOptions({tabBarStyle: { display: 'flex', ...tabStyle(insets)}});
     }, [navigation, route]);
 
     return (
@@ -58,7 +59,7 @@ export const SettingNavigator = ({ navigation, route }) => {
 const screenOptions = {
     headerTintColor: 'black',
     headerBackTitleVisible: false,
-    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold, margin:'200px' },
+    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
     headerStyle: {
         backgroundColor: Constants.headerStyleConfig.BackgroundColor
     },

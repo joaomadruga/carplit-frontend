@@ -7,6 +7,7 @@ import Input from './Input.component';
 const InputWithTitleSubtitleStyle = styled.View`
     background-color: ${Constants.colors.gray[0]};
     margin-top: 8px;
+    max-width: 500px;
 `;
 
 const Title = styled.Text`

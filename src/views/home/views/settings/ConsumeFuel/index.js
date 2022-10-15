@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import PriceFuelInput from "../../../../../components/settings/ConsumeFuel/PriceFuelInput.component";
 import ConsumeFuelInput from "../../../../../components/settings/ConsumeFuel/ConsumeFuelInput.component";
@@ -8,11 +8,43 @@ import PaddingContent from "../../../../../components/utils/PaddingContent.compo
 import SafeAreaViewDefault from "../../../../../components/utils/SafeAreaViewLogin.component";
 import * as Constants from "../../../../../constants/utils/Constants"
 import * as Store from "../../../../../redux/store/store";
+import { updateConsumeAndFuel } from "../../../../../helper/consumeandfuel/utils";
+import NotificationPopup from "../../../../../components/utils/NotificationPopup.component";
 
 export default function ConsumeFuel({ navigation }) {
-    const { setConsumeAndFuel } = useContext(Store.HomeContext);
+    const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
     const [fixedPriceFuel, setFixedPriceFuel] = useState("R$ 0,00");
     const [fixedConsumeFuel, setFixedConsumeFuel] = useState("0,00");
+
+    const handleChange = async (value, type) => {
+        setLoginInfo(prev => ({...prev, [type]: value}));
+    };
+    const onSubmit = async () => {
+        setIsDisabled(true);
+        const averageConsumption = parseFloat(fixedConsumeFuel.replace(',', '.'));
+        const fuelPerLiter = parseFloat(fixedPriceFuel.replace('R$', '').replace(',', '.'));
+        if (averageConsumption !== 0 && fuelPerLiter !== 0) {
+            const updateObj = {
+                "average_consumption": averageConsumption,
+                "fuel_per_liter": fuelPerLiter
+            };
+            const responseAddPath = await updateConsumeAndFuel(loginInfo.authToken, updateObj)
+            .then(response => {
+                handleChange(averageConsumption, "averageConsumption");
+                handleChange(fuelPerLiter, "fuelPerLiter");
+                navigation.goBack();
+            })
+            .catch((error) => {
+                console.log(error);
+                setShowPopup(true);
+            });
+        } else {
+            setShowPopup(true);
+        }
+        setIsDisabled(false);
+    }
     return (
         <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
         <SafeAreaViewDefault>
@@ -27,17 +59,13 @@ export default function ConsumeFuel({ navigation }) {
                     TextSubtitle={'Esse valor será utilizado para calcular o custo dos seus trajetos'}
                     fixedPriceState={{fixedState: fixedPriceFuel, setFixedState: setFixedPriceFuel}}
                     />
-                    <ButtonPrimaryDefault 
+                    <ButtonPrimaryDefault
                         marginTop={40} 
                         title={"Salvar alterações"} 
-                        onPress={() => { 
-                            setConsumeAndFuel({
-                                priceFuel: parseFloat(fixedPriceFuel.replace('R$', '').trim().replace(',', '.')), 
-                                consumeFuel: parseFloat(fixedConsumeFuel.replace(',', '.'))
-                            });
-                            navigation.goBack();
-                        }} 
+                        disabled={isDisabled}
+                        onPress={() => { onSubmit() }} 
                     />
+                    { showPopup && <NotificationPopup title={"Valores informados inválidos."} setShowPopup={setShowPopup} bottom={'-100px'}/> }
             </PaddingContent>
         </SafeAreaViewDefault>
         </ScrollView>

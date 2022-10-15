@@ -10,6 +10,7 @@ import AddRiders from "../../../../views/home/views/settings/Riders/AddRiders";
 import RidersDetails from "../../../../views/home/views/settings/Riders/RidersDetails";
 import { Modalize, useModalize } from 'react-native-modalize';
 import EditRiders from "../../../../views/home/views/settings/Riders/EditRiders";
+import CarpoolDetails from "../../../../views/home/views/carpool/CarpoolDetails";
 
 const StackRiders = createNativeStackNavigator();
 
@@ -83,6 +84,20 @@ export const RidersNavigator = ({ navigation, route }) => {
             name="EditRiders"
             component={EditRiders}
             />
+
+            <StackRiders.Screen
+                options={({ navigation, route }) => ({
+                    headerTitle: route.params.date,
+                    title: route.params.date,
+                    headerLeft: () =>  ( 
+                    <TouchableWithoutFeedback onPress={navigation.goBack}>
+                        <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                    </TouchableWithoutFeedback>
+                    )
+                })}
+                name="CarpoolDetailsRiders"
+                component={CarpoolDetails} 
+            />
         </StackRiders.Navigator>
     )
 }
@@ -90,7 +105,7 @@ export const RidersNavigator = ({ navigation, route }) => {
 const screenOptions = {
     headerTintColor: 'black',
     headerBackTitleVisible: false,
-    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold, margin:'200px' },
+    headerTitleStyle: { fontFamily: Constants.fontWeightConfig.Bold },
     headerStyle: {
         backgroundColor: Constants.headerStyleConfig.BackgroundColor
     },
