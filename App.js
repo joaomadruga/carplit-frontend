@@ -14,7 +14,7 @@ const window = Dimensions.get("window");
 export default function App() {
   const [fontsLoaded] = useFonts(fontsLoadedConfig);
   const [dimensions, setDimensions] = useState({ window });
-  const webStyle = {flex: 1, paddingRight: '20%', paddingLeft: '20%'};
+  const webStyle = {flex: 1, backgroundColor: 'white', marginLeft: '10%', marginRight: '10%'};
   useEffect(() => {
     const subscription = Dimensions.addEventListener(
       "change",
@@ -43,7 +43,7 @@ export default function App() {
   }
   
   return (
-    <GestureHandlerRootView style={Platform.OS === 'web' && dimensions.window.width > 1280 ? webStyle : {flex: 1}}>
+    <GestureHandlerRootView style={Platform.OS === 'web' && dimensions.window.width > 1920 ? webStyle : {flex: 1}}>
       <Portal.Host>
         <SafeAreaProvider>
           <View onLayout={onLayoutRootView}/>

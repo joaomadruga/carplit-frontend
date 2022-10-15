@@ -5,11 +5,11 @@ import * as Constants from "../../constants/utils/Constants";
 import DateText from './DateText.component';
 import TouchableListItem from './TouchableListItem.component';
 
-function Item({pathTitle, pathDistance, columnIndex, rowIndex, date, navigation}) {
+function Item({pathTitle, subtitleText, columnIndex, rowIndex, date, navigation}) {
     return (
         <TouchableListItem
             titleText={pathTitle} 
-            subtitleText={pathDistance} 
+            subtitleText={subtitleText} 
             onPress={() => { navigation.navigate('CarpoolDetails', { columnIndex, rowIndex, date: date})}}
         />
     )
@@ -23,9 +23,9 @@ export default function SectionListCarpool({ listOfCarpools, navigation, ...prop
         //here could be switched with index in backend
         sections={listOfCarpools.map((section, index) => ({ ...section, index }))}
         renderItem={({ item, index, section: { index: columnIndex, date } }) => ( 
-            <Item 
-            pathTitle={item.pathTitle} 
-            pathDistance={item.pathDistance}
+            <Item
+            pathTitle={item.path.title} 
+            subtitleText={item.passengers.length}
             rowIndex={index}
             columnIndex={columnIndex}
             navigation={navigation}

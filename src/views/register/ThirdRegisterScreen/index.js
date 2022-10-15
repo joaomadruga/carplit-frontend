@@ -26,25 +26,34 @@ export default function ThirdRegisterScreen({ navigation }) {
     setIsDisabled(true);
     const priceFuel = parseFloat(fixedPriceFuel.replace('R$', '').trim().replace(',', '.'));
     const consumeFuel = parseFloat(fixedConsumeFuel.replace(',', '.'));
-    const responseRegister = await getAuthTokenRegister(loginInfo.name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
-    .then(response => {
-      setLoginInfo(prev => ({...prev, ["authToken"]: response.data.token}));
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [{
-            name: 'HomeRoutes',
-            params: {'isRegister': true}
-          }],
-        })
-      );
-    })
-    .catch((error) => {
-      console.log(error);
+    
+    if (priceFuel !== 0 && consumeFuel !== 0) {
+      const responseRegister = await getAuthTokenRegister(loginInfo.name, loginInfo.login.toLowerCase().trim(), loginInfo.password, consumeFuel, priceFuel)
+      .then(response => {
+        const currentDate = new Date();
+        setLoginInfo(prev => ({...prev, ["loginDate"]: currentDate.getTime()}));
+        setLoginInfo(prev => ({...prev, ["authToken"]: response.data.token}));
+        setLoginInfo(prev => ({...prev, ["averageConsumption"]: consumeFuel}));
+        setLoginInfo(prev => ({...prev, ["fuelPerLiter"]: priceFuel}));
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{
+              name: 'HomeRoutes',
+              params: {'isRegister': true}
+            }],
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        setShowPopup(true);
+      });
+      setIsDisabled(false);
+    } else {
       setShowPopup(true);
-    });
-    setIsDisabled(false);
-
+      setIsDisabled(false);
+    }
   };
 
   return (
@@ -52,7 +61,7 @@ export default function ThirdRegisterScreen({ navigation }) {
       <ScrollView contentContainerStyle={{flexGrow: 1}} style={{backgroundColor: Constants.colors.gray[0]}}>
         <PaddingContent>
           <View style={{flexDirection: 'column', justifyContent:'space-between', height: '100%'}}>
-              <View>
+              <View style={{alignSelf: 'center'}}>
                   <CurrentScreenWidget numberOfFilledWidgets={3} />
                   <ConsumeFuelInput
                     TextTitle={'Consumo médio do seu carro (km/L)'} 
@@ -68,7 +77,7 @@ export default function ThirdRegisterScreen({ navigation }) {
               </View>
               <View>
                 <TextPrivacy/>
-                <ButtonPrimaryDefault title={'Finalizar cadastro'} style={{marginBottom: 30}} onPress={() => onSubmit()} disabled={isDisabled}/>
+                <ButtonPrimaryDefault title={'Finalizar cadastro'} onPress={() => onSubmit()} disabled={isDisabled} style={{backgroundColor: isDisabled ? Constants.colors.gray[700] : Constants.buttonConfig.Default.Primary.Small.BackgroundColor, marginBottom: 30}}/>
               </View>
           </View>
           { showPopup && <NotificationPopup title={"Impossível de criar a conta, tente com outras credenciais.."} setShowPopup={setShowPopup} bottom={'60px'}/> }

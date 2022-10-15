@@ -36,8 +36,8 @@ export default function StartScreen({ navigation }) {
         <ImageWrapper source={MainImage} width={'100%'} height={'40%'} resizeMode={'contain'}/>
         <ImageWrapper source={PeopleImage} width={'101px'} height={'26px'}/>
         <CenteredView>
-            <TextMainStart>Organizando suas caronas!</TextMainStart>
-            <TextSubtitleStart>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante elit</TextSubtitleStart>
+            <TextMainStart>Gerenciando suas caronas!</TextMainStart>
+            <TextSubtitleStart>Você no controle do gastos e recebimentos das suas caronas.</TextSubtitleStart>
         </CenteredView>
         <CenteredView>
           <ButtonPrimaryDefault

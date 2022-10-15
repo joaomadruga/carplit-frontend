@@ -2,8 +2,10 @@ import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import { Dimensions, Switch, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import BottomLine from '../utils/BottomLine.component';
+import { updatePassengerPayment } from '../../helper/carpools/utils';
+import * as Store from "../../redux/store/store";
 
 const ViewListItemStyle = styled.View`
     padding: 16px 0;
@@ -22,23 +24,40 @@ const Subtitle = styled.Text`
     font-family: ${Constants.fontConfig.Body.Regular.FontFamily};
     font-size: ${Constants.fontConfig.Sm.Regular.FontSize};
     color: ${Constants.colors.gray[700]};
-    max-width: 90%;
 `
 
-export default function TouchableListItem({titleText, subtitleText, index, People, isDriver, totalPriceState, ...props}){
-    const [checkBox, setCheckBox] = useState(false);
+export default function TouchableListItem({titleText, tripId, subtitleText, index, Person, isDriver, totalPriceState, carpoolPrice , isFixedValue, isOwnerIncluded, passengersLength, ...props}){
+    const [checkBox, setCheckBox] = useState(Person.hasPaid || isDriver);
+    const [isDisabled, setIsDisabled] = useState(Person.is_driver);
+    const { loginInfo } = useContext(Store.HomeContext);
     const { totalPrice, setTotalPrice } = totalPriceState;
+    const formattedSubtitleText = Constants.formatter.format(subtitleText);
+
     const changeTotalPrice = (checkBox) => {
         if (checkBox && !isDriver) {
-            setTotalPrice(totalPrice + People.price);
+            setTotalPrice(totalPrice + Person.price);
         } else if (!checkBox && !isDriver) {
-            setTotalPrice(totalPrice - People.price);
+            const price = isOwnerIncluded ? carpoolPrice/passengersLength : isFixedValue ? totalPrice : totalPrice/(passengersLength - 1)
+            setTotalPrice(totalPrice - price);
         }
     }
     const toggleSwitch = () => { 
-        setCheckBox(previousState => !previousState) 
-        People.hasPaid = !People.hasPaid;
-        changeTotalPrice(!checkBox);
+        const { _id } = Person;
+        setIsDisabled(true);
+        setCheckBox(previousState => !previousState);
+        const updateInfo = {
+            "passenger_id": _id,
+            "trip_id": tripId
+        }
+        const responseUpdateCarpool = (async () => { await updatePassengerPayment(loginInfo.authToken, updateInfo)
+        .then((response) => {
+            setCheckBox(response.data.passenger.hasPaid);
+            changeTotalPrice(!checkBox);
+            setIsDisabled(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })})();
     };
 
     return (
@@ -46,14 +65,14 @@ export default function TouchableListItem({titleText, subtitleText, index, Peopl
             <ViewListItemStyle {...props}>
                 <View>
                     <Title>{titleText}</Title>
-                    <Subtitle>{subtitleText}</Subtitle>
+                    <Subtitle>{formattedSubtitleText}</Subtitle>
                 </View>
-                <Switch 
-                    onValueChange={toggleSwitch} 
+                <Switch
+                    onValueChange={toggleSwitch}
                     value={checkBox}
                     trackColor={{ false: "#767577", true: Constants.colors.primary[600] }}
                     thumbColor={checkBox ? Constants.colors.gray[0] : "#f4f3f4"}
-                    disabled={People.isDriver ? true : false}
+                    disabled={isDisabled}
                 />
             </ViewListItemStyle>
             <BottomLine/>

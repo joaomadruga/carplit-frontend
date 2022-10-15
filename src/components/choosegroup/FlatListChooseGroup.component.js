@@ -6,7 +6,7 @@ function Item({name, address, index, People, isDriver}) {
     return (
         <TouchableListItem
             titleText={isDriver ? "Você" : name} 
-            subtitleText={address}
+            subtitleText={isDriver ? "Onde você está." : address}
             index={index}
             People={People}
         />

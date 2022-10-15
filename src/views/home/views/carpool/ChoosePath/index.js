@@ -11,11 +11,10 @@ import * as Store from "../../../../../redux/store/store";
 
 export default function ChoosePath({ navigation }) {
     const { listOfPaths } = useContext(Store.CarpoolContext);
-    console.log(listOfPaths)
     const [isListOfPathsEmpty, setIsListOfPathsEmpty] = useState(listOfPaths.length == 0);
 
     useEffect(() => {
-        setIsListOfPathsEmpty(listOfPaths.length == 0)
+        setIsListOfPathsEmpty(listOfPaths.length == 0);
     }, [listOfPaths]);
     return (
         <SafeAreaViewDefault>

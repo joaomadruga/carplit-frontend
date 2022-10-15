@@ -22,7 +22,6 @@ export default function ForgotPasswordScreen( { navigation } ) {
             />
             <ButtonPrimaryDefault title={'Enviar email de redefinição'} style={{marginTop: 8}} onPress={() => {console.log('pressed')}}/>
       </PaddingContent>
-        
     </SafeAreaViewDefault>
   );
 }

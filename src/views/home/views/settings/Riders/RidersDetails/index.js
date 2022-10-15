@@ -10,7 +10,7 @@ import ModalPopup from "../../../../../../components/utils/ModalPopup.component"
 import NotificationPopup from "../../../../../../components/utils/NotificationPopup.component";
 import PaddingContent from "../../../../../../components/utils/PaddingContent.component";
 import * as Constants from "../../../../../../constants/utils/Constants";
-import { deleteRider } from "../../../../../../helper/riders/utils";
+import { deleteAllCarpools, deleteRider } from "../../../../../../helper/riders/utils";
 import * as Store from "../../../../../../redux/store/store";
 
 LogBox.ignoreLogs([
@@ -20,17 +20,19 @@ LogBox.ignoreLogs([
 export default function RidersDetails({ route, navigation }) {
     const { index, ref, id } = route.params;
     const { loginInfo } = useContext(Store.LoginContext);
-    const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
+    const { listOfRiders, setListOfRiders, passengersFinance } = useContext(Store.HomeContext);
     const [currentRider, setCurrentRider] = useState(listOfRiders[index]);
     const [modalVisible, setModalVisible] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState(false);
     const [isAllCarpoolButtonDisabled, setIsAllCarpoolButtonDisabled] = useState(false);
     const [modalAllCarpoolVisible, setModalAllCarpoolVisible] = useState(false);
+    const [currentCarpoolHistory, setCurrentCarpoolHistory] = useState([]);
+
     const CloseModalOption = () => ref.current?.close();
     const onSubmitDelete = async () => {
         setIsDeleteButtonDisabled(true);
-        await deleteRider(loginInfo.authToken, id)
+        await deleteRider(loginInfo.authToken, currentRider._id)
         .then ((response) => {
             setListOfRiders(listOfRiders.filter((item, filterIndex) => { return item.isDriver || filterIndex !== index }));
             setModalVisible(false);
@@ -41,14 +43,32 @@ export default function RidersDetails({ route, navigation }) {
             setShowPopup(true);
         });
         setIsDeleteButtonDisabled(false);
-    }
+    };
+    
+    const onSubmitDeleteAllCarpools = async () => {
+        setIsAllCarpoolButtonDisabled(true);
+        const updateObj = { passenger_id: currentRider._id }
+        await deleteAllCarpools(loginInfo.authToken, updateObj)
+        .then ((response) => {
+            currentCarpoolHistory.map((carpool) => {
+                carpool.hasPaid = true;
+            });
+            CloseModalOption();
+            setModalAllCarpoolVisible(false);
+        })
+        .catch((error) => {
+            console.log(error);
+            setShowPopup(true);
+        });
+        setIsAllCarpoolButtonDisabled(false);
+    };
     return (
         <>
             <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
                 <PaddingContent>
                     <HeaderText name={currentRider.name} address={currentRider.address}/>
-                    <FinanceView carpoolHistory={currentRider.carpoolHistory}/>
-                    <ListHistoryCarpools carpoolHistory={currentRider.carpoolHistory}/>
+                    <FinanceView carpoolHistory={currentRider.carpoolHistory} userReceived={passengersFinance?.passenger_trips?.user_received} totalPending={passengersFinance?.passenger_trips?.total_cost}/>
+                    <ListHistoryCarpools navigation={navigation} currentCarpoolHistory={currentCarpoolHistory} setCurrentCarpoolHistory={setCurrentCarpoolHistory} id={currentRider._id} authToken={loginInfo.authToken}/>
                     { showPopup && <NotificationPopup title={"Ops... algo deu errado. Tente novamente mais tarde."} setShowPopup={setShowPopup} bottom={'20px'}/> }
                 </PaddingContent>
             </ScrollView>
@@ -80,7 +100,7 @@ export default function RidersDetails({ route, navigation }) {
             rightButtonTitle={"Confirmar"}
             name={currentRider.name}
             rightButtonDisabled={isAllCarpoolButtonDisabled}
-            rightButtonPressed={() => { console.log('COLOCA PRA PAGAR TUDO') }}
+            rightButtonPressed={() => { onSubmitDeleteAllCarpools() }}
             modalState={{ modalVisible: modalAllCarpoolVisible, setModalVisible: setModalAllCarpoolVisible }}/>
         </>
     );

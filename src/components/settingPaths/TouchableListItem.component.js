@@ -16,6 +16,7 @@ const Title = styled.Text`
     font-family: ${Constants.fontConfig.Body.Medium.FontFamily};
     font-size: ${Constants.fontConfig.Body.Medium.FontSize};
     color: ${Constants.colors.gray[800]};
+    padding-right: 10%;
 `
 
 const Subtitle = styled.Text`
@@ -32,7 +33,7 @@ export default function TouchableListItem({pathTitle, index, pathDistance, open,
     return (
         <>
             <TouchableListItemStyle {...props} activeOpacity={1}>
-                <View>
+                <View style={{maxWidth: '90%'}}>
                     <Title>{pathTitle}</Title>
                     <Subtitle>{pathDistance}km</Subtitle>
                 </View>

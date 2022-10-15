@@ -7,10 +7,12 @@ import ButtonPrimaryDefault from "../../../../../../components/utils/ButtonPrima
 import * as Store from "../../../../../../redux/store/store";
 import moment from 'moment';
 import 'moment/locale/pt-br';
+import { addCarpool } from "../../../../../../helper/carpools/utils";
 
 export default function SwitchPage({ props }) {
-    const { carpoolPrice, consumeAndFuel, listOfCarpools, setListOfCarpools, tempListOfRiders, isLeftSelected, pathTitle, pathDistance, navigation } = props;
-    const { priceFuel, consumeFuel } = consumeAndFuel;
+    const { carpoolPrice, loginInfo, listOfCarpools, setListOfCarpools, tempListOfRiders, isLeftSelected, pathId, navigation } = props;
+    const priceFuel = loginInfo.fuelPerLiter;
+    const consumeFuel = loginInfo.averageConsumption;
     const availablePeople = tempListOfRiders.filter((item) => {
         if (item.isParticipating || item.isDriver) return item
     });
@@ -71,41 +73,35 @@ export default function SwitchPage({ props }) {
                     title={"Adicionar carona"} 
                     onPress={() => {
                         const currentCarpool = { 
-                            date: `${moment().locale("pt-br").format('dddd, MM/DD/YYYY')}`,
-                            data: [{ 
-                            pathTitle: pathTitle, pathDistance: pathDistance, consumeFuel: consumeFuel, priceFuel: priceFuel,
-                            listOfRiders: availablePeople
-                        }]
+                            date: `${moment().locale("pt-br").format('dddd, DD/MM/YYYY')}`,
+                            passengers: availablePeople.slice(1),
+                            isFixedValue: !isLeftSelected,
+                            isOwnerIncluded: isLeftSelected && isEnabled,
+                            value: isLeftSelected ? splitedPrice : parseFloat(fixedPrice.replace('R$', '').replace(',', '.')),
+                            path: pathId,
+                            gas_price: priceFuel,
+                            km_l: consumeFuel
                         }
-
-                        listOfRiders.forEach((item) => {
-                            //this do not allows people with the same name, should be fixed with ID in backend and changed here later.
-                            const index = availablePeople.findIndex(e => e.name === item.name);
-                            if (index > -1) {
-                                item.carpoolHistory.push({ ...availablePeople[index], date: currentCarpool.date });
-                            }
-                        })
-                        if (listOfCarpools) {
-                            const hasFind = listOfCarpools.some((item) => {
-                                if (item.date === currentCarpool.date) {
-                                    item.data.push(currentCarpool.data[0]);
-                                    return true;
-                                }
-                                return false;
-                            });
-                            if (!hasFind) setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
-                        } else {
-                            setListOfCarpools(oldArray => [...oldArray, currentCarpool]);
-                        }
-                        navigation.dispatch(
-                            CommonActions.reset({
-                            index: 0,
-                            routes: [{
-                                name: 'CarpoolScreen',
-                                params: { showPopup: true }
-                            }],
+                        const responseCarpools = (async () => { await addCarpool(loginInfo.authToken, currentCarpool)
+                            .then((response) => {
+                                setListOfCarpools(response.data);
+                                navigation.dispatch(
+                                    CommonActions.reset({
+                                    index: 0,
+                                    routes: [{
+                                        name: 'CarpoolScreen',
+                                        params: { showPopup: true, 'isRegister': false }
+                                    }],
+                                    })
+                                );
                             })
-                        ) } }
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                        })();
+                        
+                    } }
+                        
                     />
             </>
     );

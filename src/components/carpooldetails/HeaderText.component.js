@@ -39,10 +39,11 @@ const TextView = styled.View`
 `
 
 export function HeaderText({titleText, subtitleText, consumeFuel, carpoolPrice}){
+    const formattedCarpoolPrice = Constants.formatter.format(carpoolPrice);
     return (
         <HeaderTextStyle>
             <Title>{titleText}</Title>
-            <Subtitle>{`${subtitleText} - ${consumeFuel}L - R$ ${carpoolPrice}`}</Subtitle>
+            <Subtitle>{`${subtitleText}km - ${consumeFuel}L - ${formattedCarpoolPrice}`}</Subtitle>
             <BottomLine marginTop={24} />
             <TextView>
                 <SmallTitle>Registro de pagamentos</SmallTitle>

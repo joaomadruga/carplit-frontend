@@ -45,7 +45,7 @@ export default function RegisterScreen( {navigation} ) {
   return (
     <SafeAreaViewDefault>
       <PaddingContent>
-        <View style={{flexDirection: 'column', justifyContent:'space-between', height: '100%'}}>
+        <View style={{flexDirection: 'column', justifyContent:'space-between', height: '100%', alignItems: 'center'}}>
             <View>
                 <CurrentScreenWidget numberOfFilledWidgets={1} />
                 <InputWithTitleSubtitle
@@ -65,9 +65,9 @@ export default function RegisterScreen( {navigation} ) {
             </View>
             <ButtonPrimaryDefault 
               title={'Continuar'} 
-              style={{marginBottom: 30}} 
               onPress={() => {onSubmit()}}
               disabled={isDisabled}
+              style={{backgroundColor: isDisabled ? Constants.colors.gray[700] : Constants.buttonConfig.Default.Primary.Small.BackgroundColor, marginBottom: 30}}
             />
         </View>
         { showPopup && <NotificationPopup title={"Email inválido ou já existente."} setShowPopup={setShowPopup} bottom={'30px'}/> }

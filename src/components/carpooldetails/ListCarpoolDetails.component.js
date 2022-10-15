@@ -26,29 +26,36 @@ const TextView = styled.View`
     margin: 24px 0;
 `
 
-function Item({name, address, index, People, isDriver, totalPriceState}) {
+function Item({name, price, tripId, index, Person, isDriver, totalPriceState, carpoolPrice, isFixedValue, isOwnerIncluded, passengersLength}) {
     return (
         <TouchableListItem
-            titleText={isDriver ? "Você" : name} 
-            subtitleText={address}
+            titleText={isDriver ? "Você" : name}
+            subtitleText={price}
             index={index}
-            People={People}
+            Person={Person}
             isDriver={isDriver}
             totalPriceState={totalPriceState}
+            isFixedValue={isFixedValue}
+            isOwnerIncluded={isOwnerIncluded}
+            passengersLength={passengersLength}
+            carpoolPrice={carpoolPrice}
+            tripId={tripId}
         />
     )
 }
 
-export default function ListCarpoolDetails({ availablePeople, totalPriceState, carpoolPrice, ...props }) {
+export default function ListCarpoolDetails({ availablePeople, tripId, totalPriceState, carpoolPrice, isFixedValue, isOwnerIncluded, ...props }) {
     const { totalPrice, setTotalPrice } = totalPriceState;
+    const overPrice = totalPrice - carpoolPrice;
     const carpoolPriceFormated = Constants.formatter.format(carpoolPrice);
     const totalPriceFormated = Constants.formatter.format(totalPrice);
-    const overPriceFormated = Constants.formatter.format(totalPrice - carpoolPrice);
+    const overPriceFormated = Constants.formatter.format(overPrice);
+    const passengersLength = availablePeople.length;
     return (
         <View style={{flex: 1}}>
             {availablePeople.map((item, index) => {
                 return (
-                    <Item key={index} isDriver={item.isDriver} People={item} name={item.name} address={item.address} index={index} totalPriceState={totalPriceState}/>
+                    <Item key={index} tripId={tripId} carpoolPrice={carpoolPrice} passengersLength={passengersLength} isFixedValue={isFixedValue} isOwnerIncluded={isOwnerIncluded} isDriver={item.is_driver} Person={item} name={item.name} price={item.price} index={index} totalPriceState={totalPriceState}/>
                 )
             })}
             <TextView>
@@ -58,7 +65,7 @@ export default function ListCarpoolDetails({ availablePeople, totalPriceState, c
                 </View>
                 <View>
                     <Title>Saldo da carona</Title>
-                    <Subtitle>{overPriceFormated > 0 ? `+${overPriceFormated}` : overPriceFormated}</Subtitle>
+                    <Subtitle style={{textAlign: 'right'}}>{overPrice > 0 ? `+ ${overPriceFormated}` : overPriceFormated.replace('-', '- ')}</Subtitle>
                 </View>
             </TextView>
         </View>

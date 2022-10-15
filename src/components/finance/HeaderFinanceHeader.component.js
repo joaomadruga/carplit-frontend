@@ -22,6 +22,13 @@ const GreenTitle = styled.Text`
     margin-bottom: 16px;
 `
 
+const RedTitle = styled.Text`
+    font-size: 24px;
+    font-family: ${Constants.fontConfig.Body.Bold.FontFamily};
+    color: #CB1F1F;
+    margin-bottom: 16px;
+`
+
 const Subtitle = styled.Text`
     font-size: ${Constants.fontConfig.Xsm.Bold.FontSize};
     font-family: ${Constants.fontConfig.Xsm.Bold.FontFamily};
@@ -41,24 +48,28 @@ const RightTitle = styled.Text`
     color: ${Constants.colors.gray[700]};
 `
 
-export default function HeaderFinanceHeader({ selectedValue }){
+export default function HeaderFinanceHeader({ selectedValue, cost, userReceived }){
+    const balanceValue = userReceived - cost;
+    const formatedValueUserReceived = Constants.formatter.format(userReceived);
+    const formatedValueBalance = Constants.formatter.format(balanceValue);
+    const formatedValueCost = Constants.formatter.format(cost);
     return (
         <HeaderFinanceStyle>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                 <View>
                     <TotalTitle>Saldo total das caronas</TotalTitle>
-                    <GreenTitle>+ R$0,00</GreenTitle>
+                    { balanceValue < 0 ? <RedTitle>{formatedValueBalance.replace('-', '- ')}</RedTitle> : <GreenTitle>+ {formatedValueBalance}</GreenTitle>}
                 </View>
-                <RightTitle>Nos últimos {selectedValue}</RightTitle>
+                {selectedValue && <RightTitle>Nos últimos {selectedValue}</RightTitle>}
             </View>
             <View style={{flexDirection: 'row'}}>
                 <View style={{marginRight: 24}}>
                     <Subtitle>Valor recebido</Subtitle>
-                    <Title>R$ 100,00</Title>
+                    <Title>{formatedValueUserReceived}</Title>
                 </View>
                 <View>
                     <Subtitle>Custo das caronas</Subtitle>
-                    <Title>R$ 100,00</Title>
+                    <Title>{formatedValueCost}</Title>
                 </View>
             </View>
         </HeaderFinanceStyle>

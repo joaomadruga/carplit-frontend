@@ -1,5 +1,5 @@
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createNativeStackNavigator,  } from "@react-navigation/native-stack";
 import { useEffect, useLayoutEffect } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import ImageWrapper from "../../../components/utils/ImageWrapper.component";
@@ -22,8 +22,6 @@ export const SettingNavigator = ({ navigation, route }) => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "SettingsScreen"){
             navigation.setOptions({tabBarStyle: { display: 'none' }});
-        } else {
-            navigation.setOptions({tabBarStyle: { display: 'flex', ...tabStyle(insets)}});
         }
         return () => navigation.setOptions({tabBarStyle: { display: 'flex', ...tabStyle(insets)}});
     }, [navigation, route]);

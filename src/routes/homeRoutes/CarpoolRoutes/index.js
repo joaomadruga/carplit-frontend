@@ -12,30 +12,41 @@ import * as Constants from "../../../constants/utils/Constants";
 import { tabStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
 import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
-import { getCarpools, getPath } from "../../../helper/utils";
 import * as Store from "../../../redux/store/store";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AddPath from "../../../views/home/views/settings/Paths/AddPath";
+import { getCarpools } from "../../../helper/carpools/utils";
 
 const StackSettings = createNativeStackNavigator();
 
 export const CarpoolNavigator = ({ navigation, route }) => {
     const insets = useSafeAreaInsets();
-    const [listOfCarpools, setListOfCarpools] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
-    const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
+    const { listOfPaths, setListOfPaths, listOfCarpools, setListOfCarpools } = useContext(Store.HomeContext);
     
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
         if (routeName && routeName !== "CarpoolScreen"){
             navigation.setOptions({tabBarStyle: { backgroundColor: 'white', display: 'none' }})
-        } else {
-            navigation.setOptions({tabBarStyle: { display: 'flex', ...tabStyle(insets)}});
         }
+        return () => navigation.setOptions({tabBarStyle: { display: 'flex', ...tabStyle(insets)}});
     }, [navigation, route]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        const responseCarpools = (async () => { await getCarpools(loginInfo.authToken)
+        .then((response) => {
+            setListOfCarpools(response.data);
+            setIsLoading(false);
+        })
+        .catch((error) => {
+            console.log(error);
+        })})();
+    }, []);
     
     return (
-        <Store.CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools }}>
+        <Store.CarpoolContext.Provider value={{ listOfCarpools, listOfPaths, setListOfCarpools, isLoading, loginInfo }}>
             <StackSettings.Navigator screenOptions={screenOptions} initialRouteName='CarpoolScreen'>
                     <StackSettings.Screen 
                     options={{headerShown: false}}
@@ -138,5 +149,6 @@ const screenOptions = {
     headerTitleAlign: 'center',
     gestureEnabled: true,
     gestureDirection: "horizontal",
-    animation: "slide_from_right"
+    animation: "slide_from_right",
+    title: 'Carplit'
 }

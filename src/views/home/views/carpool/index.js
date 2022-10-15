@@ -11,9 +11,11 @@ import * as Store from "../../../../redux/store/store";
 import NotificationPopup from '../../../../components/utils/NotificationPopup.component';
 import ModalOptionsRegisterHome from '../../../../components/register/ModalOptionsRegister.component';
 import { useModalize } from 'react-native-modalize';
+import { ActivityIndicator } from 'react-native-paper';
+import Loading from '../../../../components/utils/Loading.component';
 
 export default function Carpool({ navigation, route }) {
-        const { listOfCarpools } = useContext(Store.CarpoolContext);
+        const { listOfCarpools, isLoading } = useContext(Store.CarpoolContext);
         const [isListOfCarpoolsEmpty, setIsListOfCarpoolsEmpty] = useState(listOfCarpools.length == 0);
         const [showPopup, setShowPopup] = useState(route.params?.showPopup);
         const { ref, open, close } = useModalize();
@@ -30,8 +32,9 @@ export default function Carpool({ navigation, route }) {
                     <RoundedPlusButton onPress={() => { navigation.navigate('ChoosePath') }} />
                     { showPopup && <NotificationPopup title={"Trajeto adicionado com sucesso"} setShowPopup={setShowPopup} bottom={'20px'}/> }
                     <CarpoolContent justifyContent={isListOfCarpoolsEmpty ? 'center' : 'flex-start'}>
-                        {isListOfCarpoolsEmpty && (<Empty title={"Você ainda não registrou caronas!"} subtitle={"Toque no botão de adicionar + para registar uma nova carona"}/>)}
-                        {!isListOfCarpoolsEmpty && (
+                        {isLoading && <Loading />}
+                        {isListOfCarpoolsEmpty && !isLoading && (<Empty title={"Você ainda não registrou caronas!"} subtitle={"Toque no botão de adicionar + para registar uma nova carona"}/>)}
+                        {!isListOfCarpoolsEmpty && !isLoading && (
                         <>
                             <SectionListCarpool listOfCarpools={listOfCarpools} navigation={navigation}/>
                         </>

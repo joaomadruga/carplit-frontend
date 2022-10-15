@@ -1,7 +1,6 @@
 import api from "../api";
 
 export async function getAuthTokenLogin(email, password) {
-    console.log({email, password})
     const response = await api.post('/user/login', {
         "email": email,
         "password": password

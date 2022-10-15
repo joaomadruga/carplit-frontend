@@ -25,11 +25,12 @@ export default function SettingsScreen({ navigation }) {
         setLoginInfo({
             login: "",
             password: "",
-            authToken: ""
+            authToken: "",
+            loginDate: ""
         });
         navigation.dispatch(
             CommonActions.reset({
-            index: 0,
+            index: 1,
             routes: [{
                 name: 'Start'
             }],

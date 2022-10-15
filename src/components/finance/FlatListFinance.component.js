@@ -14,15 +14,15 @@ function Item({name, owePrice, navigation, index}) {
     )
 }
 
-export default function FlatListFinance({ listOfRiders, navigation, ...props }) {
+export default function FlatListFinance({ passengersFinance, navigation, ...props }) {
     const windowWidth = Dimensions.get('window').width;
     return (
         <FlatList
-        data={listOfRiders}
+        data={passengersFinance}
         style={{backgroundColor: Constants.colors.gray[100], width: windowWidth, marginLeft: -20}}
         renderItem={({ item, index }) => {
             return (
-                 <Item key={index} name={item.name} owePrice={item.price} navigation={navigation} index={index}/>
+                 <Item key={index} name={item.passenger} owePrice={item.debt} navigation={navigation} index={index}/>
             )}}
         {...props}
         />

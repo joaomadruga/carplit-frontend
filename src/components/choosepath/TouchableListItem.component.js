@@ -16,13 +16,13 @@ const Title = styled.Text`
     font-family: ${Constants.fontConfig.H3.Medium.FontFamily};
     font-size: ${Constants.fontConfig.H3.Medium.FontSize};
     color: ${Constants.colors.gray[800]};
+    padding-right: 10%;
 `
 
 const Subtitle = styled.Text`
     font-family: ${Constants.fontConfig.Body.Regular.FontFamily};
     font-size: ${Constants.fontConfig.Body.Regular.FontSize};
     color: ${Constants.colors.gray[700]};
-    max-width: 90%;
 `
 
 export default function TouchableListItem({titleText, subtitleText, ...props}){
@@ -31,7 +31,7 @@ export default function TouchableListItem({titleText, subtitleText, ...props}){
     return (
         <>
             <TouchableListItemStyle {...props}>
-                <View>
+                <View style={{maxWidth: '90%'}}>
                     <Title>{titleText}</Title>
                     <Subtitle>{subtitleText}km</Subtitle>
                 </View>

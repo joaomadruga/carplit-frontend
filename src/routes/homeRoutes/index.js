@@ -33,22 +33,15 @@ export const loadAllLists = async (authToken, setListOfPaths, setListOfRiders) =
     })
     .catch((error) => {
         console.log(error);
-    })
+    });
 };
 
 export default function HomeRoutes({ navigation, route }) {
     const insets = useSafeAreaInsets();
+    const [listOfCarpools, setListOfCarpools] = useState([]);
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
     const [listOfRiders, setListOfRiders] = useState([]);
-    /*
-    [{name: 'Zé', 
-    address: 'Rua Um de Dois, 123, Tamarineira, Recife - PE', 
-    isParticipating: true, 
-    isDriver: true, 
-    hasPaid: true,
-    price: 0,
-    carpoolHistory: []}]
-    */
+    const [passengersFinance, setPassengersFinance] = useState({});
     const [listOfPaths, setListOfPaths] = useState([]);
     const [consumeAndFuel, setConsumeAndFuel] = useState({
         priceFuel: 0,
@@ -58,11 +51,9 @@ export default function HomeRoutes({ navigation, route }) {
     useEffect(() => {
         loadAllLists(loginInfo.authToken, setListOfPaths, setListOfRiders);
     }, []);
-    
   return (
-        <Store.HomeContext.Provider value={{ listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, consumeAndFuel, setConsumeAndFuel }}>
+        <Store.HomeContext.Provider value={{ loginInfo, listOfRiders, setListOfRiders, listOfPaths, setListOfPaths, setConsumeAndFuel, passengersFinance, setPassengersFinance, listOfCarpools, setListOfCarpools }}>
             <Tab.Navigator screenOptions={{...screenOptions, tabBarStyle: tabStyle(insets), headerShown: false}}>
-            
                 <Tab.Screen name="Home"
                     component={CarpoolNavigator}
                     initialParams={route ? route.params : {'isRegister': false}}
@@ -112,6 +103,7 @@ const screenOptions = {
     headerStyle: { backgroundColor: Constants.headerStyleConfig.BackgroundColor },
     headerShadowVisible: false,
     headerTitleAlign: 'center',
-    tabBarActiveTintColor: Constants.colors.primary[600]
+    tabBarActiveTintColor: Constants.colors.primary[600],
+    title: 'Carplit'
 }
 export const tabStyle = (insets) => { return { paddingRight: 32, paddingLeft: 32, height: 72 + insets.bottom, paddingBottom: 15 + insets.bottom, paddingTop: 15 } }
