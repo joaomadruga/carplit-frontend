@@ -13,7 +13,6 @@ import NotificationPopup from "../../../../../components/utils/NotificationPopup
 
 export default function ConsumeFuel({ navigation }) {
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
-    console.log(Constants.formatter.format(loginInfo.averageConsumption))
     const [isDisabled, setIsDisabled] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [fixedConsumeFuel, setFixedConsumeFuel] = useState(loginInfo.averageConsumption.toFixed(2));

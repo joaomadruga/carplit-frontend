@@ -1,6 +1,6 @@
 import { CommonActions, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createContext, useContext, useEffect, useLayoutEffect, useState } from "react";
+import { createContext, createRef, useContext, useEffect, useLayoutEffect, useState } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import ImageWrapper from "../../../components/utils/ImageWrapper.component";
 import Carpool from "../../../views/home/views/carpool";
@@ -12,10 +12,14 @@ import * as Constants from "../../../constants/utils/Constants";
 import { tabStyle } from "..";
 import ChooseGroup from "../../../views/home/views/carpool/ChooseGroup";
 import AddCarpool from "../../../views/home/views/carpool/AddCarpool";
+import GarbageIcon from "../../../../assets/Home/garbage-icon.png";
 import * as Store from "../../../redux/store/store";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AddPath from "../../../views/home/views/settings/Paths/AddPath";
 import { getCarpools } from "../../../helper/carpools/utils";
+import { useModalize } from "react-native-modalize";
+import { TouchableOpacity } from "react-native";
+import AddRiders from "../../../views/home/views/settings/Riders/AddRiders";
 
 const StackSettings = createNativeStackNavigator();
 
@@ -23,7 +27,7 @@ export const CarpoolNavigator = ({ navigation, route }) => {
     const insets = useSafeAreaInsets();
     const [isLoading, setIsLoading] = useState(true);
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
-    const { listOfPaths, setListOfPaths, listOfCarpools, setListOfCarpools } = useContext(Store.HomeContext);
+    const { listOfPaths, setListOfPaths, listOfCarpools, setListOfCarpools, setModalCarpoolDetailsVisible } = useContext(Store.HomeContext);
     
     useLayoutEffect(() => {
         const routeName = getFocusedRouteNameFromRoute(route);
@@ -63,29 +67,30 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                         <TouchableWithoutFeedback onPress={navigation.goBack}>
                             <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
                         </TouchableWithoutFeedback>
+                        ),
+                        headerRight: () => (
+                            <TouchableWithoutFeedback onPress={() => setModalCarpoolDetailsVisible(true) }>
+                                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={GarbageIcon} />
+                            </TouchableWithoutFeedback>
                         )
                     })}
                     name="CarpoolDetails"
-                    component={CarpoolDetails} 
+                    component={CarpoolDetails}
                     />
                     <StackSettings.Screen 
                         options={({ navigation, route }) => ({
                             title: "Selecione o trajeto",
                             headerTitle: "Selecione o trajeto",
                             headerLeft: () =>  ( 
-                            <TouchableWithoutFeedback onPress={navigation.goBack}>
-                                <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
-                            </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback onPress={navigation.goBack}>
+                                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                                </TouchableWithoutFeedback>
                             ),
-                            headerRight: () => {
-                                if (listOfPaths.length === 0) {
-                                    return (
-                                        <TouchableWithoutFeedback onPress={() => { navigation.navigate('AddPath') }} >
-                                            <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
-                                        </TouchableWithoutFeedback> 
-                                        ) 
-                                }
-                            }
+                            headerRight: () => (
+                                <TouchableWithoutFeedback onPress={() => { navigation.navigate('AddPath') }} >
+                                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
+                                </TouchableWithoutFeedback>
+                            )
                         })}
                         name="ChoosePath"
                         component={ChoosePath} 
@@ -100,6 +105,11 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                                 <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
                             </TouchableWithoutFeedback>
                             ),
+                            headerRight: () => (
+                                <TouchableWithoutFeedback onPress={() => { navigation.navigate('AddRiders') }} >
+                                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={AddIcon} />
+                                </TouchableWithoutFeedback>
+                            )
                         })}
                         name="ChooseGroup"
                         component={ChooseGroup} 
@@ -131,6 +141,20 @@ export const CarpoolNavigator = ({ navigation, route }) => {
                         })}
                         name="AddPath"
                         component={AddPath}
+                    />
+
+                    <StackSettings.Screen 
+                        options={({navigation}) => ({
+                            headerTitle: 'Adicionar passageiro',
+                            title: 'Adicionar passageiro',
+                            headerLeft: () =>  ( 
+                                <TouchableWithoutFeedback onPress={navigation.goBack}>
+                                    <ImageWrapper style={{cursor: 'pointer'}} width={'24px'} height={'24px'} source={ArrowLeft} />
+                                </TouchableWithoutFeedback>
+                            ),
+                        })}
+                        name="AddRiders"
+                        component={AddRiders}
                     />
                     
             </StackSettings.Navigator>
