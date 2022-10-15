@@ -70,6 +70,7 @@ export default function TouchableListItem({titleText, tripId, subtitleText, inde
                 <Switch
                     onValueChange={toggleSwitch}
                     value={checkBox}
+                    activeThumbColor= "#f4f3f4"
                     trackColor={{ false: "#767577", true: Constants.colors.primary[600] }}
                     thumbColor={checkBox ? Constants.colors.gray[0] : "#f4f3f4"}
                     disabled={isDisabled}

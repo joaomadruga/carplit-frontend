@@ -13,10 +13,11 @@ import NotificationPopup from "../../../../../components/utils/NotificationPopup
 
 export default function ConsumeFuel({ navigation }) {
     const { loginInfo, setLoginInfo } = useContext(Store.LoginContext);
+    console.log(Constants.formatter.format(loginInfo.averageConsumption))
     const [isDisabled, setIsDisabled] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
-    const [fixedPriceFuel, setFixedPriceFuel] = useState("R$ 0,00");
-    const [fixedConsumeFuel, setFixedConsumeFuel] = useState("0,00");
+    const [fixedConsumeFuel, setFixedConsumeFuel] = useState(loginInfo.averageConsumption.toFixed(2));
+    const [fixedPriceFuel, setFixedPriceFuel] = useState(`R$ ${loginInfo.fuelPerLiter}`);
 
     const handleChange = async (value, type) => {
         setLoginInfo(prev => ({...prev, [type]: value}));

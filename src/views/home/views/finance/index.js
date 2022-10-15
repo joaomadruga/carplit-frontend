@@ -9,16 +9,25 @@ import PaddingContent from '../../../../components/utils/PaddingContent.componen
 import { getFinance } from '../../../../helper/finance/utils';
 import * as Store from "../../../../redux/store/store";
 
+const getActiveRouteState = function (route) {
+    if (!route.routes || route.routes.length === 0 || route.index >= route.routes.length) {
+        return route;
+    }
+
+    const childActiveRoute = route.routes[route.index];
+    return getActiveRouteState(childActiveRoute);
+}
+
 export default function Finance({ navigation }) {
     const { loginInfo } = useContext(Store.LoginContext);
-    const { passengersFinance, setPassengersFinance } = useContext(Store.HomeContext);
+    const { passengersFinance, setPassengersFinance, listOfCarpools } = useContext(Store.HomeContext);
     const [value, setValue] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [cost, setCost] = useState(0);
+    const activeRoute = getActiveRouteState(navigation.getState());
     const listOfDays = { 7: 7, 15: 15, 3: 3 * 30, 6: 6 * 30, 1: 365 };
-
     useEffect(() => {
-        let currentValue = 99999;
+        let currentValue = 9999;
         if (value) {
             currentValue = listOfDays[Number(value.match(/[0-9$]+/gm))];
         }
@@ -33,7 +42,7 @@ export default function Finance({ navigation }) {
         .catch((error) => {
             console.log(error);
         })})();
-    }, [value]);
+    }, [value, activeRoute.name === "Finance"]);
 
     return (
         <SafeAreaView>

@@ -28,6 +28,7 @@ export default function AutoValueHeader({ isEnabledState }){
             <Switch 
             onValueChange={toggleSwitch} 
             value={isEnabled}
+            activeThumbColor= "#f4f3f4"
             trackColor={{ false: "#767577", true: Constants.colors.primary[600] }}
             thumbColor={isEnabled ? Constants.colors.gray[0] : "#f4f3f4"}
             />
