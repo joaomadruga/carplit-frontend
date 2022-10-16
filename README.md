@@ -1,16 +1,20 @@
+
 # Carplit 🚗
-Organizando suas caronas!
+
+![App Screenshot](https://i.imgur.com/3UmaMjU.jpeg)
 
 
 ## 🧾 Conteúdos
 <p align="center">
  <a>Sobre</a> •
  <a>Tecnologias</a> • 
+ <a>Versões</a> • 
  <a> Requisitos</a> • 
  <a> Executando aplicação localmente</a> • 
  <a> Testes</a> • 
+ <a> Deploy</a> • 
  <a> Instrutor</a> • 
- <a> Autores</a> • 
+ <a> Time</a> • 
  <a> Metodologia</a> •
  <a> Entregas</a>
 </p>
@@ -26,6 +30,15 @@ Tecnologias utilizadas na realização do projeto:
 
 - [Expo](https://expo.io/)
 - [React Native](https://reactnative.dev)
+- [Vercel](https://vercel.com/)
+
+## 📁 Versões
+
+Deploys disponíveis do projeto:
+
+- [Google Play](https://play.google.com/)
+
+- [Web](https://carplit.me)
 
 ## ⚙ Requisitos
 
@@ -43,21 +56,35 @@ $ yarn install
 ```bash
 # Executando a aplicação
 $ npx expo start
+
+# Executando a aplicação no web
+$ npx expo start:web
 ```
 
 ## 🚨 Testes
 
-- [jest](https://jestjs.io/)
+- [Jest](https://jestjs.io/)
 
 ```bash
-# Rodando Testes
+# Rodando testes
 $ yarn test
+```
+
+## Deploy
+
+Para fazer o deploy desse projeto rode
+
+```bash
+  # Deploy vercel
+  npm expo export:web
+  cd web-build/
+  vercel
 ```
 
 ## 👨‍🏫 Instrutor
 **Professor** [Vinicius Cardoso Garcia](https://viniciusgarcia.me/) (vcg@cin.ufpe.br)
 
-## 👥 Autores
+## 👥 Time
 
 **Gilberto Medeiros** - (gmoj2@cin.ufpe.br)
 
@@ -77,8 +104,12 @@ Baseado no SCRUM fazemos encontros semanais para alinhamento de ideias, planejam
 
 ## 🔗 Entregas
 
+- [Figma](https://www.figma.com/file/U9tinXc4aVHqbAsJaMtkMw/Carplit?node-id=0%3A1)
+
 - [Notion](https://majestic-iguanodon-1ef.notion.site/Carplit-45357668df2241ed89df9be8335cc62c)
 
 - [Apresentação Pitch](https://docs.google.com/presentation/d/1Q-Kd_0Us4Hjw7TkxjH17AzH425KhfQq1tzYCENAqAy8/edit?usp=sharing)
 
-🚧🚧Projeto em andamento!🚧🚧
+- [Primeira iteração](https://docs.google.com/presentation/d/1MLZMfDtYAO5OALm1oaDrLu6FWIpJ5yJ2bSGKzbGI_Ok/edit?usp=sharing)
+
+- [Post Mortem 1](https://majestic-iguanodon-1ef.notion.site/Post-Mortem-1-785e5b10451a4dcfa67b698fad66fc01)
