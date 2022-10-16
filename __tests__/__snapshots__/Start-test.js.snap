@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "height": "100%",
+        "width": "100%",
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "display": "flex",
+          "height": "100%",
+          "paddingBottom": 0,
+          "paddingLeft": 20,
+          "paddingRight": 20,
+          "paddingTop": 0,
+          "width": "100%",
+        },
+        Object {
+          "alignItems": "center",
+          "justifyContent": "space-evenly",
+        },
+      ]
+    }
+  >
+    <Image
+      height="40%"
+      resizeMode="contain"
+      source={1}
+      style={
+        Array [
+          Object {
+            "height": "40%",
+            "marginLeft": 0,
+            "maxWidth": "auto",
+            "overflow": "hidden",
+            "width": "100%",
+          },
+        ]
+      }
+      width="100%"
+    />
+    <Image
+      height="26px"
+      source={1}
+      style={
+        Array [
+          Object {
+            "height": 26,
+            "marginLeft": 0,
+            "maxWidth": "auto",
+            "overflow": "hidden",
+            "width": 101,
+          },
+        ]
+      }
+      width="101px"
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "width": "100%",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#6E1DBE",
+              "fontFamily": "RetniSans-Bold",
+              "fontSize": 36,
+              "lineHeight": 35,
+              "textAlign": "center",
+              "width": "100%",
+            },
+          ]
+        }
+      >
+        Organizando suas caronas!
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#686D73",
+              "fontFamily": "RetniSans-Regular",
+              "fontSize": 16,
+              "paddingBottom": 0,
+              "paddingLeft": 20,
+              "paddingRight": 20,
+              "paddingTop": 0,
+              "textAlign": "center",
+              "width": "100%",
+            },
+          ]
+        }
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante elit
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "width": "100%",
+          },
+        ]
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#6E1DBE",
+              "borderRadius": 8,
+              "display": "flex",
+              "height": 64,
+              "justifyContent": "center",
+              "marginBottom": 10,
+              "marginLeft": 0,
+              "marginRight": 0,
+              "marginTop": 0,
+              "maxWidth": 500,
+              "width": "100%",
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "RetniSans-Bold",
+                "fontSize": 16,
+              },
+            ]
+          }
+        >
+          Criar uma conta
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E1E1E4",
+            "borderRadius": 8,
+            "borderWidth": 1,
+            "display": "flex",
+            "height": 64,
+            "justifyContent": "center",
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "maxWidth": 500,
+            "opacity": 1,
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "fontFamily": "RetniSans-Bold",
+                "fontSize": 16,
+              },
+              Object {
+                "color": "#6E1DBE",
+              },
+            ]
+          }
+        >
+          Entrar
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;
