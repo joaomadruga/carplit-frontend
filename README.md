@@ -42,12 +42,17 @@ $ yarn install
 
 ```bash
 # Executando a aplicação
-$ expo start
+$ npx expo start
 ```
 
 ## 🚨 Testes
 
 - [jest](https://jestjs.io/)
+
+```bash
+# Rodando Testes
+$ yarn test
+```
 
 ## 👨‍🏫 Instrutor
 **Professor** [Vinicius Cardoso Garcia](https://viniciusgarcia.me/) (vcg@cin.ufpe.br)
