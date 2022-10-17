@@ -47,7 +47,7 @@ const WhatsappButtonText = styled.Text`
     margin-right: 10px;
 `
 
-export function FinanceView({ carpoolHistory, totalPending, userReceived }){
+export function FinanceView({ totalPending, userReceived }){
     const sendWhatsappMensage = () => {
         let whatsAppMsg = `Oi, passando pra te lembrar da carona! Ficou um valor de ${Constants.formatter.format(totalPending)} em aberto. Valeu!\n\n\n_OBS: valores calculados automaticamente pelo app Carplit!_`
         let url = 'whatsapp://send?text=' + whatsAppMsg;

@@ -50,7 +50,7 @@ export async function deleteRider(authToken, id) {
 }
 
 export async function getHistoryCarpools(authToken, id) {
-    const response = await api.get(`/trip/carpool/passenger/${id}`, {
+    const response = await api.get(`/passenger/retrieve/${id}`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type':'application/json',

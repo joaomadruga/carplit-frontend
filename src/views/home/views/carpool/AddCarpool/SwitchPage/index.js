@@ -10,19 +10,28 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import { addCarpool } from "../../../../../../helper/carpools/utils";
 
+const getActiveRouteState = function (route) {
+    if (!route.routes || route.routes.length === 0 || route.index >= route.routes.length) {
+        return route;
+    }
+
+    const childActiveRoute = route.routes[route.index];
+    return getActiveRouteState(childActiveRoute);
+};
+
 export default function SwitchPage({ props }) {
-    const { carpoolPrice, loginInfo, listOfCarpools, setListOfCarpools, tempListOfRiders, isLeftSelected, pathId, navigation } = props;
+    const { carpoolPrice, loginInfo, listOfCarpools, setListOfCarpools, tempListOfRiders, isLeftSelected, pathId, navigation, isSoloCarpool, setIsSoloCarpool } = props;
     const priceFuel = loginInfo.fuelPerLiter;
     const consumeFuel = loginInfo.averageConsumption;
     const availablePeople = tempListOfRiders.filter((item) => {
         if (item.isParticipating || item.isDriver) return item
     });
-    const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isEnabled, setIsEnabled] = useState(false);
     const [fixedPrice, setFixedPrice] = useState("R$ 0,00");
     const totalPrice = fixedPrice.replace(/[$a-zA-Z.]/g, '').replace(',', '.') * (availablePeople.length - 1);
     const [splitedPrice, setSplitedPrice] = useState(carpoolPrice/(availablePeople.length - 1));
+    const activeRoute = getActiveRouteState(navigation.getState());
     useEffect(() => {
         if(isLeftSelected && isEnabled) {
             const price = carpoolPrice/availablePeople.length;
@@ -56,11 +65,15 @@ export default function SwitchPage({ props }) {
         }
     }, [fixedPrice, isLeftSelected]);
 
+    useEffect(() => {
+        setIsSoloCarpool(availablePeople.length === 1);
+    }, [tempListOfRiders]);
+
     return (
             <>
                 {
                     isLeftSelected 
-                    ? <AutoValueHeader isEnabledState={{ isEnabled, setIsEnabled }}/>
+                    ? <AutoValueHeader isSoloCarpool={isSoloCarpool} isEnabledState={{ isEnabled, setIsEnabled }}/>
                     : <FixedValueHeader fixedPriceState={{fixedPrice, setFixedPrice}}/>
                 }
                 {

@@ -5,22 +5,33 @@ import { FinanceView } from "../../../../../../components/ridersdetails/FinanceV
 import { HeaderText } from "../../../../../../components/ridersdetails/HeaderText.component";
 import ListHistoryCarpools from "../../../../../../components/ridersdetails/ListHistoryCarpools.component";
 import ModalOptionsRidersDetails from "../../../../../../components/ridersdetails/ModalOptionsRidersDetails.component";
+import Loading from "../../../../../../components/utils/Loading.component";
 import ModalOptions from "../../../../../../components/utils/ModalOptions.component";
 import ModalPopup from "../../../../../../components/utils/ModalPopup.component";
 import NotificationPopup from "../../../../../../components/utils/NotificationPopup.component";
 import PaddingContent from "../../../../../../components/utils/PaddingContent.component";
 import * as Constants from "../../../../../../constants/utils/Constants";
-import { deleteAllCarpools, deleteRider } from "../../../../../../helper/riders/utils";
+import { deleteAllCarpools, deleteRider, getHistoryCarpools } from "../../../../../../helper/riders/utils";
 import * as Store from "../../../../../../redux/store/store";
 
 LogBox.ignoreLogs([
     'Non-serializable values were found in the navigation state',
 ]);
 
+const getActiveRouteState = function (route) {
+    if (!route.routes || route.routes.length === 0 || route.index >= route.routes.length) {
+        return route;
+    }
+
+    const childActiveRoute = route.routes[route.index];
+    return getActiveRouteState(childActiveRoute);
+}
+
 export default function RidersDetails({ route, navigation }) {
     const { index, ref, id } = route.params;
     const { loginInfo } = useContext(Store.LoginContext);
-    const { listOfRiders, setListOfRiders, passengersFinance } = useContext(Store.HomeContext);
+    const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
+    const [currentRiderFinance, setCurrentRiderFinance] = useState({totalDebt: 0, totalPaid: 0});
     const [currentRider, setCurrentRider] = useState(listOfRiders[index]);
     const [modalVisible, setModalVisible] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
@@ -28,6 +39,8 @@ export default function RidersDetails({ route, navigation }) {
     const [isAllCarpoolButtonDisabled, setIsAllCarpoolButtonDisabled] = useState(false);
     const [modalAllCarpoolVisible, setModalAllCarpoolVisible] = useState(false);
     const [currentCarpoolHistory, setCurrentCarpoolHistory] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const activeRoute = getActiveRouteState(navigation.getState());
 
     const CloseModalOption = () => ref.current?.close();
     const onSubmitDelete = async () => {
@@ -62,13 +75,30 @@ export default function RidersDetails({ route, navigation }) {
         });
         setIsAllCarpoolButtonDisabled(false);
     };
+
+    useEffect(() => {
+        setIsLoading(true);
+        const responseHistoryCarpools = (async () => await getHistoryCarpools(loginInfo.authToken, currentRider._id)
+        .then((response) => {
+            setCurrentRiderFinance({totalDebt: response.data.obj.totalDebt, totalPaid: response.data.obj.totalPaid})
+            setCurrentCarpoolHistory(response.data.obj.tripHistory);
+            setIsLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        }))();
+    }, [activeRoute.name === "RidersDetails"]);
     return (
         <>
             <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
                 <PaddingContent>
                     <HeaderText name={currentRider.name} address={currentRider.address}/>
-                    <FinanceView carpoolHistory={currentRider.carpoolHistory} userReceived={passengersFinance?.passenger_trips?.user_received} totalPending={passengersFinance?.passenger_trips?.total_cost}/>
-                    <ListHistoryCarpools navigation={navigation} currentCarpoolHistory={currentCarpoolHistory} setCurrentCarpoolHistory={setCurrentCarpoolHistory} id={currentRider._id} authToken={loginInfo.authToken}/>
+                    {!isLoading ?
+                    <>
+                        <FinanceView userReceived={currentRiderFinance.totalPaid} totalPending={currentRiderFinance.totalDebt}/>
+                        <ListHistoryCarpools navigation={navigation} currentCarpoolHistory={currentCarpoolHistory} setCurrentCarpoolHistory={setCurrentCarpoolHistory} id={currentRider._id} authToken={loginInfo.authToken}/>
+                    </>
+                    : <Loading />}
                     { showPopup && <NotificationPopup title={"Ops... algo deu errado. Tente novamente mais tarde."} setShowPopup={setShowPopup} bottom={'20px'}/> }
                 </PaddingContent>
             </ScrollView>

@@ -11,6 +11,7 @@ import ListCarpoolDetails from "../../../../../components/carpooldetails/ListCar
 import { deleteCarpool, getCarpoolDetails } from "../../../../../helper/carpools/utils";
 import Loading from '../../../../../components/utils/Loading.component';
 import ModalPopup from "../../../../../components/utils/ModalPopup.component";
+import NotificationPopup from "../../../../../components/utils/NotificationPopup.component";
 
 const onSubmitDeleteCarpool = async (authToken, carpoolId, setIsDeleteButtonDisabled, setShowPopup, navigation, setListOfCarpools, listOfCarpools, setModalCarpoolDetailsVisible) => {
     setIsDeleteButtonDisabled(true);
@@ -54,7 +55,6 @@ export default function CarpoolDetails({ route, navigation }) {
             const passengers = response.data.slice(0);
             driverPrice = isFixedValue || !isOwnerIncluded ? 0 : (value/(passengers.length + 1));
             passengers.unshift({is_driver: true, price: driverPrice, hasPaid: true});
-            console.log(passengers)
             let totalPrice = 0;
             passengers.map((passenger) => {
                 if (passenger.hasPaid) totalPrice += passenger.price;

@@ -32,7 +32,7 @@ const ButtonText = styled.Text`
     font-family: ${Constants.fontConfig.Body.Medium.FontFamily};
 `
 
-export function SwitchButton({ isLeftSelectedState }){
+export function SwitchButton({ isLeftSelectedState, isSoloCarpool }){
     const {isLeftSelected, setIsLeftSelected} = isLeftSelectedState;
 
     const invertIsSelected = (isButtonSelected) => { if (!isButtonSelected) setIsLeftSelected(!isLeftSelected) };
@@ -52,6 +52,7 @@ export function SwitchButton({ isLeftSelectedState }){
             isSelected={!isLeftSelected}
             isLeft={false}
             underlayColor={isLeftSelected ? Constants.colors.gray[0] : Constants.colors.primary[200]}
+            disabled={isSoloCarpool}
             >
                 <ButtonText isSelected={!isLeftSelected}>Valor fixo</ButtonText>
             </Button>

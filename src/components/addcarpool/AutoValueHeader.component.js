@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Switch } from 'react-native';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
@@ -18,10 +18,11 @@ const AutoValueText = styled.Text`
     margin-right: 8px;
 `
 
-export default function AutoValueHeader({ isEnabledState }){
+export default function AutoValueHeader({ isEnabledState, isSoloCarpool }){
     const {isEnabled, setIsEnabled} = isEnabledState;
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    useEffect(() => { isSoloCarpool && toggleSwitch() }, [isSoloCarpool]);
     return (
         <AutoValueViewStyle>
             <AutoValueText>Se incluir na divisão de custos</AutoValueText>
@@ -31,6 +32,7 @@ export default function AutoValueHeader({ isEnabledState }){
             activeThumbColor= "#f4f3f4"
             trackColor={{ false: "#767577", true: Constants.colors.primary[600] }}
             thumbColor={isEnabled ? Constants.colors.gray[0] : "#f4f3f4"}
+            disabled={isSoloCarpool}
             />
         </AutoValueViewStyle>
     )

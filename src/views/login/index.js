@@ -28,6 +28,7 @@ export default function LoginScreen( { navigation } ) {
         handleChange(response.data.token, 'authToken');
         handleChange(response.data.average_consumption, 'averageConsumption');
         handleChange(response.data.fuel_per_liter, 'fuelPerLiter');
+        handleChange(response.data.user_name, 'userName');
         navigation.dispatch(
           CommonActions.reset({
             index: 0,

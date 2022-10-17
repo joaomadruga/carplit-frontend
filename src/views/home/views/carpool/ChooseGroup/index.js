@@ -27,7 +27,7 @@ export default function ChooseGroup({ navigation, route }) {
     const activeRoute = getActiveRouteState(navigation.getState());
 
     useEffect(() => {
-        const copyListOfRiders = JSON.parse(JSON.stringify(listOfRiders))
+        const copyListOfRiders = JSON.parse(JSON.stringify(listOfRiders));
         setCurrentRiders([driver, ...copyListOfRiders]);
     }, [activeRoute.name === "ChooseGroup"]);
 
@@ -38,7 +38,7 @@ export default function ChooseGroup({ navigation, route }) {
                     <FlatListChooseGroup listOfRiders={currentRiders} />
                     <ButtonPrimaryDefault
                     title={"Continuar"}
-                    onPress={() => { selectedPath['listOfRiders'] = currentRiders, navigation.navigate('AddCarpool', { selectedPath }) }} />
+                    onPress={() => {selectedPath['listOfRiders'] = currentRiders, navigation.navigate('AddCarpool', { selectedPath }) }} />
                     
                 </View>
             </PaddingContent>

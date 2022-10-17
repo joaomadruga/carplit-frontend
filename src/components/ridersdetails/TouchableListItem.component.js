@@ -42,7 +42,7 @@ export default function TouchableListItem({ navigation, date, address, price, ha
                     <ItemText>{address}</ItemText>
                     <ItemText>{price === 0 ? "Sem cobrança" : hasPaid ? `${price} (Pago)` : `${price} (Não pago)`}</ItemText>
                 </View>
-                <ImageWrapper source={ArrowRight} width={24} height={24} />
+                <ImageWrapper source={ArrowRight} width={'24px'} height={'24px'} />
             </TouchableListItemStyle>
                 <BottomLine/>
         </>

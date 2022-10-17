@@ -35,6 +35,7 @@ export default function ThirdRegisterScreen({ navigation }) {
         setLoginInfo(prev => ({...prev, ["authToken"]: response.data.token}));
         setLoginInfo(prev => ({...prev, ["averageConsumption"]: consumeFuel}));
         setLoginInfo(prev => ({...prev, ["fuelPerLiter"]: priceFuel}));
+        setLoginInfo(prev => ({...prev, ["userName"]: response.data.user_name}));
         navigation.dispatch(
           CommonActions.reset({
             index: 0,

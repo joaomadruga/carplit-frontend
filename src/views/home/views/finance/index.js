@@ -21,22 +21,16 @@ const getActiveRouteState = function (route) {
 export default function Finance({ navigation }) {
     const { loginInfo } = useContext(Store.LoginContext);
     const { passengersFinance, setPassengersFinance, listOfCarpools } = useContext(Store.HomeContext);
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('15 dias');
     const [isLoading, setIsLoading] = useState(false);
-    const [cost, setCost] = useState(0);
     const activeRoute = getActiveRouteState(navigation.getState());
     const listOfDays = { 7: 7, 15: 15, 3: 3 * 30, 6: 6 * 30, 1: 365 };
     useEffect(() => {
-        let currentValue = 9999;
-        if (value) {
-            currentValue = listOfDays[Number(value.match(/[0-9$]+/gm))];
-        }
+        const currentValue = listOfDays[Number(value.match(/[0-9$]+/gm))];
         setIsLoading(true);
         const responseFinance = (async () => { await getFinance(loginInfo.authToken, currentValue)
         .then((response) => {
             setPassengersFinance(response.data);
-            let currentCost = 0;
-            setCost(currentCost);
             setIsLoading(false);
         })
         .catch((error) => {
@@ -51,7 +45,7 @@ export default function Finance({ navigation }) {
                 <BigHeaderTitle title={'Finanças'} />
                 {!isLoading &&
                 <>
-                    <HeaderFinanceHeader selectedValue={value} userReceived={passengersFinance?.passenger_trips?.user_received} cost={passengersFinance?.passenger_trips?.total_cost} />
+                    <HeaderFinanceHeader selectedValue={value} userReceived={passengersFinance?.passenger_trips?.user_received} cost={passengersFinance?.passenger_trips?.total_cost} saved={passengersFinance?.passenger_trips?.saved} rideBalance={passengersFinance?.passenger_trips?.ride_balance} />
                     <FlatListFinance passengersFinance={passengersFinance?.passenger_trips?.passengers} navigation={navigation}/>
                 </>
                 }

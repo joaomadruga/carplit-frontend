@@ -14,6 +14,7 @@ function Item({name, address, index, People, isDriver}) {
 }
 
 export default function FlatListChooseGroup({ listOfRiders, ...props }) {
+
     return (
         <FlatList
         style={{maxHeight: '85%'}}

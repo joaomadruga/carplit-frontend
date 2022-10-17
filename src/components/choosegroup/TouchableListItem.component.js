@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import { Dimensions, View } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BottomLine from '../utils/BottomLine.component';
 
 const TouchableListItemStyle = styled.TouchableOpacity`
@@ -25,13 +25,16 @@ const Subtitle = styled.Text`
 `
 
 export default function TouchableListItem({titleText, subtitleText, index, People,  ...props}){
-    const [checkBox, setCheckBox] = useState(false);
+    const [checkBox, setCheckBox] = useState(People.isParticipating);
+    useEffect(() => {
+        setCheckBox(People.isParticipating);
+    }, [People]);
     return (
         <>
             <TouchableListItemStyle {...props} onPress={() => {
                 if (!People.isDriver) {
-                    setCheckBox(!checkBox)
                     People.isParticipating = !People.isParticipating;
+                    setCheckBox(People.isParticipating);
                 }
             }}>
                 <View style={{maxWidth: '70%'}}>
