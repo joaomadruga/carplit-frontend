@@ -56,6 +56,7 @@ export default function LoginScreen( { navigation } ) {
         <Input placeholder="Senha" secureTextEntry={true} marginBottom={38} onChangeText={(value) => {handleChange(value, 'password')}} value={loginInfo.password}/>
         <ButtonPrimaryDefault
           title='Entrar'
+          testID= 'test'
           onPress={() => onSubmit()}
           disabled={isDisabled}
           style={{backgroundColor: isDisabled ? Constants.colors.gray[700] : Constants.buttonConfig.Default.Primary.Small.BackgroundColor}}

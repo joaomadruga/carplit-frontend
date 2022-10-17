@@ -91,7 +91,7 @@ exports[`renders correctly 1`] = `
           ]
         }
       >
-        Organizando suas caronas!
+        Gerenciando suas caronas!
       </Text>
       <Text
         style={
@@ -100,17 +100,12 @@ exports[`renders correctly 1`] = `
               "color": "#686D73",
               "fontFamily": "RetniSans-Regular",
               "fontSize": 16,
-              "paddingBottom": 0,
-              "paddingLeft": 20,
-              "paddingRight": 20,
-              "paddingTop": 0,
               "textAlign": "center",
-              "width": "100%",
             },
           ]
         }
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ante elit
+        Você no controle do gastos e recebimentos das suas caronas.
       </Text>
     </View>
     <View
