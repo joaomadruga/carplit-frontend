@@ -32,6 +32,7 @@ const Box = styled.View`
     padding: 10px;
     min-width: 100%;
     border-radius: 4px;
+    flex-wrap: wrap;
 `
 
 const TextBox = styled.Text`
@@ -39,6 +40,7 @@ const TextBox = styled.Text`
     font-family: ${Constants.fontConfig.Sm.Medium.FontFamily};
     color: ${Constants.colors.support.Green[500]};
     margin-left: 12px;
+    max-width: 90%;
 `
 
 const TextBoxBold = styled.Text`

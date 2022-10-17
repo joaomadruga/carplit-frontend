@@ -32,7 +32,7 @@ export default function RidersDetails({ route, navigation }) {
     const { loginInfo } = useContext(Store.LoginContext);
     const { listOfRiders, setListOfRiders } = useContext(Store.HomeContext);
     const [currentRiderFinance, setCurrentRiderFinance] = useState({totalDebt: 0, totalPaid: 0});
-    const [currentRider, setCurrentRider] = useState(listOfRiders[index]);
+    const [currentRider, setCurrentRider] = useState({name: '', address: ''});
     const [modalVisible, setModalVisible] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [isDeleteButtonDisabled, setIsDeleteButtonDisabled] = useState(false);
@@ -78,8 +78,9 @@ export default function RidersDetails({ route, navigation }) {
 
     useEffect(() => {
         setIsLoading(true);
-        const responseHistoryCarpools = (async () => await getHistoryCarpools(loginInfo.authToken, currentRider._id)
+        const responseHistoryCarpools = (async () => await getHistoryCarpools(loginInfo.authToken, id)
         .then((response) => {
+            setCurrentRider({name: response.data.obj.passenger.name, address: response.data.obj.passenger.address})
             setCurrentRiderFinance({totalDebt: response.data.obj.totalDebt, totalPaid: response.data.obj.totalPaid})
             setCurrentCarpoolHistory(response.data.obj.tripHistory);
             setIsLoading(false);
@@ -92,9 +93,9 @@ export default function RidersDetails({ route, navigation }) {
         <>
             <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
                 <PaddingContent>
-                    <HeaderText name={currentRider.name} address={currentRider.address}/>
                     {!isLoading ?
                     <>
+                        <HeaderText name={currentRider.name} address={currentRider.address}/>
                         <FinanceView userReceived={currentRiderFinance.totalPaid} totalPending={currentRiderFinance.totalDebt}/>
                         <ListHistoryCarpools navigation={navigation} currentCarpoolHistory={currentCarpoolHistory} setCurrentCarpoolHistory={setCurrentCarpoolHistory} id={currentRider._id} authToken={loginInfo.authToken}/>
                     </>

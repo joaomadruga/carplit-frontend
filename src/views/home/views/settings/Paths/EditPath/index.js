@@ -35,7 +35,7 @@ export default function EditPath({ navigation, route }) {
                 const responseUpdatePath = await updatePath(loginInfo.authToken, currentItem.id, updateObj)
                 .then(response => {
                     listOfPaths[currentItem.index].title = pathInfo.pathTitle;
-                    listOfPaths[currentItem.index].totalDistance = pathInfo.pathDistance;
+                    listOfPaths[currentItem.index].totalDistance = parseFloat(pathInfo.pathDistance);
                     navigation.navigate('PathsScreen');
                 })
                 .catch((error) => {
