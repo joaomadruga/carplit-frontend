@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import * as Constants from "../../constants/utils/Constants";
 import ImageWrapper from '../utils/ImageWrapper.component';
@@ -31,7 +31,7 @@ const ImageBackground = styled.TouchableOpacity`
     width: 56px;
     height: 56px;
     background-color: ${Constants.colors.primary[200]};
-    border-radius: 50%;
+    border-radius: 50px;
     overflow: hidden;
     z-index: 999;
     justify-content: center;
@@ -49,7 +49,7 @@ export default function ProfileView({ TextTitle, TextSubtitle, SourceImage, setL
     return (
         <ProfileViewStyle {...props}>
             <ImageBackground onPress={() => updateCurrentImage()} activeOpacity={0.5}> 
-                <Image source={currentImage} style={{width: 76, height: 76, marginBottom: -25}}/>
+                <Image source={Platform.OS === "web" ? {uri: currentImage} : currentImage} style={{width: 76, height: 76, marginBottom: -25}}/>
             </ImageBackground>
             <Title>{TextTitle}</Title>
             <Subtitle>{TextSubtitle}</Subtitle>
