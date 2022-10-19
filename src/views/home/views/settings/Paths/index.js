@@ -11,6 +11,7 @@ import ModalPopup from '../../../../../components/utils/ModalPopup.component';
 import * as Store from "../../../../../redux/store/store";
 import ModalOptions from '../../../../../components/utils/ModalOptions.component';
 import { deletePath } from '../../../../../helper/path/utils';
+import NotificationPopup from '../../../../../components/utils/NotificationPopup.component';
 
 export default function Paths({ navigation, route }) {
         const { listOfPaths, setListOfPaths } = useContext(Store.HomeContext);
@@ -19,6 +20,7 @@ export default function Paths({ navigation, route }) {
         const [isDisabled, setIsDisabled] = useState(false);
         const [modalVisible, setModalVisible] = useState(false);
         const [showPopup, setShowPopup] = useState(false);
+        const [errorMessage, setErrorMessage] = useState("Algo errado aconteceu, tente novamente mais tarde.");
         const [currentItem, setCurrentItem] = useState({
             index: 0,
             id: undefined
@@ -37,8 +39,11 @@ export default function Paths({ navigation, route }) {
                 setModalVisible(false);
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error)
+                if (error.response.status === 403) setErrorMessage("Não foi possível deletar pois esse trajeto está contido em uma carona.");
+                setModalVisible(false);
                 setShowPopup(true);
+                setTimeout(() => setErrorMessage("Algo errado aconteceu, tente novamente mais tarde."), 4000);
             });
             setIsDisabled(false);
         }
@@ -51,7 +56,7 @@ export default function Paths({ navigation, route }) {
                             {isListOfPathsEmpty && <Empty title={"Você ainda não cadastrou trajetos!"} subtitle={"Toque no botão de adicionar + para cadastrar a distância dos seus trajetos."}/>}
                             {!isListOfPathsEmpty && <ListOfPaths listOfPaths={listOfPaths} navigation={navigation} open={open} setCurrentItem={setCurrentItem} />}
                         </PathsContent>
-                        { showPopup && <NotificationPopup title={"Algo errado aconteceu, tente novamente mais tarde."} setShowPopup={setShowPopup} bottom={'60px'}/> }
+                        { showPopup && <NotificationPopup title={errorMessage} setShowPopup={setShowPopup} bottom={'60px'}/> }
                     </PaddingContent>
                 </ScrollView>
                 <ModalOptions

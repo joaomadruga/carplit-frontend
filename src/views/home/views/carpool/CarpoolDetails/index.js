@@ -73,7 +73,7 @@ export default function CarpoolDetails({ route, navigation }) {
         <>
             <ScrollView style={{backgroundColor: Constants.colors.gray[0]}}>
                 <PaddingContent>
-                    <HeaderText carpoolPrice={carpoolPrice} titleText={path.title} subtitleText={path.totalDistance} consumeFuel={km_l}/>
+                    <HeaderText carpoolPrice={carpoolPrice} titleText={path?.title} subtitleText={path?.totalDistance} consumeFuel={km_l}/>
                     { !isLoading && <ListCarpoolDetails tripId={currentCarpool._id} totalPriceState={{ totalPrice, setTotalPrice }} availablePeople={availablePeople} carpoolPrice={carpoolPrice} isFixedValue={isFixedValue} isOwnerIncluded={isOwnerIncluded}/>}
                     { isLoading && <Loading  style={{marginTop: 20 }}/> }
                     { showPopup && <NotificationPopup title={"Ops... algo deu errado. Tente novamente mais tarde."} setShowPopup={setShowPopup} bottom={'20px'}/> }

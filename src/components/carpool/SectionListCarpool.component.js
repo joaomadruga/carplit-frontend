@@ -24,8 +24,8 @@ export default function SectionListCarpool({ listOfCarpools, navigation, ...prop
         sections={listOfCarpools.map((section, index) => ({ ...section, index }))}
         renderItem={({ item, index, section: { index: columnIndex, date } }) => ( 
             <Item
-            pathTitle={item.path.title} 
-            subtitleText={item.passengers.length}
+            pathTitle={item?.path?.title} 
+            subtitleText={item?.passengers?.length}
             rowIndex={index}
             columnIndex={columnIndex}
             navigation={navigation}

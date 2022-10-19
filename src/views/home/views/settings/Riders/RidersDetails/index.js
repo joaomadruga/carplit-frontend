@@ -39,28 +39,31 @@ export default function RidersDetails({ route, navigation }) {
     const [isAllCarpoolButtonDisabled, setIsAllCarpoolButtonDisabled] = useState(false);
     const [modalAllCarpoolVisible, setModalAllCarpoolVisible] = useState(false);
     const [currentCarpoolHistory, setCurrentCarpoolHistory] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("Ops... algo deu errado. Tente novamente mais tarde.");
     const [isLoading, setIsLoading] = useState(true);
     const activeRoute = getActiveRouteState(navigation.getState());
 
     const CloseModalOption = () => ref.current?.close();
     const onSubmitDelete = async () => {
         setIsDeleteButtonDisabled(true);
-        await deleteRider(loginInfo.authToken, currentRider._id)
+        await deleteRider(loginInfo.authToken, id)
         .then ((response) => {
             setListOfRiders(listOfRiders.filter((item, filterIndex) => { return item.isDriver || filterIndex !== index }));
             setModalVisible(false);
             setTimeout(() => navigation.navigate('RidersScreen', { index }), 500);
         })
         .catch((error) => {
-            console.log(error);
+            if (error.response.status === 403) setErrorMessage("Não foi possível deletar pois esse usuário já está contido em uma carona.");
+            setModalVisible(false);
             setShowPopup(true);
+            setTimeout(() => setErrorMessage("Ops... algo deu errado. Tente novamente mais tarde."), 4000);
         });
         setIsDeleteButtonDisabled(false);
     };
     
     const onSubmitDeleteAllCarpools = async () => {
         setIsAllCarpoolButtonDisabled(true);
-        const updateObj = { passenger_id: currentRider._id }
+        const updateObj = { passenger_id: id }
         await deleteAllCarpools(loginInfo.authToken, updateObj)
         .then ((response) => {
             currentCarpoolHistory.map((carpool) => {
@@ -97,10 +100,10 @@ export default function RidersDetails({ route, navigation }) {
                     <>
                         <HeaderText name={currentRider.name} address={currentRider.address}/>
                         <FinanceView userReceived={currentRiderFinance.totalPaid} totalPending={currentRiderFinance.totalDebt}/>
-                        <ListHistoryCarpools navigation={navigation} currentCarpoolHistory={currentCarpoolHistory} setCurrentCarpoolHistory={setCurrentCarpoolHistory} id={currentRider._id} authToken={loginInfo.authToken}/>
+                        <ListHistoryCarpools navigation={navigation} currentCarpoolHistory={currentCarpoolHistory} setCurrentCarpoolHistory={setCurrentCarpoolHistory} id={id} authToken={loginInfo.authToken}/>
                     </>
                     : <Loading />}
-                    { showPopup && <NotificationPopup title={"Ops... algo deu errado. Tente novamente mais tarde."} setShowPopup={setShowPopup} bottom={'20px'}/> }
+                    { showPopup && <NotificationPopup title={errorMessage} setShowPopup={setShowPopup} bottom={'20px'}/> }
                 </PaddingContent>
             </ScrollView>
 
