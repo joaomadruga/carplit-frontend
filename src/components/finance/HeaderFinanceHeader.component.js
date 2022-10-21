@@ -25,22 +25,21 @@ const Subtitle = styled.Text`
 `
 
 const Box = styled.View`
-    flex-direction: row; 
-    align-items: center;
-    margin-top: 16px;
     background-color: ${Constants.colors.support.Green[100]};
-    padding: 10px;
-    min-width: 100%;
+    flex-direction: row;
+    align-items: center;
     border-radius: 4px;
-    flex-wrap: wrap;
+    padding: 16px 10px;
+    margin-top: 16px;
+    width: 100%;
 `
 
 const TextBox = styled.Text`
     font-size: ${Constants.fontConfig.Sm.Medium.FontSize};
     font-family: ${Constants.fontConfig.Sm.Medium.FontFamily};
     color: ${Constants.colors.support.Green[500]};
-    margin-left: 12px;
-    max-width: 90%;
+    word-break: break-word;
+    padding: 0 15px;
 `
 
 const TextBoxBold = styled.Text`
@@ -71,12 +70,10 @@ export default function HeaderFinanceHeader({ selectedValue, cost, userReceived,
                 </View>
             </View>
 
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
-                <Box>
-                    <ImageWrapper source={CoinIcon} width={'24px'} height={'24px'}/>
-                    <TextBox>Oferecendo caronas você já economizou <TextBoxBold>{formatedValueSaved}</TextBoxBold>{selectedValue ? ` nos últimos ${selectedValue}.`: '.'}</TextBox>
-                </Box>
-            </View>
+            <Box>
+                <ImageWrapper source={CoinIcon} width={'24px'} height={'24px'}/>
+                <TextBox>Oferecendo caronas você já economizou <TextBoxBold>{formatedValueSaved}</TextBoxBold>{selectedValue ? ` nos últimos ${selectedValue}.`: '.'}</TextBox>
+            </Box>
             
         </HeaderFinanceStyle>
     )
