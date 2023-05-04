@@ -1,7 +1,7 @@
 
 # Carplit 🚗
 
-![App Screenshot](https://i.imgur.com/3ADbTv0.png)
+![App Screenshot](https://i.imgur.com/3UmaMjU.jpeg)
 
 
 ## 🧾 Conteúdos
